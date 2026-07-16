@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom'; // 1. Imported NavLink
 import img from "./../../assets/logo.png";
 
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -44,22 +45,22 @@ const Navbar = () => {
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
               {/* Note: Points to /projects to match your dropdown structure */}
-              <NavLink to="/projects" className="dropdown-toggle" onClick={handleLinkClick}>
+              <NavLink to="/projects/education" className="dropdown-toggle" onClick={handleLinkClick}>
                 PROJECTS <span className="arrow-down">▼</span>
               </NavLink>
               <ul className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
                 <li><NavLink to="/projects/education" onClick={handleLinkClick}>Education</NavLink></li>
-                <li><NavLink to="/projects/medical-relief" onClick={handleLinkClick}>Medical Relief</NavLink></li>
-                <li><NavLink to="/projects/employment-support" onClick={handleLinkClick}>Employment Support</NavLink></li>
-                <li><NavLink to="/projects/economic-empowerment" onClick={handleLinkClick}>Economic Empowerment</NavLink></li>
-                <li><NavLink to="/projects/student-mentorship" onClick={handleLinkClick}>Student Mentorship</NavLink></li>
-                <li><NavLink to="/projects/employment-training" onClick={handleLinkClick}>Employment Training</NavLink></li>
+                <li><NavLink to="/projects/medical" onClick={handleLinkClick}>Medical Relief</NavLink></li>
+                <li><NavLink to="/projects/employment" onClick={handleLinkClick}>Employment Support</NavLink></li>
+                <li><NavLink to="/projects/empowerment" onClick={handleLinkClick}>Economic Empowerment</NavLink></li>
+                <li><NavLink to="/projects/mentorship" onClick={handleLinkClick}>Student Mentorship</NavLink></li>
+                <li><NavLink to="/projects/training" onClick={handleLinkClick}>Employment Training</NavLink></li>
               </ul>
             </li>
    
             <li><NavLink to="/events" onClick={handleLinkClick}>EVENTS</NavLink></li>
             <li><NavLink to="/volunteer" onClick={handleLinkClick}>VOLUNTEER</NavLink></li>
-            <li><NavLink to="/support-us" onClick={handleLinkClick}>SUPPORT US</NavLink></li>
+            <li><NavLink to="/Support" onClick={handleLinkClick}>SUPPORT US</NavLink></li>
             <li><NavLink to="/contact" onClick={handleLinkClick}>CONTACT</NavLink></li>
           </ul>
         </div>
