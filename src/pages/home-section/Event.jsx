@@ -1,4 +1,5 @@
-import  { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 
 const eventsData = [
@@ -111,26 +112,27 @@ const Event = () => {
               </div>
 
               {/* Right Action Button */}
-              <div className="event-action-box">
+              {/* <div className="event-action-box">
                 <a href={event.detailsLink} className="event-view-details-btn">
                   VIEW DETAILS
                 </a>
-              </div>
+              </div> */}
 
             </div>
           ))}
         </div>
 
-        {/* ================= NEW VIEW ALL EVENTS OPTION ================= */}
+        {/* View All Events CTA */}
         <div className={`events-global-action-row spatial-reveal ${isRevealed ? 'active' : ''}`}>
-          <a href="/events" className="events-view-all-link-lux">
-            <span className='vae'>View All Events
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lux-arrow-vector">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-            </span>
-          </a>
+          <div className="events-view-all-cta-wrap">
+            <a href="/events" className="events-view-all-btn-premium">
+              <span className="events-view-all-btn-text">View All Events</span>
+              <ArrowRight className="events-view-all-arrow" size={20} aria-hidden="true" />
+            </a>
+            {/* <p className="events-view-all-subtext">
+              Explore all upcoming programs, workshops, and community initiatives.
+            </p> */}
+          </div>
         </div>
 
       </div>

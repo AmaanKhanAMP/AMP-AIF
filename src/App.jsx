@@ -5,8 +5,7 @@ import './App.css'; // Import your global styles here
 // 1. Import all your page components here
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
-// import Events from './pages/Events.jsx';
-// import Volunteer from './pages/Volunteer.jsx';
+import Events from './pages/Events.jsx';
 import Support from './pages/Support.jsx';
 import Contact from './pages/Contact.jsx';
 
@@ -31,7 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
-          {/* <Route path="/events" element={<Events />} /> */}
+          <Route path="/events" element={<Events />} />
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/support" element={<Support />} />
           <Route path="/contact" element={<Contact />} />
