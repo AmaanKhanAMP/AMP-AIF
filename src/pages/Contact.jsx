@@ -1,8 +1,15 @@
-import  { useState } from 'react';
+import { useState } from 'react';
+import contact from "../assets/contact.jpeg"; 
 
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ 
+    firstName: '', 
+    lastName: '', 
+    email: '', 
+    phone: '', 
+    message: '' 
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -10,135 +17,218 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for getting in touch! We will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    alert(`Thank you for getting in touch, ${formData.firstName}! We will get back to you soon.`);
+    setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
   };
 
   return (
     <div className="contact-page">
-      {/* Header Section */}
-      <header className="hero-section">
-        <div className="container hero-content animate-fade-in">
-          <div className="hero-text">
-            <p className="breadcrumb">Home &nbsp;/&nbsp; <span className="active">Contact Us</span></p>
-            <h1>Contact Us</h1>
-            <p>Have questions or want to collaborate? Reach out to us, and let's make a difference together.</p>
-          </div>
-          <div className="hero-image-container animate-slide-up">
-            <div className="arched-image-wrapper">
-              <img 
-                src="https://images.unsplash.com/photo-1577416416889-b473cf501cfd?auto=format&fit=crop&q=80&w=800" 
-                alt="Office Workspace" 
-                className="hero-image"
-              />
+
+      {/* Dynamic Immersive Background Image Banner */}
+      <header 
+        className="hero-section full-bleed-bg" 
+        style={{ backgroundImage: `linear-gradient(to right, rgba(0, 31, 71, 0.41) 30%, rgba(0, 21, 51, 0.85) 60%, rgba(2, 6, 23, 0.4) 100%), url(${contact})` }}
+      >
+        <div className="hero-ambient-glow-1"></div>
+        <div className="hero-content full-bleed-layout">
+          <div className="hero-text animate-slide-up">
+            <div className="hero-tagline-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>Communication Hub</span>
+            </div>
+            <h1 className="hero-heading">
+              Let's start a <br/>
+              <span className="hero-heading-gradient-wrapper">
+                <span className="hero-heading-gradient font-extrabold">meaningful</span>
+                <span className="heading-geometric-underline"></span>
+              </span> 
+              <br/>conversation
+            </h1>
+            <p className="hero-subtext">
+              Have questions, partnership ideas, or want to support our initiatives? Reach out to our team and we will guide you with clarity, care, and purpose.
+            </p>
+            <div className="hero-action-ctas">
+              <a href="#contact-form-section" className="hero-primary-btn">
+                <span>Drop a Message</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
             </div>
           </div>
+          
+         
         </div>
       </header>
 
-      {/* Info Cards Section */}
-      <section className="info-section container animate-fade-in delay-1">
-        <div className="info-card">
-         
-          <h3>Our Address</h3>
-          <p>Room 9, 1st Floor, Halima Manzil, Mirza Ghalib Marg, A Clare Road, Nagpada, Mumbai - 400008</p>
-        </div>
-        <div className="info-card">
+      {/* Overlapping Professional Cards Section */}
+      <section className="info-cards-section animate-staggered-fade">
+        <div className="cards-grid-layout">
           
-          <h3>Call Us</h3>
-          <p>+91 8291101312</p>
-        </div>
-        <div className="info-card">
-          
-          <h3>Email Us</h3>
-          <p>contact@ampindiafoundation.org</p>
+          {/* Card: Address */}
+          <div className="premium-info-card" style={{ '--card-index': 1 }}>
+            <div className="card-icon-frame">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <h3 className="card-title text-heading">Our Address</h3>
+            <p className="card-desc-text">
+              Room 9, 1st Floor, Halima Manzil, Mirza Ghalib Marg, A Clare Road, Nagpada, Mumbai - 400008
+            </p>
+          </div>
+
+          {/* Card: Call */}
+          <div className="premium-info-card" style={{ '--card-index': 2 }}>
+            <div className="card-icon-frame">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <h3 className="card-title text-heading">Call Us</h3>
+            <p style={{ margin: 0 }}>
+              <a href="tel:+918291101312" className="card-anchor-link">+91 8291101312</a>
+            </p>
+            <span className="card-sub-meta">Mon - Sat, 9AM to 6PM</span>
+          </div>
+
+          {/* Card: Email */}
+          <div className="premium-info-card" style={{ '--card-index': 3 }}>
+            <div className="card-icon-frame">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <h3 className="card-title text-heading">Email Us</h3>
+            <p style={{ margin: 0 }}>
+              <a href="mailto:contact@ampindiafoundation.org" className="card-anchor-link">contact@ampindiafoundation.org</a>
+            </p>
+            <span className="card-sub-meta">We reply within 24 hours</span>
+          </div>
+
         </div>
       </section>
 
-      {/* Form and Map Section */}
-      <section className="form-map-section container animate-fade-in delay-2">
-        {/* Contact Form */}
-        <div className="form-container">
-          <h2>Get In Touch With Us</h2>
-          <p>Fill out the form below, and our team will connect with you shortly.</p>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                value={formData.name} 
-                onChange={handleChange} 
-                required 
-              />
+      {/* Isolated Section 1: Contact Form Layout */}
+      <section id="contact-form-section" className="form-content-section scroll-triggered-reveal">
+        <div className="form-split-layout">
+          
+          <div className="form-sticky-panel">
+            <p className="section-tagline">Message form</p>
+            <h2 className="section-main-title text-heading">Tell us how we can help</h2>
+            <p className="section-explanatory-text">
+              Fill out our explicit workspace request terminal. Your message will be securely routed directly to the regional management team for verification and scheduling.
+            </p>
+            <div className="form-response-metric-box">
+              <div className="metric-header-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Average Response Duration</span>
+              </div>
+              <p className="metric-body-text">Our dedicated communication desk prioritizes inquiry processing within 1 business day.</p>
             </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                value={formData.email} 
-                onChange={handleChange} 
-                required 
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea 
-                id="message" 
-                name="message" 
-                rows="5" 
-                value={formData.message} 
-                onChange={handleChange} 
-                required
-              ></textarea>
-            </div>
-            <button type="submit" className="submit-btn">Submit Button</button>
-          </form>
-        </div>
-
-        {/* Map and Socials */}
-        <div className="map-container">
-          <h2>Our Location</h2>
-          <p>Find us on the map or follow our updates across social media.</p>
-          <div className="map-box">
-            {/* Embedded Google Map pointing near Clare Road, Nagpada, Mumbai */}
-            <iframe 
-              title="AMP India Foundation Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7441530963384!2d72.82772717597561!3d18.964893982424424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce3a2aaaaaab%3A0x7d83dddfd02a5c9f!2sClare%20Road%2C%20Nagpada%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
-              width="100%" 
-              height="250" 
-              style={{ border: 0, borderRadius: '12px' }} 
-              allowFullScreen="" 
-              loading="lazy"
-            ></iframe>
           </div>
           
-          <div className="social-media">
-            <h3>Social Media</h3>
-        
+          <div className="immersive-interactive-form">
+            <form className="form-fields-stack" onSubmit={handleSubmit}>
+              
+              {/* Row 1: First Name & Last Name */}
+              <div className="form-row-duo">
+                <div className="input-group-block">
+                  <label htmlFor="firstName" className="form-input-label">First Name</label>
+                  <input 
+                    type="text" id="firstName" name="firstName" required 
+                    placeholder="John" className="modular-text-input" 
+                    value={formData.firstName} onChange={handleChange} 
+                  />
+                </div>
+                <div className="input-group-block">
+                  <label htmlFor="lastName" className="form-input-label">Last Name</label>
+                  <input 
+                    type="text" id="lastName" name="lastName" required 
+                    placeholder="Doe" className="modular-text-input" 
+                    value={formData.lastName} onChange={handleChange} 
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Email & Phone Number */}
+              <div className="form-row-duo">
+                <div className="input-group-block">
+                  <label htmlFor="email" className="form-input-label">Email Address</label>
+                  <input 
+                    type="email" id="email" name="email" required 
+                    placeholder="john.doe@corporate.com" className="modular-text-input" 
+                    value={formData.email} onChange={handleChange} 
+                  />
+                </div>
+                <div className="input-group-block">
+                  <label htmlFor="phone" className="form-input-label">Phone Number</label>
+                  <input 
+                    type="tel" id="phone" name="phone" required 
+                    placeholder="+91 XXXXX XXXXX" className="modular-text-input" 
+                    value={formData.phone} onChange={handleChange} 
+                  />
+                </div>
+              </div>
+
+              {/* Message Block */}
+              <div className="input-group-block">
+                <label htmlFor="message" className="form-input-label">Message</label>
+                <textarea 
+                  id="message" name="message" rows="6" required 
+                  placeholder="Describe your context, queries or collaboration objectives..." className="modular-textarea-input"
+                  value={formData.message} onChange={handleChange}
+                ></textarea>
+              </div>
+              
+              <div style={{ paddingTop: '8px' }}>
+                <button type="submit" className="secure-submit-btn">
+                  <span>Send Secure Message</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Isolated Section 2: Full Width Interactive Map Section */}
+      <section id="map-section" className="map-visual-section scroll-triggered-reveal">
+        <div className="map-section-container">
+          <div className="map-layout-header">
+            <div className="map-header-split-row">
+              <div className="map-intro-text-block">
+                <p className="section-tagline">Location map</p>
+                <h2 className="section-main-title text-heading">Visit our main office</h2>
+                <p className="section-explanatory-text">
+                  Our regional operations are anchored dynamically in Mumbai. View the high-fidelity structural vector details below or seamlessly shift to external routing maps.
+                </p>
+              </div>
+              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="map-external-anchor-link">
+                <span>Open in Google Maps</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+          </div>
+          
+          <div className="premium-map-display-panel">
+            <div className="map-panel-top-banner">
+              <div>
+                <h3 className="map-panel-title text-heading">AMP India Foundation</h3>
+                <p className="map-panel-subtitle">Clare Road, Nagpada, Mumbai, Maharashtra</p>
+              </div>
+              <div className="map-status-badge">
+                <span className="pulse-dot-indicator"></span>
+                <span>Verified Registry Point</span>
+              </div>
+            </div>
+            <div className="iframe-responsive-viewport">
+              <iframe 
+                title="AMP India Foundation Location" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.141291782794!2d72.82685557492766!3d18.96936645531204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce6871485c39%3A0x2eccfdf8278853e1!2sAMP%20India%20Foundation!5e0!3m2!1sen!2sin!4v1784187273160!5m2!1sen!2sin"
+                loading="lazy" 
+                className="embedded-iframe-node"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="newsletter-section">
-        <div className="container newsletter-content">
-          <div>
-            <h2>Our Newsletters</h2>
-            <p>Subscribe to our newsletter to stay updated on our upcoming initiatives and drives.</p>
-          </div>
-          <div className="newsletter-form">
-            <input type="email" placeholder="Email" required />
-            <button type="submit" className="newsletter-btn">Submit Button</button>
-          </div>
-        </div>
-      </section>
+    
 
-      {/* Footer Section */}
-     
     </div>
   );
 };
