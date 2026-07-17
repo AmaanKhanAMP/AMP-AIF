@@ -7,7 +7,7 @@ const pastEvents = [
     year: '2025',
     location: 'Mumbai',
     image:
-      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
+       'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=600&q=80',
     tall: true,
   },
   {
