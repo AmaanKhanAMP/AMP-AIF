@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 const slidesData = [
@@ -10,20 +11,19 @@ const slidesData = [
     subtitle: 'Every brilliant mind deserves an opportunity. We build impactful educational paths to secure sustainable futures for underprivileged students.',
     primaryBtnText: 'READ MORE',
     secondaryBtnText: 'OUR PROJECTS',
-    primaryLink: '#about',
-    secondaryLink: '#education'
+    primaryLink: '/about',
+    secondaryLink: '/projects'
   },
   {
     id: 2,
-    // Replaced with a sharp, high-quality real world photo for the second slide
     image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1920&q=80',
     titleStart: 'Bridging the Gap to Rightful',
     titleAccent: 'Employment',
     subtitle: 'Transforming potential into professions. Our structured training modules open direct job avenues for deserving job seekers.',
     primaryBtnText: 'JOIN US',
     secondaryBtnText: 'VIEW IMPACT',
-    primaryLink: '#join-us',
-    secondaryLink: '#projects'
+    primaryLink: '/volunteer',
+    secondaryLink: '/about'
   },
   {
     id: 3,
@@ -33,8 +33,8 @@ const slidesData = [
     subtitle: 'Uplifting grassroots communities by fostering self-reliance, practical skill development setups, and small-scale business incubation.',
     primaryBtnText: 'SUPPORT US',
     secondaryBtnText: 'OUR MISSION',
-    primaryLink: '#support-us',
-    secondaryLink: '#what-we-do'
+    primaryLink: '/support-us',
+    secondaryLink: '/what-we-do'
   }
 ];
 
@@ -84,15 +84,14 @@ const HeroCarousel = () => {
               <p className="carousel-subtitle">{slide.subtitle}</p>
               
               <div className="carousel-btn-group">
-                <a href={slide.primaryLink} className="btn-primary-blue">{slide.primaryBtnText}</a>
-                <a href={slide.secondaryLink} className="btn-outline-white">{slide.secondaryBtnText}</a>
+                <NavLink to={slide.primaryLink} className="btn-primary-blue">{slide.primaryBtnText}</NavLink>
+                <NavLink to={slide.secondaryLink} className="btn-outline-white">{slide.secondaryBtnText}</NavLink>
               </div>
             </div>
           </div>
         </div>
       ))}
 
-      {/* Navigation Arrows */}
       <button className="nav-arrow arrow-left" onClick={handlePrev} aria-label="Previous slide">
         <span>‹</span>
       </button>
@@ -100,7 +99,6 @@ const HeroCarousel = () => {
         <span>›</span>
       </button>
 
-      {/* Slide Indicators / Dots */}
       <div className="carousel-indicators">
         {slidesData.map((_, index) => (
           <span

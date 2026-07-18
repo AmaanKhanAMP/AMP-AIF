@@ -1,5 +1,8 @@
 import  { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+
+const MotionNavLink = motion.create(NavLink);
 
 
 const About = () => {
@@ -328,13 +331,14 @@ const About = () => {
               <p className="faq-header-intro">
                 We've gathered answers to the questions we hear most, making it easy for you to learn about our work, values, and the structural impact we create together.
               </p>
-              <motion.button 
+              <MotionNavLink
+                to="/contact"
                 className="faq-cta-btn"
                 whileHover={{ y: -2, boxShadow: "0 6px 20px rgba(30, 74, 138, 0.25)" }}
                 whileTap={{ scale: 0.98 }}
               >
                 Contact Us Now ↗
-              </motion.button>
+              </MotionNavLink>
             </div>
           </div>
 

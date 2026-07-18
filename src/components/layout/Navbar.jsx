@@ -60,7 +60,7 @@ const Navbar = () => {
    
             <li><NavLink to="/events" onClick={handleLinkClick}>EVENTS</NavLink></li>
             <li><NavLink to="/volunteer" onClick={handleLinkClick}>VOLUNTEER</NavLink></li>
-            <li><NavLink to="/Support" onClick={handleLinkClick}>SUPPORT US</NavLink></li>
+            <li><NavLink to="/support-us" onClick={handleLinkClick}>SUPPORT US</NavLink></li>
             <li><NavLink to="/contact" onClick={handleLinkClick}>CONTACT</NavLink></li>
           </ul>
         </div>

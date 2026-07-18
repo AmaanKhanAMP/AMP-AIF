@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const VolunteerCTA = () => {
@@ -17,13 +18,13 @@ const VolunteerCTA = () => {
         </p>
 
         <div className="volunteer-cta-actions">
-          <a href="/volunteer" className="volunteer-cta-btn-white">
+          <NavLink to="/volunteer" className="volunteer-cta-btn-white">
             Become a Volunteer
             <ArrowRight size={16} aria-hidden="true" />
-          </a>
-          <a href="/support" className="volunteer-cta-btn-outline">
+          </NavLink>
+          <NavLink to="/support-us" className="volunteer-cta-btn-outline">
             Support Our Mission
-          </a>
+          </NavLink>
         </div>
       </motion.div>
     </section>

@@ -33,7 +33,10 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/support-us" element={<Support />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/what-we-do" element={<About />} />
+          <Route path="/projects" element={<FeaturedInitiatives />} />
 
           {/* Project Dropdown Pages (Matching your NavLink paths) */}
           <Route path="/projects/education" element={<Education />} />

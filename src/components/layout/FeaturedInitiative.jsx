@@ -1,5 +1,5 @@
 
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 
 const FeaturedInitiatives = () => {
@@ -54,7 +54,7 @@ const FeaturedInitiatives = () => {
         {projectList.map((project) => {
           const isSelected = location.pathname === project.path;
           return (
-            <Link 
+            <NavLink 
               key={project.path}
               to={project.path}
               className={`editorial-tab-card ${isSelected ? 'is-selected' : ''}`}
@@ -70,7 +70,7 @@ const FeaturedInitiatives = () => {
                 <span className="tab-action-trigger">Explore Component View →</span>
               </div>
               <div className="tab-underline"></div>
-            </Link>
+            </NavLink>
           );
         })}
       </div>

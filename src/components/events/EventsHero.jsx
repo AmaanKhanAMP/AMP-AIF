@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
 
 const EventsHero = () => {
@@ -57,9 +58,9 @@ const EventsHero = () => {
           <button type="button" className="events-btn-primary" onClick={scrollToEvents}>
             Explore Upcoming Events
           </button>
-          <a href="/volunteer" className="events-btn-outline">
+          <NavLink to="/volunteer" className="events-btn-outline">
             Become a Volunteer
-          </a>
+          </NavLink>
         </motion.div>
       </motion.div>
     </section>

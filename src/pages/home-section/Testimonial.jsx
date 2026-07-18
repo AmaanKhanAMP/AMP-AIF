@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 const testimonialsData = [
   {
     id: 1,
@@ -73,11 +72,11 @@ const testimonialsData = [
     location: 'Lucknow',
     avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&h=300&q=80',
     quote: '"The career guidance sessions conducted by AIF professionals opened doors I never knew existed. From choosing the right vocational path to preparing for employment drives, every step was supported. Their pan-India network of volunteers truly empowers youth who lack access to quality mentorship and corporate exposure."',
-  }
+  },
 ];
 
 const Testimonial = () => {
-  const [activeIndex, setActiveIndex] = useState(1); // Defaults to the center card (Sana Khan)
+  const [activeIndex, setActiveIndex] = useState(1);
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
@@ -87,7 +86,6 @@ const Testimonial = () => {
     setActiveIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
   };
 
-  // Always show: far-left, near-left, active, near-right, far-right (wraps with modular arithmetic)
   const getCardPositionClass = (index) => {
     const total = testimonialsData.length;
     const raw = ((index - activeIndex) % total + total) % total;
@@ -109,67 +107,88 @@ const Testimonial = () => {
     }
   };
 
+  const active = testimonialsData[activeIndex];
+
   return (
     <section className="testimonials-section">
       <div className="testimonials-container">
-        
-        {/* Section Heading */}
-        <div className="testimonials-header">
+        <header className="testimonials-header">
           <h2>
             WORDS FROM <span className="text-blue-accent">PEOPLE</span>
           </h2>
-          <div className="decorative-line-wrapper">
-            <span className="line-segment short"></span>
-            <span className="line-segment long"></span>
-            <span className="line-segment short"></span>
+          <div className="decorative-line-wrapper" aria-hidden="true">
+            <span className="line-segment short" />
+            <span className="line-segment long" />
+            <span className="line-segment short" />
           </div>
-        </div>
+        </header>
 
-        {/* Shifting Carousel Window Block */}
         <div className="testimonial-slider-window">
-          
-          {/* Left Arrow Button */}
-          <button className="slider-arrow left-arrow" onClick={handlePrev} aria-label="Previous testimonial">
-            <span>‹</span>
-          </button>
-          
-          {/* Right Arrow Button */}
-          <button className="slider-arrow right-arrow" onClick={handleNext} aria-label="Next testimonial">
-            <span>›</span>
-          </button>
+          {/* Avatar row + desktop arrows (vertically aligned with avatars) */}
+          <div className="testimonial-avatar-band">
+            <button
+              type="button"
+              className="slider-arrow left-arrow is-desktop-arrow"
+              onClick={handlePrev}
+              aria-label="Previous testimonial"
+            >
+              <span aria-hidden="true">‹</span>
+            </button>
 
-          <div className="shifting-stage-container">
-            
-            {/* 3D Dynamic Shifting Avatar Track on Top */}
             <div className="avatar-stage-row">
               {testimonialsData.map((item, index) => (
-                <div 
-                  key={item.id} 
+                <button
+                  type="button"
+                  key={item.id}
                   className={`avatar-card-node ${getCardPositionClass(index)}`}
                   onClick={() => setActiveIndex(index)}
+                  aria-label={`Show testimonial from ${item.name}`}
+                  aria-current={index === activeIndex ? 'true' : undefined}
                 >
-                  <img src={item.avatar} alt={item.name} className="testimonial-avatar" />
-                </div>
+                  <img src={item.avatar} alt="" className="testimonial-avatar" />
+                </button>
               ))}
             </div>
 
-            {/* Content Display Grid for Active Highlighting Card below */}
-            <div className="testimonial-text-block">
-              <p className="testimonial-quote">
-                {testimonialsData[activeIndex].quote}
-              </p>
-              <h3 className="testimonial-author-name">
-                {testimonialsData[activeIndex].name}
-              </h3>
-              <p className="testimonial-author-meta">
-                {testimonialsData[activeIndex].role} &bull; <span className="meta-location">{testimonialsData[activeIndex].location}</span>
-              </p>
-            </div>
-
+            <button
+              type="button"
+              className="slider-arrow right-arrow is-desktop-arrow"
+              onClick={handleNext}
+              aria-label="Next testimonial"
+            >
+              <span aria-hidden="true">›</span>
+            </button>
           </div>
 
-        </div>
+          {/* Quote + author */}
+          <div className="testimonial-text-block" key={active.id}>
+            <p className="testimonial-quote">{active.quote}</p>
+            <h3 className="testimonial-author-name">{active.name}</h3>
+            <p className="testimonial-author-meta">
+              {active.role} &bull; <span className="meta-location">{active.location}</span>
+            </p>
+          </div>
 
+          {/* Mobile-only arrows beneath the testimonial */}
+          <div className="testimonial-mobile-nav">
+            <button
+              type="button"
+              className="slider-arrow left-arrow"
+              onClick={handlePrev}
+              aria-label="Previous testimonial"
+            >
+              <span aria-hidden="true">‹</span>
+            </button>
+            <button
+              type="button"
+              className="slider-arrow right-arrow"
+              onClick={handleNext}
+              aria-label="Next testimonial"
+            >
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

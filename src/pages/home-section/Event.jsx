@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 
@@ -126,10 +126,10 @@ const Event = () => {
         {/* View All Events CTA */}
         <div className={`events-global-action-row spatial-reveal ${isRevealed ? 'active' : ''}`}>
           <div className="events-view-all-cta-wrap">
-            <Link to="/events" className="events-view-all-btn-premium">
+            <NavLink to="/events" className="events-view-all-btn-premium">
               <span className="events-view-all-btn-text">View All Events</span>
               <ArrowRight className="events-view-all-arrow" size={20} aria-hidden="true" />
-            </Link>
+            </NavLink>
             {/* <p className="events-view-all-subtext">
               Explore all upcoming programs, workshops, and community initiatives.
             </p> */}

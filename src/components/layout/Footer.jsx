@@ -1,4 +1,4 @@
-
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="footer-cta-bar">
         <div className="footer-cta-container">
           <h2>Join Our Mission to Empower Lives Through Education & Employment.</h2>
-          <a href="#join-us" className="cta-button">BECOME A VOLUNTEER</a>
+          <NavLink to="/volunteer" className="cta-button">BECOME A VOLUNTEER</NavLink>
         </div>
       </div>
-
+      
       {/* Main 4-Column Grid Section */}
       <div className="footer-main-content">
         <div className="footer-grid-container">
@@ -25,19 +25,21 @@ const Footer = () => {
               underprivileged youth through sustainable educational models, rigorous training, 
               and professional mentorship.
             </p>
-            <a href="/about" className="read-more-link">READ MORE →</a>
+            <NavLink to="/about" className="read-more-link">READ MORE →</NavLink>
           </div>
 
           {/* Column 2: Useful Links */}
           <div className="footer-column links-col">
             <h3>USEFUL LINKS</h3>
             <ul>
-              <li><a href="/about"><span>▶</span> About AMP Foundation</a></li>
-              <li><a href="#projects"><span>▶</span> Our Core Projects</a></li>
-              <li><a href="#education"><span>▶</span> Education Assist</a></li>
-              <li><a href="#employment"><span>▶</span> Employment Support</a></li>
-              <li><a href="#mentorship"><span>▶</span> Student Mentorship</a></li>
-              <li><a href="#join-us"><span>▶</span> Join As Volunteer</a></li>
+              <li><NavLink to="/"><span>▶</span> Home</NavLink></li>
+              <li><NavLink to="/about"><span>▶</span> About Us</NavLink></li>
+              <li><NavLink to="/what-we-do"><span>▶</span> What We Do</NavLink></li>
+              <li><NavLink to="/projects"><span>▶</span> Projects</NavLink></li>
+              <li><NavLink to="/events"><span>▶</span> Events</NavLink></li>
+              <li><NavLink to="/volunteer"><span>▶</span> Join Us / Volunteer</NavLink></li>
+              <li><NavLink to="/support-us"><span>▶</span> Support Us</NavLink></li>
+              <li><NavLink to="/contact"><span>▶</span> Contact</NavLink></li>
             </ul>
           </div>
 
@@ -45,15 +47,15 @@ const Footer = () => {
           <div className="footer-column post-col">
             <h3>RECENT FOCUS</h3>
             <div className="post-item">
-              <a href="#post1">National Talent Search Examination</a>
+              <NavLink to="/projects/education">National Talent Search Examination</NavLink>
               <span className="post-date">July 2026</span>
             </div>
             <div className="post-item">
-              <a href="#post2">Employability Training Programs</a>
+              <NavLink to="/projects/training">Employability Training Programs</NavLink>
               <span className="post-date">June 2026</span>
             </div>
             <div className="post-item">
-              <a href="#post3">Higher Education Scholarship Distribution</a>
+              <NavLink to="/projects/education">Higher Education Scholarship Distribution</NavLink>
               <span className="post-date">May 2026</span>
             </div>
           </div>
@@ -84,7 +86,7 @@ const Footer = () => {
           <p className="copyright-text">
             Copyrights © 2026 All Rights Reserved. Powered by <span className="highlight-text">AMP India Foundation</span>
           </p>
-          <a href="#join-us" className="join-now-link">Join Us Now!</a>
+          <NavLink to="/volunteer" className="join-now-link">Join Us Now!</NavLink>
         </div>
       </div>
 
