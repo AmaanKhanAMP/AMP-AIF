@@ -146,8 +146,7 @@ margin-left:-100px;
   
   /* Smooth transparent deep drop dynamic base layout */
   background: rgba(12, 36, 62, 0.94);
-  backdrop-filter: blur(15px);
-  
+  backdrop-filter: blur(15px); 
   list-style: none;
   padding: 12px 0;
   margin: 14px 0 0 0;
@@ -195,7 +194,6 @@ margin-left:-100px;
   padding: 6px 12px;
   border-radius: 3px;
 }
-
 @media (max-width: 1024px) {
   .mobile-menu-btn {
     display: block;
