@@ -5,8 +5,8 @@
  * Contract kept compatible with useChat: returns { reply, sessionId, ... }.
  *
  * Env:
- *   NEXT_PUBLIC_CHAT_API_URL  → FastAPI base (default http://localhost:8000)
- *   NEXT_PUBLIC_API_URL       → fallback legacy Flask base
+ *   NEXT_PUBLIC_CHAT_API_URL  → FastAPI chatbot base (default http://localhost:8000)
+ *   NEXT_PUBLIC_API_URL       → Flask CMS/API fallback (Render)
  */
 
 const CHAT_API_BASE = (

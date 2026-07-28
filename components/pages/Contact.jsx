@@ -3,7 +3,9 @@
 import { useState } from 'react';
 const contact = '/assets/contact.jpeg';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_BASE_URL = (
+  process.env.NEXT_PUBLIC_API_URL || 'https://aif-backend-6jwe.onrender.com'
+).replace(/\/$/, '');
 
 const Contact = () => {
   const [formData, setFormData] = useState({ 
