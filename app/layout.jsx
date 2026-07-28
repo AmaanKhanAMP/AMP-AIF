@@ -1,5 +1,6 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { ChatWidget } from '@/chatbot';
 import './globals.css';
 
 export const metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main style={{ minHeight: '80vh' }}>{children}</main>
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   );
