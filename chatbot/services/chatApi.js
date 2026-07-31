@@ -6,12 +6,14 @@
  *
  * Env:
  *   NEXT_PUBLIC_CHAT_API_URL  → FastAPI chatbot base (default http://localhost:8000)
- *   NEXT_PUBLIC_API_URL       → Flask CMS/API fallback (Render)
+ *   NEXT_PUBLIC_API_URL       → Flask API fallback (via shared lib/api)
  */
+
+import { API_URL } from '@/lib/api';
 
 const CHAT_API_BASE = (
   process.env.NEXT_PUBLIC_CHAT_API_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
+  API_URL ||
   'http://localhost:8000'
 ).replace(/\/$/, '');
 

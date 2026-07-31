@@ -1,15 +1,16 @@
 import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
-
+import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Employment = () => {
   return (
     <div className="editorial-portfolio-page">
-  
+      <ScrollToTop />
+
       <main className="hero-editorial-block">
         <div className="hero-typography-pane">
-          <h1 className="main-giant-title">SUPPORT</h1>
+          <h1 className="premium-hero-heading">SUPPORT</h1>
           <p className="hero-project-subtitle">CAREER PLACEMENT INFRASTRUCTURE</p>
-          <div className="editorial-divider-line"><span className="divider-star">✦</span></div>
+          <div className="editorial-divider-line"></div>
           <div className="editorial-quote-card">
             <p className="quote-text">"Bridging the transition from student networks to corporate ecosystems."</p>
           </div>

@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import usePublishedContent from '@/hooks/usePublishedContent';
 import { mapTestimonial } from '@/lib/contentApi';
+
+const AUTO_SCROLL_MS = 5000;
+const SWIPE_THRESHOLD_PX = 48;
+const EASE = [0.45, 0, 0.2, 1];
 
 const FALLBACK_TESTIMONIALS = [
   {
@@ -85,18 +90,73 @@ const Testimonial = () => {
     FALLBACK_TESTIMONIALS,
     mapTestimonial
   );
+  const total = testimonialsData.length;
+
   const [activeIndex, setActiveIndex] = useState(1);
+  const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const pointerRef = useRef({ tracking: false, startX: 0, startY: 0 });
+  const resumeTimerRef = useRef(null);
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
-  };
+  const clearResumeTimer = useCallback(() => {
+    if (resumeTimerRef.current != null) {
+      window.clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = null;
+    }
+  }, []);
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
-  };
+  const pauseAutoplay = useCallback(() => {
+    clearResumeTimer();
+    setIsPaused(true);
+  }, [clearResumeTimer]);
+
+  const resumeAutoplay = useCallback(
+    (delayMs = 0) => {
+      clearResumeTimer();
+      if (delayMs > 0) {
+        resumeTimerRef.current = window.setTimeout(() => {
+          setIsPaused(false);
+          resumeTimerRef.current = null;
+        }, delayMs);
+        return;
+      }
+      setIsPaused(false);
+    },
+    [clearResumeTimer]
+  );
+
+  const goTo = useCallback(
+    (index, dir = 1) => {
+      if (total <= 0) return;
+      const next = ((index % total) + total) % total;
+      setDirection(dir);
+      setActiveIndex(next);
+    },
+    [total]
+  );
+
+  const handlePrev = useCallback(() => {
+    goTo(activeIndex - 1, -1);
+  }, [activeIndex, goTo]);
+
+  const handleNext = useCallback(() => {
+    goTo(activeIndex + 1, 1);
+  }, [activeIndex, goTo]);
+
+  useEffect(() => {
+    if (isPaused || total <= 1) return undefined;
+
+    const id = window.setInterval(() => {
+      setDirection(1);
+      setActiveIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
+    }, AUTO_SCROLL_MS);
+
+    return () => window.clearInterval(id);
+  }, [isPaused, total, activeIndex]);
+
+  useEffect(() => () => clearResumeTimer(), [clearResumeTimer]);
 
   const getCardPositionClass = (index) => {
-    const total = testimonialsData.length;
     const raw = ((index - activeIndex) % total + total) % total;
     const offset = raw <= Math.floor(total / 2) ? raw : raw - total;
 
@@ -116,7 +176,45 @@ const Testimonial = () => {
     }
   };
 
+  const onPointerDown = (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    pointerRef.current = {
+      tracking: true,
+      startX: event.clientX,
+      startY: event.clientY,
+    };
+    if (event.pointerType !== 'mouse') {
+      pauseAutoplay();
+    }
+  };
+
+  const onPointerUp = (event) => {
+    if (!pointerRef.current.tracking) return;
+
+    const dx = event.clientX - pointerRef.current.startX;
+    const dy = event.clientY - pointerRef.current.startY;
+    const isSwipe =
+      Math.abs(dx) >= SWIPE_THRESHOLD_PX && Math.abs(dx) > Math.abs(dy);
+
+    pointerRef.current.tracking = false;
+
+    if (isSwipe) {
+      if (dx < 0) handleNext();
+      else handlePrev();
+    }
+
+    if (event.pointerType !== 'mouse') {
+      resumeAutoplay(900);
+    }
+  };
+
+  const onPointerCancel = () => {
+    pointerRef.current.tracking = false;
+    resumeAutoplay(600);
+  };
+
   const active = testimonialsData[activeIndex];
+  if (!active) return null;
 
   return (
     <section className="testimonials-section">
@@ -132,13 +230,23 @@ const Testimonial = () => {
           </div>
         </header>
 
-        <div className="testimonial-slider-window">
-          {/* Avatar row + desktop arrows (vertically aligned with avatars) */}
+        <div
+          className="testimonial-slider-window"
+          onMouseEnter={pauseAutoplay}
+          onMouseLeave={() => resumeAutoplay(0)}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerCancel}
+        >
           <div className="testimonial-avatar-band">
             <button
               type="button"
               className="slider-arrow left-arrow is-desktop-arrow"
-              onClick={handlePrev}
+              onClick={() => {
+                pauseAutoplay();
+                handlePrev();
+                resumeAutoplay(1400);
+              }}
               aria-label="Previous testimonial"
             >
               <span aria-hidden="true">‹</span>
@@ -150,7 +258,13 @@ const Testimonial = () => {
                   type="button"
                   key={item.id}
                   className={`avatar-card-node ${getCardPositionClass(index)}`}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => {
+                    pauseAutoplay();
+                    const raw = ((index - activeIndex) % total + total) % total;
+                    const offset = raw <= Math.floor(total / 2) ? raw : raw - total;
+                    goTo(index, offset >= 0 ? 1 : -1);
+                    resumeAutoplay(1400);
+                  }}
                   aria-label={`Show testimonial from ${item.name}`}
                   aria-current={index === activeIndex ? 'true' : undefined}
                 >
@@ -162,28 +276,52 @@ const Testimonial = () => {
             <button
               type="button"
               className="slider-arrow right-arrow is-desktop-arrow"
-              onClick={handleNext}
+              onClick={() => {
+                pauseAutoplay();
+                handleNext();
+                resumeAutoplay(1400);
+              }}
               aria-label="Next testimonial"
             >
               <span aria-hidden="true">›</span>
             </button>
           </div>
 
-          {/* Quote + author */}
-          <div className="testimonial-text-block" key={active.id}>
-            <p className="testimonial-quote">{active.quote}</p>
-            <h3 className="testimonial-author-name">{active.name}</h3>
-            <p className="testimonial-author-meta">
-              {active.role} &bull; <span className="meta-location">{active.location}</span>
-            </p>
+          <div className="testimonial-text-viewport">
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <motion.div
+                key={active.id}
+                className="testimonial-text-block"
+                custom={direction}
+                variants={{
+                  enter: (dir) => ({ opacity: 0, x: 28 * dir }),
+                  center: { opacity: 1, x: 0 },
+                  exit: (dir) => ({ opacity: 0, x: -28 * dir }),
+                }}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.7, ease: EASE }}
+              >
+                <p className="testimonial-quote">{active.quote}</p>
+                <h3 className="testimonial-author-name">{active.name}</h3>
+                <p className="testimonial-author-meta">
+                  {active.role} &bull;{' '}
+                  <span className="meta-location">{active.location}</span>
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Mobile-only arrows beneath the testimonial */}
           <div className="testimonial-mobile-nav">
             <button
               type="button"
               className="slider-arrow left-arrow"
-              onClick={handlePrev}
+              onClick={() => {
+                pauseAutoplay();
+                handlePrev();
+                resumeAutoplay(1400);
+              }}
               aria-label="Previous testimonial"
             >
               <span aria-hidden="true">‹</span>
@@ -191,7 +329,11 @@ const Testimonial = () => {
             <button
               type="button"
               className="slider-arrow right-arrow"
-              onClick={handleNext}
+              onClick={() => {
+                pauseAutoplay();
+                handleNext();
+                resumeAutoplay(1400);
+              }}
               aria-label="Next testimonial"
             >
               <span aria-hidden="true">›</span>

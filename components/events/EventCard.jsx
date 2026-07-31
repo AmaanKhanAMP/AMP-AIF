@@ -1,9 +1,21 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
+import { Calendar, Clock, MapPin } from 'lucide-react';
 
-const EventCard = ({ event, index = 0 }) => {
+const EventCard = ({
+  event,
+  index = 0,
+  buttonLabel = 'Register Now',
+  showButton = false,
+}) => {
+  const href = event.registrationLink || event.ctaHref || null;
+  const description =
+    event.description?.trim() ||
+    'A memorable AMP India Foundation event bringing communities together for lasting impact.';
+
+  const hasMeta = Boolean(event.date || event.time || event.venue);
+
   return (
     <motion.article
       className="event-card"
@@ -15,24 +27,44 @@ const EventCard = ({ event, index = 0 }) => {
     >
       <div className="event-card-image">
         <img src={event.image} alt={event.title} loading="lazy" />
-        <span className="event-card-category">{event.category}</span>
+        {event.category ? (
+          <span className="event-card-category">{event.category}</span>
+        ) : null}
       </div>
 
       <div className="event-card-body">
         <h3 className="event-card-title">{event.title}</h3>
 
-        <div className="event-card-meta">
-          <span>
-            <Calendar aria-hidden="true" />
-            {event.date}
-          </span>
-          <span>
-            <MapPin aria-hidden="true" />
-            {event.venue}
-          </span>
-        </div>
+        {hasMeta ? (
+          <div className="event-card-meta">
+            {event.date ? (
+              <span>
+                <Calendar aria-hidden="true" />
+                {event.date}
+              </span>
+            ) : null}
+            {event.time ? (
+              <span>
+                <Clock aria-hidden="true" />
+                {event.time}
+              </span>
+            ) : null}
+            {event.venue ? (
+              <span>
+                <MapPin aria-hidden="true" />
+                {event.venue}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
 
-        <p className="event-card-desc">{event.description}</p>
+        <p className="event-card-desc">{description}</p>
+
+        {showButton && href ? (
+          <a href={href} className="event-card-cta">
+            {buttonLabel}
+          </a>
+        ) : null}
       </div>
     </motion.article>
   );

@@ -1,9 +1,7 @@
 "use client";
 
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 
 const FeaturedInitiatives = () => {
   const pathname = usePathname();
@@ -50,22 +48,24 @@ const FeaturedInitiatives = () => {
   return (
     <section className="featured-tabs-section">
       <div className="section-title-banner">
-        <span className="star-accent">✦</span> MAIN STRATEGIC INITIATIVES <span className="star-accent">✦</span>
+         MAIN STRATEGIC INITIATIVES 
       </div>
 
       <div className="tabs-strip-container">
         {projectList.map((project) => {
-          const isSelected = pathname === project.path;
+          const isSelected =
+            pathname === project.path ||
+            (project.path === '/projects/medical' && pathname === '/projects/healthcare');
           return (
             <Link 
               key={project.path}
               href={project.path}
               className={`editorial-tab-card ${isSelected ? 'is-selected' : ''}`}
+              scroll
             >
               <div className="tab-img-preview">
                 <img src={project.image} alt={project.title} />
                 <div className="tab-img-overlay"></div>
-                <div className="active-corner-indicator">✦</div>
               </div>
               <div className="tab-meta-content">
                 <h3 className="tab-title">{project.title}</h3>

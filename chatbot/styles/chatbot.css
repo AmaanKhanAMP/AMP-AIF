@@ -13,7 +13,8 @@
   --aif-muted: #64748b;
   --aif-soft: #eff6ff;
   --aif-shadow: 0 24px 60px rgba(11, 94, 215, 0.2);
-  --aif-z: 9999;
+  /* Stacking: launcher 1000, tooltip 1100, window 1200 (Back to Top sits at 990) */
+  --aif-z: 1000;
   position: relative;
   z-index: var(--aif-z);
   font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
@@ -38,7 +39,7 @@
   position: fixed;
   right: 24px;
   bottom: 24px;
-  z-index: calc(var(--aif-z) + 2);
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -46,6 +47,8 @@
 }
 
 .aif-chat-fab-tooltip {
+  position: relative;
+  z-index: 1100;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -61,6 +64,13 @@
   transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
+.aif-chat-fab-wrap:hover .aif-chat-fab-tooltip,
+.aif-chat-fab-wrap:focus-within .aif-chat-fab-tooltip {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
 .aif-chat-fab-tooltip strong {
   font-size: 13px;
   font-weight: 700;
@@ -72,14 +82,9 @@
   font-weight: 500;
 }
 
-.aif-chat-fab-wrap:hover .aif-chat-fab-tooltip,
-.aif-chat-fab-wrap:focus-within .aif-chat-fab-tooltip {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
 .aif-chat-fab-wrap:has(.aif-chat-fab--open) .aif-chat-fab-tooltip {
   opacity: 0;
+  pointer-events: none;
 }
 
 .aif-chat-fab-pulse {
@@ -211,7 +216,7 @@
   -webkit-backdrop-filter: blur(24px) saturate(170%);
   box-shadow: var(--aif-shadow);
   border: 1px solid rgba(255, 255, 255, 0.7);
-  z-index: calc(var(--aif-z) + 1);
+  z-index: 1200;
   transform-origin: bottom right;
 }
 
@@ -944,6 +949,41 @@
   }
 }
 
+/* Mobile logo only — match desktop fill (scale into square), stay centered */
+@media (max-width: 768px) {
+  .aif-chat-header-brand {
+    align-items: center;
+  }
+
+  .aif-chat-logo-wrap {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .aif-chat-logo {
+    width: 90%;
+    height: 90%;
+    max-width: none;
+    max-height: none;
+    display: block;
+    margin: auto;
+    object-fit: contain;
+    object-position: center;
+    /* Same zoom-to-fill as desktop; no sideways offset so it stays centered */
+    transform: scale(1.7);
+    transform-origin: center center;
+  }
+}
+
 @media (max-width: 640px) {
   .aif-chat-fab-wrap {
     right: 16px;
@@ -968,23 +1008,6 @@
     min-height: 82px;
     max-height: 82px;
     padding: 6px 12px 6px 14px;
-  }
-
-  .aif-chat-logo-wrap {
-    width: 66px;
-    height: 66px;
-    border-radius: 16px;
-  }
-
-  .aif-chat-logo {
-    width: 90%;
-    height: 90%;
-    display: block;
-    margin: auto;
-    object-fit: contain;
-    object-position: center;
-    transform: translateX(8px) scale(1.7);
-    transform-origin: center center;
   }
 
   .aif-chat-title { font-size: 14px; }

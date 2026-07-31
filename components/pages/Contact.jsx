@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from 'react';
+import { API_URL } from '@/lib/api';
 const contact = '/assets/contact.jpeg';
-
-const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL || 'https://aif-backend-6jwe.onrender.com'
-).replace(/\/$/, '');
 
 const Contact = () => {
   const [formData, setFormData] = useState({ 
@@ -31,7 +28,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -161,6 +158,47 @@ const Contact = () => {
 
         </div>
       </section>
+       {/* Isolated Section 2: Full Width Interactive Map Section */}
+       <section id="map-section" className="map-visual-section scroll-triggered-reveal">
+        <div className="map-section-container">
+          <div className="map-layout-header">
+            <div className="map-header-split-row">
+              <div className="map-intro-text-block">
+                <p className="section-tagline">Location map</p>
+                <h2 className="section-main-title text-heading">Visit our main office</h2>
+                <p className="section-explanatory-text">
+                  Our regional operations are anchored dynamically in Mumbai. View the high-fidelity structural vector details below or seamlessly shift to external routing maps.
+                </p>
+              </div>
+              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="map-external-anchor-link">
+                <span>Open in Google Maps</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+          </div>
+          
+          <div className="premium-map-display-panel">
+            <div className="map-panel-top-banner">
+              <div>
+                <h3 className="map-panel-title text-heading">AMP India Foundation</h3>
+                <p className="map-panel-subtitle">Clare Road, Nagpada, Mumbai, Maharashtra</p>
+              </div>
+              <div className="map-status-badge">
+                <span className="pulse-dot-indicator"></span>
+                <span>Verified Registry Point</span>
+              </div>
+            </div>
+            <div className="iframe-responsive-viewport">
+              <iframe 
+                title="AMP India Foundation Location" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.141291782794!2d72.82685557492766!3d18.96936645531204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce6871485c39%3A0x2eccfdf8278853e1!2sAMP%20India%20Foundation!5e0!3m2!1sen!2sin!4v1784187273160!5m2!1sen!2sin"
+                loading="lazy" 
+                className="embedded-iframe-node"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Isolated Section 1: Contact Form Layout */}
       <section id="contact-form-section" className="form-content-section scroll-triggered-reveal">
@@ -266,47 +304,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Isolated Section 2: Full Width Interactive Map Section */}
-      <section id="map-section" className="map-visual-section scroll-triggered-reveal">
-        <div className="map-section-container">
-          <div className="map-layout-header">
-            <div className="map-header-split-row">
-              <div className="map-intro-text-block">
-                <p className="section-tagline">Location map</p>
-                <h2 className="section-main-title text-heading">Visit our main office</h2>
-                <p className="section-explanatory-text">
-                  Our regional operations are anchored dynamically in Mumbai. View the high-fidelity structural vector details below or seamlessly shift to external routing maps.
-                </p>
-              </div>
-              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="map-external-anchor-link">
-                <span>Open in Google Maps</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-            </div>
-          </div>
-          
-          <div className="premium-map-display-panel">
-            <div className="map-panel-top-banner">
-              <div>
-                <h3 className="map-panel-title text-heading">AMP India Foundation</h3>
-                <p className="map-panel-subtitle">Clare Road, Nagpada, Mumbai, Maharashtra</p>
-              </div>
-              <div className="map-status-badge">
-                <span className="pulse-dot-indicator"></span>
-                <span>Verified Registry Point</span>
-              </div>
-            </div>
-            <div className="iframe-responsive-viewport">
-              <iframe 
-                title="AMP India Foundation Location" 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.141291782794!2d72.82685557492766!3d18.96936645531204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce6871485c39%3A0x2eccfdf8278853e1!2sAMP%20India%20Foundation!5e0!3m2!1sen!2sin!4v1784187273160!5m2!1sen!2sin"
-                loading="lazy" 
-                className="embedded-iframe-node"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
     
 

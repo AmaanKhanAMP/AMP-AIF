@@ -1,108 +1,107 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import EventSection from './EventSection';
 import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapGalleryItem } from '@/lib/contentApi';
+import { mapPastEvent } from '@/lib/contentApi';
 
-const FALLBACK_GALLERY = [
+const FALLBACK_PAST = [
   {
     id: 1,
-    name: 'National Job Fair 2025',
-    year: '2025',
-    location: 'Mumbai',
+    title: 'National Job Fair 2025',
+    category: 'Employment',
+    date: '15 Mar 2025',
+    time: '9:00 AM – 5:00 PM',
+    venue: 'Mumbai',
+    description:
+      'A large-scale placement drive connecting skilled youth with corporate employers across manufacturing, IT, and services.',
     image:
-       'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=600&q=80',
-    tall: true,
+      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80',
+    registrationLink: null,
   },
   {
     id: 2,
-    name: 'Medical Relief Camp',
-    year: '2025',
-    location: 'Hyderabad',
+    title: 'Medical Relief Camp',
+    category: 'Medical Camp',
+    date: '22 Jun 2025',
+    time: '8:00 AM – 2:00 PM',
+    venue: 'Hyderabad',
+    description:
+      'Free health check-ups, screenings, and medical relief support delivered to underserved neighbourhoods.',
     image:
- 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80',
-    tall: false,
+      'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80',
+    registrationLink: null,
   },
   {
     id: 3,
-    name: 'Scholarship Distribution',
-    year: '2024',
-    location: 'Delhi',
+    title: 'Scholarship Distribution Ceremony',
+    category: 'Education',
+    date: '10 Dec 2024',
+    time: '11:00 AM – 1:00 PM',
+    venue: 'Delhi',
+    description:
+      'Recognising meritorious students and awarding scholarships to support higher education pathways.',
     image:
-      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80',
-    tall: false,
+      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80',
+    registrationLink: null,
   },
   {
     id: 4,
-    name: 'Skill Training Graduation',
-    year: '2024',
-    location: 'Bengaluru',
+    title: 'Skill Training Graduation',
+    category: 'Skill Development',
+    date: '18 Sep 2024',
+    time: '10:00 AM – 12:30 PM',
+    venue: 'Bengaluru',
+    description:
+      'Celebrating graduates of vocational programs in digital skills, tailoring, and entrepreneurship.',
     image:
-      'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
-    tall: true,
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
+    registrationLink: null,
   },
   {
     id: 5,
-    name: 'Mentorship Summit',
-    year: '2024',
-    location: 'Pune',
+    title: 'Mentorship Summit',
+    category: 'Career Guidance',
+    date: '05 Aug 2024',
+    time: '10:00 AM – 4:00 PM',
+    venue: 'Pune',
+    description:
+      'Industry mentors guided students through academic choices, resume building, and career planning.',
     image:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-    tall: false,
+      'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+    registrationLink: null,
   },
   {
     id: 6,
-    name: 'Community Upliftment Drive',
-    year: '2023',
-    location: 'Kolkata',
+    title: 'Community Upliftment Drive',
+    category: 'Community Outreach',
+    date: '12 Nov 2023',
+    time: '9:30 AM – 1:30 PM',
+    venue: 'Kolkata',
+    description:
+      'Grassroots outreach with essential supplies, financial literacy workshops, and self-help group support.',
     image:
-      'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=600&q=80',
-    tall: true,
+      'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80',
+    registrationLink: null,
   },
 ];
 
 const PastEventsGallery = () => {
   const pastEvents = usePublishedContent(
     'gallery-items',
-    FALLBACK_GALLERY,
-    mapGalleryItem
+    FALLBACK_PAST,
+    mapPastEvent
   );
 
   return (
-    <section className="past-events-section" aria-label="Past events gallery">
-      <div className="ev-container">
-        <header className="ev-section-header">
-          <span className="ev-section-tag">Our Legacy</span>
-          <h2 className="ev-section-title">
-            Past Events <span className="ev-accent">Gallery</span>
-          </h2>
-          <p className="ev-section-subtitle">
-            Celebrating years of transformative impact across communities throughout India.
-          </p>
-        </header>
-
-        <div className="past-events-masonry">
-          {pastEvents.map((event, index) => (
-            <motion.figure
-              key={event.id}
-              className="past-event-item"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: index * 0.08, duration: 0.5 }}
-            >
-              <img src={event.image} alt={event.name} loading="lazy" />
-              <figcaption className="past-event-overlay">
-                <p className="past-event-name">{event.name}</p>
-                <span className="past-event-meta">
-                  {event.year} · {event.location}
-                </span>
-              </figcaption>
-            </motion.figure>
-          ))}
-        </div>
-      </div>
-    </section>
+    <EventSection
+      id="past-events"
+      tag="Our Legacy"
+      title="Past Events"
+      subtitle="Celebrating years of transformative impact across communities throughout India."
+      events={pastEvents}
+      ariaLabel="Past events"
+      className="past-events-listing"
+    />
   );
 };
 

@@ -1,16 +1,16 @@
-
 import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
-
+import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Mentorship = () => {
   return (
     <div className="editorial-portfolio-page">
-    
+      <ScrollToTop />
+
       <main className="hero-editorial-block">
         <div className="hero-typography-pane">
-          <h1 className="main-giant-title">MENTORSHIP</h1>
+          <h1 className="premium-hero-heading">MENTORSHIP</h1>
           <p className="hero-project-subtitle">INTELLECTUAL GUIDANCE FRAMEWORK</p>
-          <div className="editorial-divider-line"><span className="divider-star">✦</span></div>
+          <div className="editorial-divider-line"></div>
           <div className="editorial-quote-card">
             <p className="quote-text">"Connecting industry experience with first-generation student networks."</p>
           </div>

@@ -150,7 +150,7 @@ const About = () => {
         <div className="hero-content-wrapper">
           <span className="hero-subtitle-tag">Empowering Lives</span>
           <h1 className="hero-title">
-            About <span className="hero-gradient-text">AMP India Foundation</span>
+            About <span className="hero-gradient-text">Us</span>
           </h1>
           <div className="hero-divider"></div>
         </div>

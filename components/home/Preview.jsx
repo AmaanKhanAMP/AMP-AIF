@@ -1,8 +1,9 @@
-
+import Link from 'next/link';
 
 const cardData = [
   {
     id: 1,
+    href: '/projects/education',
     image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80',
     title: 'Educational Support',
     subtitle: 'Nurturing Bright Futures',
@@ -10,6 +11,7 @@ const cardData = [
   },
   {
     id: 2,
+    href: '/projects/employment',
     image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80',
     title: 'Employment Assistance',
     subtitle: 'Creating Sustainable Livelihoods',
@@ -17,6 +19,7 @@ const cardData = [
   },
   {
     id: 3,
+    href: '/projects/mentorship',
     image: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=600&q=80',
     title: 'Mentorship & Guidance',
     subtitle: 'Shaping Professional Leaders',
@@ -48,7 +51,13 @@ const Preview = () => {
         {/* 3-Column Card Layout Grid Container */}
         <div className="cards-grid-layout">
           {cardData.map((card) => (
-            <div key={card.id} className="info-feature-card">
+            <Link
+              key={card.id}
+              href={card.href}
+              className="info-feature-card"
+              aria-label={`${card.title} — view project details`}
+              scroll
+            >
               <div className="card-image-box">
                 <img src={card.image} alt={card.title} className="feature-card-img" />
               </div>
@@ -57,7 +66,7 @@ const Preview = () => {
                 <h4 className="card-sub-title">{card.subtitle}</h4>
                 <p className="card-description-text">{card.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

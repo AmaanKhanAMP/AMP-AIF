@@ -15,12 +15,11 @@ const Events = () => {
       <EventsHero />
       <FeaturedEvent />
       <UpcomingEvents />
-      <EventCategories />
-      <EventTimeline />
       <PastEventsGallery />
-      {/* <ImpactStats /> */}
+      <EventTimeline />
+      <EventCategories />
       <VolunteerCTA />
-      {/* <FAQ /> */}
+      
     </div>
   );
 };

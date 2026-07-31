@@ -1,17 +1,18 @@
-
 import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
+import ScrollToTop from '@/components/layout/ScrollToTop';
+
 const medical = '/assets/about.webp';
 
-const Medical= () => {
+const Medical = () => {
   return (
     <div className="editorial-portfolio-page">
-      
+      <ScrollToTop />
 
       <main className="hero-editorial-block">
         <div className="hero-typography-pane">
-          <h1 className="main-giant-title">MEDICAL AID</h1>
+          <h1 className="premium-hero-heading">MEDICAL AID</h1>
           <p className="hero-project-subtitle">HEALTHCARE INTERVENTION & OUTREACH</p>
-          <div className="editorial-divider-line"><span className="divider-star">✦</span></div>
+          <div className="editorial-divider-line"></div>
           <div className="editorial-quote-card">
             <p className="quote-text">"Breaking barriers to provide essential diagnostic and clinical relief."</p>
           </div>

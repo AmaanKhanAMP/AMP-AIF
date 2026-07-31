@@ -1,5 +1,6 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import BackToTop from '@/components/layout/BackToTop';
 import { ChatWidget } from '@/chatbot';
 import './globals.css';
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <main style={{ minHeight: '80vh' }}>{children}</main>
         <Footer />
         <ChatWidget />
+        <BackToTop />
       </body>
     </html>
   );
