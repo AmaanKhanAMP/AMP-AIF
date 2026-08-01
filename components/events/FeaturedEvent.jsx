@@ -2,8 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapFeaturedEvent } from '@/lib/contentApi';
 
 const FALLBACK_FEATURED = {
   title: 'Career Guidance & Employment Drive 2026',
@@ -17,12 +15,8 @@ const FALLBACK_FEATURED = {
     'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=900&q=80',
 };
 
-const FeaturedEvent = () => {
-  const items = usePublishedContent(
-    'featured-events',
-    [FALLBACK_FEATURED],
-    mapFeaturedEvent
-  );
+const FeaturedEvent = ({ items: itemsProp }) => {
+  const items = Array.isArray(itemsProp) ? itemsProp : [FALLBACK_FEATURED];
   const featuredEvent = items[0];
 
   // No published featured event — do not resurrect hardcoded fallback

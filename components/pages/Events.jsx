@@ -9,13 +9,18 @@ import VolunteerCTA from '@/components/events/VolunteerCTA';
 // import FAQ from '@/components/events/FAQ';
 import '@/styles/Events.css';
 
-const Events = () => {
+const Events = ({
+  featuredEvents,
+  upcomingEvents,
+  pastEvents,
+  upcomingVisible,
+}) => {
   return (
     <div className="events-page-canvas">
       <EventsHero />
-      <FeaturedEvent />
-      <UpcomingEvents />
-      <PastEventsGallery />
+      <FeaturedEvent items={featuredEvents} />
+      <UpcomingEvents events={upcomingEvents} isVisible={upcomingVisible} />
+      <PastEventsGallery events={pastEvents} />
       <EventTimeline />
       <EventCategories />
       <VolunteerCTA />

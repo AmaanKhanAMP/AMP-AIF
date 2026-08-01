@@ -2,9 +2,6 @@
 
 import Link from 'next/link';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import useLayoutSettings from '@/hooks/useLayoutSettings';
-import { mapFooterFocusItem, mapFooterLink } from '@/lib/contentApi';
 
 const FALLBACK_FOOTER = {
   cta_heading: 'Join Our Mission to Empower Lives Through Education & Employment.',
@@ -67,14 +64,12 @@ const FALLBACK_FOCUS = [
   },
 ];
 
-const Footer = () => {
-  const { data: settings } = useLayoutSettings('footer', FALLBACK_FOOTER);
-  const links = usePublishedContent('footer-links', FALLBACK_LINKS, mapFooterLink);
-  const focusItems = usePublishedContent(
-    'footer-focus',
-    FALLBACK_FOCUS,
-    mapFooterFocusItem
-  );
+const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusProp }) => {
+  const settings = settingsProp
+    ? { ...FALLBACK_FOOTER, ...settingsProp }
+    : FALLBACK_FOOTER;
+  const links = Array.isArray(linksProp) ? linksProp : FALLBACK_LINKS;
+  const focusItems = Array.isArray(focusProp) ? focusProp : FALLBACK_FOCUS;
 
   return (
     <footer className="amp-footer">

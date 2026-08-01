@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapHomeEvent } from '@/lib/contentApi';
 
 
 const FALLBACK_EVENTS = [
@@ -40,8 +38,8 @@ const FALLBACK_EVENTS = [
   }
 ];
 
-const Event = () => {
-  const eventsData = usePublishedContent('home-events', FALLBACK_EVENTS, mapHomeEvent);
+const Event = ({ events }) => {
+  const eventsData = Array.isArray(events) ? events : FALLBACK_EVENTS;
   const [hoveredEventId, setHoveredEventId] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const sectionRef = useRef(null);

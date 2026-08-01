@@ -1,15 +1,13 @@
 "use client";
 
 import EventSection from './EventSection';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapPastEvent } from '@/lib/contentApi';
 
 /**
- * Past Events grid — content from CMS (`gallery-items`).
+ * Past Events grid — CMS data is loaded on the server and passed as props.
  * Description comes from the API; a short fallback is used only when DB text is empty.
  */
-const PastEventsGallery = () => {
-  const pastEvents = usePublishedContent('gallery-items', [], mapPastEvent);
+const PastEventsGallery = ({ events }) => {
+  const pastEvents = Array.isArray(events) ? events : [];
 
   return (
     <EventSection

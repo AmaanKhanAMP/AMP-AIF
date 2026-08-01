@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapHeroBanner } from '@/lib/contentApi';
 
 
 const FALLBACK_SLIDES = [
@@ -42,8 +40,9 @@ const FALLBACK_SLIDES = [
   }
 ];
 
-const HeroCarousel = () => {
-  const slidesData = usePublishedContent('hero-banners', FALLBACK_SLIDES, mapHeroBanner);
+const HeroCarousel = ({ slides }) => {
+  // Server-provided CMS data (array, possibly empty). Fallback only when fetch failed (null/undefined).
+  const slidesData = Array.isArray(slides) ? slides : FALLBACK_SLIDES;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);
 

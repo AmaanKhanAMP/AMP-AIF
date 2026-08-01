@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 import { fetchContentClient } from "@/lib/contentApi";
 
 /**
- * Loads published CMS content.
- * - On API success (including empty list): use API data.
- * - On API failure: keep hardcoded fallback.
+ * @deprecated CMS sections now load on the server (see lib/loadCms.js) and
+ * receive data as props. Client-side fetch caused FALLBACK → API flicker on
+ * Vercel (especially with slow Render cold starts). Prefer server props.
  *
- * Empty published list must NOT restore fallback — otherwise Unpublish
- * appears broken on the public site.
+ * Kept only as an escape hatch for non-page utilities.
  */
 export default function usePublishedContent(resource, fallback, mapFn) {
   const [items, setItems] = useState(fallback);

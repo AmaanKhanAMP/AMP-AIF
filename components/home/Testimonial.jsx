@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapTestimonial } from '@/lib/contentApi';
 
 const AUTO_SCROLL_MS = 5000;
 const SWIPE_THRESHOLD_PX = 48;
@@ -84,12 +82,10 @@ const FALLBACK_TESTIMONIALS = [
   },
 ];
 
-const Testimonial = () => {
-  const testimonialsData = usePublishedContent(
-    'testimonials',
-    FALLBACK_TESTIMONIALS,
-    mapTestimonial
-  );
+const Testimonial = ({ testimonials }) => {
+  const testimonialsData = Array.isArray(testimonials)
+    ? testimonials
+    : FALLBACK_TESTIMONIALS;
   const total = testimonialsData.length;
 
   const [activeIndex, setActiveIndex] = useState(1);

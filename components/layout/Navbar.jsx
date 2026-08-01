@@ -3,9 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import useLayoutSettings from '@/hooks/useLayoutSettings';
-import { mapNavbarItem, resolveSiteAssetUrl } from '@/lib/contentApi';
+import { resolveSiteAssetUrl } from '@/lib/contentApi';
 
 const FALLBACK_NAVBAR = {
   logo_url: '/assets/logo.png',
@@ -41,9 +39,9 @@ function buildNavTree(items) {
   }));
 }
 
-const Navbar = () => {
-  const { data: brand } = useLayoutSettings('navbar', FALLBACK_NAVBAR);
-  const rawItems = usePublishedContent('navbar-items', FALLBACK_ITEMS, mapNavbarItem);
+const Navbar = ({ settings, items }) => {
+  const brand = settings ? { ...FALLBACK_NAVBAR, ...settings } : FALLBACK_NAVBAR;
+  const rawItems = Array.isArray(items) ? items : FALLBACK_ITEMS;
   const menuTree = useMemo(() => buildNavTree(rawItems), [rawItems]);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

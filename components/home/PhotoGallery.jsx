@@ -2,8 +2,6 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapHomeGalleryItem } from '@/lib/contentApi';
 
 const FALLBACK_GALLERY = [
   {
@@ -77,12 +75,8 @@ const imageVariants = {
   },
 };
 
-const PhotoGallery = () => {
-  const galleryImages = usePublishedContent(
-    'home-gallery',
-    FALLBACK_GALLERY,
-    mapHomeGalleryItem
-  );
+const PhotoGallery = ({ images }) => {
+  const galleryImages = Array.isArray(images) ? images : FALLBACK_GALLERY;
 
   return (
     <section className="home-photo-gallery" aria-label="Photo gallery">

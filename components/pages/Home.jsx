@@ -6,16 +6,22 @@ import PhotoGallery from '@/components/home/PhotoGallery';
 import Testimonial from '@/components/home/Testimonial';
 import Event from '@/components/home/Event';
 
-const Home = () => {
+const Home = ({
+  heroBanners,
+  homeProjects,
+  homeEvents,
+  homeGallery,
+  testimonials,
+}) => {
   return (
     <>
-      <Hero />
+      <Hero slides={heroBanners} />
       <Preview/>
       <Impact/>
-      <Projects/>
-      <Event/>
-      <PhotoGallery />
-      <Testimonial/>
+      <Projects projects={homeProjects} />
+      <Event events={homeEvents} />
+      <PhotoGallery images={homeGallery} />
+      <Testimonial testimonials={testimonials} />
   </>
   )
 }

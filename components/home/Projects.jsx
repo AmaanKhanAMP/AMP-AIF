@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useRef} from 'react';
-import usePublishedContent from '@/hooks/usePublishedContent';
-import { mapHomeProject } from '@/lib/contentApi';
 
 
 const FALLBACK_PROJECTS = [
@@ -36,8 +34,8 @@ const FALLBACK_PROJECTS = [
   }
 ];
 
-const Projects = () => {
-  const projectsData = usePublishedContent('home-projects', FALLBACK_PROJECTS, mapHomeProject);
+const Projects = ({ projects }) => {
+  const projectsData = Array.isArray(projects) ? projects : FALLBACK_PROJECTS;
   const [isPaused, setIsPaused] = useState(false);
   const sliderTrackRef = useRef(null);
 
