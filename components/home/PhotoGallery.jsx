@@ -2,37 +2,51 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import usePublishedContent from '@/hooks/usePublishedContent';
+import { mapHomeGalleryItem } from '@/lib/contentApi';
 
-const GALLERY_IMAGES = [
+const FALLBACK_GALLERY = [
   {
     id: 1,
     src: 'https://images.unsplash.com/photo-1692269725836-fbd72e98883f?auto=format&fit=crop&w=900&q=80',
     alt: 'Indian schoolchildren seated together in a classroom learning session',
+    title: 'Classroom Learning',
+    description: 'Students engaged together in a supported classroom learning session.',
   },
   {
     id: 2,
     src: 'https://images.unsplash.com/photo-1692269725911-87697c558be1?auto=format&fit=crop&w=900&q=80',
     alt: 'Two young Indian girls studying at a school desk with notebooks',
+    title: 'Focused Study Time',
+    description: 'Young learners building strong foundations through guided study.',
   },
   {
     id: 3,
     src: 'https://images.unsplash.com/photo-1692269725827-699e04a11cdf?auto=format&fit=crop&w=900&q=80',
     alt: 'Indian boys reading and studying together during an education support session',
+    title: 'Reading Together',
+    description: 'Peer learning and reading support during an education session.',
   },
   {
     id: 4,
     src: 'https://images.unsplash.com/photo-1522661067900-ab829854a57f?auto=format&fit=crop&w=900&q=80',
     alt: 'Indian teacher volunteering at a chalkboard to guide students in class',
+    title: 'Volunteer Teaching',
+    description: 'Dedicated volunteers guiding students through classroom lessons.',
   },
   {
     id: 5,
     src: 'https://images.unsplash.com/photo-1759738098462-90ffac98c554?auto=format&fit=crop&w=900&q=80',
     alt: 'Rural Indian women engaged in a livelihood weaving and skill development program',
+    title: 'Livelihood Skills',
+    description: 'Women building sustainable livelihoods through skill development.',
   },
   {
     id: 6,
     src: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=900&q=80',
     alt: 'Indian children learning outdoors during a community education outreach program',
+    title: 'Community Outreach',
+    description: 'Outdoor learning moments from our community education programs.',
   },
 ];
 
@@ -64,6 +78,12 @@ const imageVariants = {
 };
 
 const PhotoGallery = () => {
+  const galleryImages = usePublishedContent(
+    'home-gallery',
+    FALLBACK_GALLERY,
+    mapHomeGalleryItem
+  );
+
   return (
     <section className="home-photo-gallery" aria-label="Photo gallery">
       <div className="home-gallery-glow" aria-hidden="true" />
@@ -94,20 +114,26 @@ const PhotoGallery = () => {
         </motion.header>
 
         <div className="home-gallery-grid">
-          {GALLERY_IMAGES.map((item) => (
+          {galleryImages.map((item) => (
             <motion.figure
               key={item.id}
               className="home-gallery-card"
               variants={imageVariants}
             >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="home-gallery-image"
-                loading="lazy"
-              />
+              <div className="home-gallery-media">
+                <Image
+                  src={item.src}
+                  alt={item.alt || item.title || 'Gallery image'}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="home-gallery-image"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption className="home-gallery-caption">
+                <h3 className="home-gallery-item-title">{item.title}</h3>
+                <p className="home-gallery-item-desc">{item.description}</p>
+              </figcaption>
             </motion.figure>
           ))}
         </div>

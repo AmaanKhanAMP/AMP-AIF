@@ -26,6 +26,7 @@ const EventSection = ({
   events = [],
   buttonLabel = 'Register Now',
   showButton = false,
+  useDescriptionFallback = true,
   showDecorativeLine = true,
   ariaLabel,
   className = '',
@@ -60,6 +61,7 @@ const EventSection = ({
               index={index}
               buttonLabel={buttonLabel}
               showButton={showButton}
+              useDescriptionFallback={useDescriptionFallback}
             />
           ))}
         </div>

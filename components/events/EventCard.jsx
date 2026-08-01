@@ -3,16 +3,20 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 
+const DEFAULT_DESCRIPTION =
+  'A memorable AMP India Foundation event bringing communities together for lasting impact.';
+
 const EventCard = ({
   event,
   index = 0,
   buttonLabel = 'Register Now',
   showButton = false,
+  /** When true, empty CMS descriptions use a short fallback so cards never look blank. */
+  useDescriptionFallback = true,
 }) => {
   const href = event.registrationLink || event.ctaHref || null;
-  const description =
-    event.description?.trim() ||
-    'A memorable AMP India Foundation event bringing communities together for lasting impact.';
+  const fromApi = event.description?.trim() || '';
+  const description = fromApi || (useDescriptionFallback ? DEFAULT_DESCRIPTION : '');
 
   const hasMeta = Boolean(event.date || event.time || event.venue);
 
@@ -58,7 +62,7 @@ const EventCard = ({
           </div>
         ) : null}
 
-        <p className="event-card-desc">{description}</p>
+        {description ? <p className="event-card-desc">{description}</p> : null}
 
         {showButton && href ? (
           <a href={href} className="event-card-cta">

@@ -2,6 +2,7 @@
 
 import EventSection from './EventSection';
 import usePublishedContent from '@/hooks/usePublishedContent';
+import useSectionVisibility from '@/hooks/useSectionVisibility';
 import { mapUpcomingEvent } from '@/lib/contentApi';
 
 const FALLBACK_UPCOMING = [
@@ -86,11 +87,15 @@ const FALLBACK_UPCOMING = [
 ];
 
 const UpcomingEvents = () => {
+  const { isVisible, loading } = useSectionVisibility('upcoming_events');
   const upcomingEvents = usePublishedContent(
     'upcoming-events',
     FALLBACK_UPCOMING,
     mapUpcomingEvent
   );
+
+  // Wait for visibility before painting; when hidden, render nothing (no gap).
+  if (loading || !isVisible) return null;
 
   return (
     <EventSection
