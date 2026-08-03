@@ -50,10 +50,12 @@ const FeaturedEvent = ({ items: itemsProp }) => {
               <Calendar size={16} aria-hidden="true" />
               {featuredEvent.date}
             </span>
-            <span className="featured-meta-item">
-              <Clock size={16} aria-hidden="true" />
-              {featuredEvent.time}
-            </span>
+            {featuredEvent.time ? (
+              <span className="featured-meta-item">
+                <Clock size={16} aria-hidden="true" />
+                {featuredEvent.time}
+              </span>
+            ) : null}
             <span className="featured-meta-item">
               <MapPin size={16} aria-hidden="true" />
               {featuredEvent.venue}

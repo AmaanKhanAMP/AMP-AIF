@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 
 const DEFAULT_DESCRIPTION =
   'A memorable AMP India Foundation event bringing communities together for lasting impact.';
@@ -14,11 +14,11 @@ const EventCard = ({
   /** When true, empty CMS descriptions use a short fallback so cards never look blank. */
   useDescriptionFallback = true,
 }) => {
-  const href = event.registrationLink || event.ctaHref || null;
+  const href = event.ctaHref || null;
   const fromApi = event.description?.trim() || '';
   const description = fromApi || (useDescriptionFallback ? DEFAULT_DESCRIPTION : '');
 
-  const hasMeta = Boolean(event.date || event.time || event.venue);
+  const hasMeta = Boolean(event.date || event.venue);
 
   return (
     <motion.article
@@ -45,12 +45,6 @@ const EventCard = ({
               <span>
                 <Calendar aria-hidden="true" />
                 {event.date}
-              </span>
-            ) : null}
-            {event.time ? (
-              <span>
-                <Clock aria-hidden="true" />
-                {event.time}
               </span>
             ) : null}
             {event.venue ? (

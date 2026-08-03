@@ -8,78 +8,66 @@ const FALLBACK_UPCOMING = [
     title: 'Scholarship Awareness & Education Workshop',
     category: 'Education',
     date: '18 Jan 2026',
-    time: '10:00 AM – 1:00 PM',
     venue: 'Delhi NCR',
     description:
       'Guiding meritorious underprivileged students on scholarship applications, higher education pathways, and Centres of Excellence programs.',
     image:
       'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80',
-    registrationLink: '#',
   },
   {
     id: 2,
     title: 'National Mega Job Fair & Placement Drive',
     category: 'Employment',
     date: '12 Aug 2026',
-    time: '9:00 AM – 5:00 PM',
     venue: 'Mumbai',
     description:
       'Bridging skilled youth with top-tier corporate employers across multiple industrial sectors with on-spot interviews and hiring.',
     image:
       'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=600&q=80',
-    registrationLink: '#',
   },
   {
     id: 3,
     title: 'Free Medical Camp & Health Screening',
     category: 'Medical Camp',
     date: '22 Aug 2026',
-    time: '8:00 AM – 2:00 PM',
     venue: 'Hyderabad',
     description:
       'Providing free health check-ups, critical illness screenings, and medical relief support for underserved communities.',
     image:
       'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
-    registrationLink: '#',
   },
   {
     id: 4,
     title: 'Vocational Skill Development Bootcamp',
     category: 'Skill Development',
     date: '05 Sep 2026',
-    time: '10:00 AM – 4:00 PM',
     venue: 'Bengaluru',
     description:
       'Intensive vocational training in digital skills, tailoring, and small-scale entrepreneurship for sustainable livelihoods.',
     image:
       'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80',
-    registrationLink: '#',
   },
   {
     id: 5,
     title: 'Student Mentorship & Career Guidance Summit',
     category: 'Career Guidance',
     date: '14 Oct 2026',
-    time: '11:00 AM – 3:00 PM',
     venue: 'Pune',
     description:
       'One-on-one mentoring sessions with industry professionals to guide students through academic and career decision-making.',
     image:
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-    registrationLink: '#',
   },
   {
     id: 6,
     title: 'Community Outreach & Upliftment Drive',
     category: 'Community Outreach',
     date: '12 Dec 2026',
-    time: '9:30 AM – 1:30 PM',
     venue: 'Kolkata',
     description:
       'Grassroots community development initiative distributing essential supplies, financial literacy workshops, and self-help group setups.',
     image:
       'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80',
-    registrationLink: '#',
   },
 ];
 
