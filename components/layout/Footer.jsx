@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { FaEnvelope, FaFacebookF, FaInstagram, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 
 const FALLBACK_FOOTER = {
   cta_heading: 'Join Our Mission to Empower Lives Through Education & Employment.',
@@ -15,11 +15,11 @@ const FALLBACK_FOOTER = {
   useful_links_heading: 'USEFUL LINKS',
   recent_focus_heading: 'RECENT FOCUS',
   contact_heading: 'GET IN TOUCH',
-  address_label: '📍 Address:',
+  address_label: 'Address:',
   address_text: 'AMP India Foundation, Mumbai, Maharashtra, India.',
-  phone_label: '📞 Phone:',
+  phone_label: 'Phone:',
   phone_text: '+91 93200 60093',
-  email_label: '✉️ Email:',
+  email_label: 'Email:',
   email_text: 'info@ampindia.org',
   follow_heading: 'FOLLOW US',
   facebook_url: 'https://www.facebook.com/ampindiafoundation/',
@@ -63,6 +63,13 @@ const FALLBACK_FOCUS = [
     order: 3,
   },
 ];
+
+/** Strip leading emoji / symbols from CMS labels (e.g. "📍 Address:" → "Address:"). */
+function labelText(value, fallback) {
+  const raw = String(value || fallback || '').trim();
+  const cleaned = raw.replace(/^[^\p{L}\p{N}]+/u, '').trim();
+  return cleaned || fallback;
+}
 
 const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusProp }) => {
   const settings = settingsProp
@@ -126,15 +133,24 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
           <div className="footer-column touch-col">
             <h3>{settings.contact_heading}</h3>
             <div className="contact-info-item">
-              <span className="contact-label">{settings.address_label}</span>
+              <span className="contact-label">
+                <FaMapMarkerAlt className="contact-label-icon" aria-hidden="true" size={13} />
+                {labelText(settings.address_label, 'Address:')}
+              </span>
               <p>{settings.address_text}</p>
             </div>
             <div className="contact-info-item">
-              <span className="contact-label">{settings.phone_label}</span>
+              <span className="contact-label">
+                <FaPhoneAlt className="contact-label-icon" aria-hidden="true" size={12} />
+                {labelText(settings.phone_label, 'Phone:')}
+              </span>
               <p>{settings.phone_text}</p>
             </div>
             <div className="contact-info-item">
-              <span className="contact-label">{settings.email_label}</span>
+              <span className="contact-label">
+                <FaEnvelope className="contact-label-icon" aria-hidden="true" size={13} />
+                {labelText(settings.email_label, 'Email:')}
+              </span>
               <p>{settings.email_text}</p>
             </div>
 

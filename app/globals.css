@@ -569,8 +569,15 @@ margin-left:-100px;
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-bottom: 2px;
+}
+
+.contact-label-icon {
+  flex-shrink: 0;
+  color: #ffffff;
 }
 
 .contact-info-item p {
