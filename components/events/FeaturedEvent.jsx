@@ -4,15 +4,14 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 
 const FALLBACK_FEATURED = {
-  title: 'Career Guidance & Employment Drive 2026',
-  date: 'Saturday, 15 March 2026',
-  time: '9:00 AM – 5:00 PM',
-  venue: 'Mumbai',
+  title: 'Kupwara Mega Job Fair',
+  date: '22 August 2026',
+  venue: 'Kupwara, Jammu & Kashmir',
   category: 'Employment',
   description:
-    'A flagship employment initiative connecting skilled youth with leading corporate employers. Featuring resume clinics, mock interviews, on-spot hiring, and career counselling by industry professionals.',
-  image:
-    'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=900&q=80',
+    'A Mega Job Fair connecting job seekers with employers across multiple industries and creating opportunities for meaningful employment.',
+  image: '/assets/kupwara-mega-job-fair.jpeg',
+  imageFit: 'contain',
 };
 
 const FeaturedEvent = ({ items: itemsProp }) => {
@@ -21,6 +20,8 @@ const FeaturedEvent = ({ items: itemsProp }) => {
 
   // No published featured event — do not resurrect hardcoded fallback
   if (!featuredEvent) return null;
+
+  const imageContain = featuredEvent.imageFit === 'contain';
 
   return (
     <section className="featured-event-section" aria-label="Featured event">
@@ -31,11 +32,18 @@ const FeaturedEvent = ({ items: itemsProp }) => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="featured-event-image-wrap">
+        <div
+          className={`featured-event-image-wrap${imageContain ? ' featured-event-image-wrap--contain' : ''}`}
+        >
           <img
             src={featuredEvent.image}
             alt={featuredEvent.title}
             loading="lazy"
+            style={
+              imageContain
+                ? { objectFit: 'contain', objectPosition: 'center' }
+                : undefined
+            }
           />
           <span className="featured-event-badge">{featuredEvent.category}</span>
         </div>

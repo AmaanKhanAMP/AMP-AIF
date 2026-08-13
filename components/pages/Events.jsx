@@ -23,7 +23,11 @@ const Events = ({
       <PastEventsGallery events={pastEvents} />
       <EventTimeline />
       <EventCategories />
-      <VolunteerCTA />
+      <VolunteerCTA
+        title="Be Part of Our Next Event"
+        text="Whether you are a student, volunteer, professional, institution or corporate partner, your participation helps create opportunities that transform lives. Together, we can make every event a step towards a stronger and more inclusive society."
+        secondaryLabel="Partner With Us"
+      />
       
     </div>
   );

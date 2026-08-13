@@ -19,6 +19,9 @@ const EventCard = ({
   const description = fromApi || (useDescriptionFallback ? DEFAULT_DESCRIPTION : '');
 
   const hasMeta = Boolean(event.date || event.venue);
+  const imageStyle = event.imagePosition
+    ? { objectPosition: event.imagePosition }
+    : undefined;
 
   return (
     <motion.article
@@ -30,7 +33,12 @@ const EventCard = ({
       whileHover={{ y: -8 }}
     >
       <div className="event-card-image">
-        <img src={event.image} alt={event.title} loading="lazy" />
+        <img
+          src={event.image}
+          alt={event.title}
+          loading="lazy"
+          style={imageStyle}
+        />
         {event.category ? (
           <span className="event-card-category">{event.category}</span>
         ) : null}

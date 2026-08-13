@@ -292,18 +292,37 @@
 .featured-event-image-wrap {
   position: relative;
   min-height: 320px;
+  height: 100%;
+  align-self: stretch;
   overflow: hidden;
 }
 
 .featured-event-image-wrap img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  display: block;
   transition: transform 0.6s var(--ev-ease);
+}
+
+.featured-event-image-wrap--contain {
+  background: #eef2f7;
+}
+
+.featured-event-image-wrap--contain img {
+  object-fit: contain;
+  object-position: center;
 }
 
 .featured-event-card:hover .featured-event-image-wrap img {
   transform: scale(1.04);
+}
+
+.featured-event-card:hover .featured-event-image-wrap--contain img {
+  transform: none;
 }
 
 .featured-event-badge {
@@ -406,15 +425,17 @@
 .event-card-image {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 180px;
   flex-shrink: 0;
   overflow: hidden;
+  background: #eef2f7;
 }
 
 .event-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   display: block;
   transition: transform 0.5s var(--ev-ease);
 }
@@ -439,10 +460,10 @@
 }
 
 .event-card-body {
-  padding: 20px 24px 24px;
+  padding: 16px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   flex: 1 1 auto;
 }
 
@@ -462,7 +483,7 @@
 .event-card-meta {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   margin: 0;
 }
 
@@ -483,7 +504,7 @@
 
 .event-card-desc {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--ev-text-muted);
   margin: 0;
   display: -webkit-box;
@@ -522,6 +543,15 @@
 /* Past listing reuses upcoming grid/card styles; alternate section ground only */
 .upcoming-events-section.past-events-listing {
   background: var(--ev-bg);
+}
+
+/* Past Events: show full descriptions (no ellipsis / line-clamp) */
+.upcoming-events-section.past-events-listing .event-card-desc {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+  text-overflow: unset;
 }
 
 /* ================= EVENT CATEGORIES ================= */
@@ -910,7 +940,11 @@
   .ev-section { padding: 72px 20px; }
   .ev-section-title { font-size: 32px; }
   .featured-event-card { grid-template-columns: 1fr; }
-  .featured-event-image-wrap { min-height: 240px; }
+  .featured-event-image-wrap {
+    min-height: 240px;
+    height: 240px;
+    max-height: 240px;
+  }
   .featured-event-body { padding: 28px; }
   .upcoming-events-grid { grid-template-columns: 1fr; }
   .event-categories-grid { grid-template-columns: repeat(2, 1fr); }

@@ -1,4 +1,3 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Employment = () => {
@@ -28,9 +27,6 @@ const Employment = () => {
           </div>
         </div>
       </main>
-
-      <FeaturedInitiatives />
-
     </div>
   );
 };

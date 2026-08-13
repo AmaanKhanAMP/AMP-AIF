@@ -3,6 +3,7 @@
 import  { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { Eye, Rocket } from 'lucide-react';
 
 const MotionLink = motion.create(Link);
 
@@ -11,14 +12,36 @@ const About = () => {
   const [activeBadge, setActiveBadge] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
 
+  /* Focus Areas → existing 5 capsules (same count) */
   const avenues = [
-    { id: 1, title: 'Economic Empowerment', desc: 'Providing financial literacy, micro-grants, and self-help group setups.' },
-    { id: 2, title: 'Employment Support', desc: 'Connecting job seekers with career opportunities and job fairs.' },
-    { id: 3, title: 'Skill Development', desc: 'Vocational training programs tailored for modern industry needs.' },
-    { id: 4, title: 'Medical Relief', desc: 'Emergency medical funds, health camps, and critical care access.' },
-    { id: 5, title: 'Student Mentorship', desc: 'Guiding youth through career counseling and academic pathways.' },
+    {
+      id: 1,
+      title: 'Education',
+      desc: 'Supporting deserving students through scholarships, career guidance, mentoring, digital learning and skill development to help them achieve their educational goals.',
+    },
+    {
+      id: 2,
+      title: 'Employment',
+      desc: 'Preparing youth for successful careers through employability training, job fairs, placement support and industry partnerships.',
+    },
+    {
+      id: 3,
+      title: 'Skill Development',
+      desc: 'Providing vocational and technical training that improves employability and creates opportunities for self-employment.',
+    },
+    {
+      id: 4,
+      title: 'Healthcare',
+      desc: 'Extending medical assistance, health awareness programmes, medical camps and emergency support to individuals and families in need.',
+    },
+    {
+      id: 5,
+      title: 'Empowerment',
+      desc: 'Promoting sustainable livelihoods, financial inclusion, entrepreneurship and social development initiatives that strengthen communities.',
+    },
   ];
 
+  /* Core Values → existing 3 cards only (Inclusiveness & Collaboration ignored — no extra cards) */
   const features = [
     {
       id: "feat-1",
@@ -28,8 +51,8 @@ const About = () => {
           <path d="M12 8v4l3 3" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      title: "Trusted Professional Philanthropy",
-      desc: "Managed voluntarily by verified industry professionals applying advanced corporate workflows to maximize community progress."
+      title: "Compassion",
+      desc: "We serve every individual with empathy, dignity and respect."
     },
     {
       id: "feat-2",
@@ -41,8 +64,8 @@ const About = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round"/>
         </svg>
       ),
-      title: "Good Will Volunteers",
-      desc: "A powerful, nationwide human logistics network prepared to distribute critical care resources dynamically on the ground."
+      title: "Integrity",
+      desc: "We maintain the highest standards of honesty, transparency and accountability in everything we do."
     },
     {
       id: "feat-3",
@@ -52,74 +75,71 @@ const About = () => {
           <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" strokeLinejoin="round"/>
         </svg>
       ),
-      title: "Centres of Excellence",
-      desc: "Establishing state-of-the-art incubation hubs where under-served students receive targeted professional guidance and scholarships."
+      title: "Excellence",
+      desc: "We continuously strive to deliver impactful programmes with professionalism and quality."
     }
   ];
 
+  /* What We Do → existing 5 numbered rows */
   const objectives = [
     {
       num: "01",
-      title: "Education & Skills Training",
-      desc: "Promoting education, including special education and employment enhancing vocation skills training for a sustainable future.",
+      title: "Education & Scholarships",
+      desc: "Helping deserving students continue their education through scholarships, educational support, mentoring and career guidance.",
       highlighted: false
     },
     {
       num: "02",
-      title: "Scholarships & Financial Support",
-      desc: "Exclusive fund for Higher Education scholarships, Orphans' Basic Education support, Self-Employment assistance, critical illness support and medical services.",
+      title: "Employability & Career Development",
+      desc: "Organising employability training programmes, career counselling sessions, job drives and Mega Job Fairs to connect youth with employment opportunities.",
       highlighted: true 
     },
     {
       num: "03",
-      title: "Centres of Excellence",
-      desc: "Mentoring, coaching and Professional & Career guidance for meritorious but underprivileged students to bridge the opportunity gap.",
+      title: "Skill Development",
+      desc: "Providing vocational and technical training that prepares individuals for today's job market and encourages entrepreneurship.",
       highlighted: false
     },
     {
       num: "04",
-      title: "Crowd Funding Platform",
-      desc: "Online platforms bringing together Donors and Help-seekers for Medical Relief, Education and Livelihoods, powered by community trust.",
+      title: "Healthcare & Medical Support",
+      desc: "Supporting health camps, emergency medical assistance and healthcare initiatives for underprivileged individuals and families.",
       highlighted: true
     },
     {
       num: "05",
-      title: "Community Upliftment",
-      desc: "Activities towards upliftment of the underprivileged without any bias of Caste, Community, Creed and Religion.",
+      title: "Community Development",
+      desc: "Implementing programmes that promote self-reliance, financial empowerment and the overall well-being of underserved communities.",
       highlighted: false
     }
   ];
 
+  /* FAQ → existing accordion; 5 approved Q&As (6th dummy removed — no invented content) */
   const faqData = [
     {
       id: 1,
-      q: "What is the primary mission of AMP India Foundation?",
-      a: "AMP India Foundation is dedicated to promoting inclusive social progression by bridging structural development gaps for the under-served and needy all over India, entirely managed through professional volunteer resources."
+      q: "What does AMP India Foundation do?",
+      a: "AMP India Foundation works in the areas of education, employment, skill development, healthcare and community empowerment to improve the lives of underprivileged individuals across India."
     },
     {
       id: 2,
-      q: "How can I apply for an AMP scholarship or financial support?",
-      a: "Deserving students can apply through our designated online crowdfunding and welfare application portals. Submissions are transparently verified based strictly on merit and economic need criteria."
+      q: "Who can benefit from your programmes?",
+      a: "Students, job seekers, women, youth, families and disadvantaged communities from across India can benefit from our various initiatives, subject to the eligibility criteria of each programme."
     },
     {
       id: 3,
-      q: "How do I become a volunteer with the foundation?",
-      a: "Professionals and student mentors can sign up voluntarily through our network platform. You can offer specialized career guidance, training, or local field execution support based on your skill sets."
+      q: "How can I support the Foundation?",
+      a: "You can support our mission by making a donation, volunteering your time and skills, mentoring students, partnering with us, or helping spread awareness about our work."
     },
     {
       id: 4,
-      q: "Does the foundation have any regional or religious bias?",
-      a: "No. All social development models, financial support distributions, and skill training workflows are executed completely irrespective of caste, community, creed, or religion."
+      q: "Can I volunteer with AMP India Foundation?",
+      a: "Yes. We welcome students, professionals, entrepreneurs and retirees who wish to contribute their time, expertise and experience towards social development."
     },
     {
       id: 5,
-      q: "What are the key focus execution areas for the organization?",
-      a: "Our core pillars target Economic Empowerment, Employment support channels, Vocational Skill Development, Medical relief, and specialized Student Mentorship paradigms."
-    },
-    {
-      id: 6,
-      q: "How does the online Crowd Funding platform function?",
-      a: "It acts as a direct verification bridge matching philanthropic donors securely with help-seekers for medical crisis emergencies, educational institutional funding, and essential livelihoods support."
+      q: "Are your programmes open to everyone?",
+      a: "Yes. Our initiatives are implemented without discrimination based on caste, community, creed, gender or religion."
     }
   ];
 
@@ -147,11 +167,13 @@ const About = () => {
       {/* ================= HERO BANNER ================= */}
       <header className="about-hero-banner">
         <div className="hero-overlay-mesh"></div>
-        <div className="hero-content-wrapper">
-          <span className="hero-subtitle-tag">Empowering Lives</span>
+        <div className="hero-content-wrapper">  
+         
           <h1 className="hero-title">
-            About <span className="hero-gradient-text">Us</span>
+            Empowering Lives. <span className="hero-gradient-text">Transforming Communities.</span>
           </h1>
+          <div className="hero-description"><p>At AMP India Foundation, we believe that every individual deserves an opportunity to learn, earn and live with dignity. Through education, employment, healthcare, skill development and community empowerment, we work to create lasting change for underprivileged communities across India.</p>
+          </div>
           <div className="hero-divider"></div>
         </div>
       </header>
@@ -180,7 +202,7 @@ const About = () => {
           <motion.div className="text-editorial-column" variants={itemVariants}>
             <span className="editorial-tag">Who We Are</span>
             <h2 className="editorial-heading">
-              Uplifting Communities Through <span className="gradient-text">Sustainable Development</span>
+              Creating Opportunities for a <span className="gradient-text">Better Tomorrow</span>
             </h2>
 
             <div className="editorial-stats-bar">
@@ -196,11 +218,57 @@ const About = () => {
 
             <div className="editorial-description-wrapper">
               <p className="paragraph-lead">
-                <strong>AMP India Foundation (AIF)</strong> is a registered not-for-profit organisation dedicated to providing structured social services aimed completely at meeting the crucial needs of underprivileged masses.
+                <strong>AMP India Foundation (AIF)</strong> is a registered non-profit organization committed to empowering underprivileged individuals and communities through sustainable development initiatives.
               </p>
               <p className="paragraph-body">
-                We strive to ignite sustainable progression by bridging structural gaps for the under-served and needy throughout the country.
+                Established by a network of committed professionals and social leaders, AIF works across India to improve access to quality education, meaningful employment, healthcare, skill development and economic opportunities.
               </p>
+
+              <div className="about-vm-grid">
+                <motion.article
+                  className="about-vm-card"
+                  variants={itemVariants}
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                >
+                  <div className="about-vm-card-overlay" aria-hidden="true" />
+                  <div className="about-vm-card-inner">
+                    <div className="about-vm-card-heading">
+                      <div className="about-vm-icon-wrap" aria-hidden="true">
+                        <Eye size={16} strokeWidth={2} />
+                      </div>
+                      <h3 className="about-vm-card-title">Our Vision</h3>
+                    </div>
+                    <p className="about-vm-card-body">
+                      To build an inclusive India where every individual has equal opportunities to
+                      learn, earn and live with dignity.
+                    </p>
+                  </div>
+                </motion.article>
+
+                <motion.article
+                  className="about-vm-card"
+                  variants={itemVariants}
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                >
+                  <div className="about-vm-card-overlay" aria-hidden="true" />
+                  <div className="about-vm-card-inner">
+                    <div className="about-vm-card-heading">
+                      <div className="about-vm-icon-wrap" aria-hidden="true">
+                        <Rocket size={16} strokeWidth={2} />
+                      </div>
+                      <h3 className="about-vm-card-title">Our Mission</h3>
+                    </div>
+                    <p className="about-vm-card-body">
+                      To empower underprivileged communities through education, employment,
+                      healthcare, skill development, mentorship and sustainable livelihood
+                      initiatives by connecting professionals, volunteers, donors and institutions
+                      for lasting social impact.
+                    </p>
+                  </div>
+                </motion.article>
+              </div><br />
 
               <div className="capsule-container">
                 <p className="capsule-instruction">Click an initiative to explore our scope:</p>
@@ -235,7 +303,7 @@ const About = () => {
         <div className="banner-container">
           <motion.div className="banner-intro-header" variants={itemVariants}>
             <span className="section-mini-tag text-center">Our Core Values</span>
-            <h2 className="section-main-heading text-center">Why Choose AIF?</h2>
+            <h2 className="section-main-heading text-center">Our Core Values</h2>
           </motion.div>
 
           <div className="banner-features-grid">
@@ -275,7 +343,7 @@ const About = () => {
               <span className="wwd-mini-tag">Overview</span>
               <h2 className="wwd-main-heading">What We Do</h2>
               <p className="wwd-intro-text">
-                AMP India Foundation is engaged in Social Services rendered by Professionals voluntarily to meet the needs of under privileged individuals all over India, without any regional or parochial bias.
+                AMP India Foundation works across multiple areas of social development to create opportunities and improve lives.
               </p>
               <div className="wwd-badge-row">
                 <span className="wwd-line-accent"></span>

@@ -38,7 +38,7 @@ const EventsHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          Events That Create <span>Lasting Impact</span>
+          Creating Opportunities. <span>Inspiring Change.</span>
         </motion.h1>
 
         <motion.p
@@ -47,8 +47,9 @@ const EventsHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.7 }}
         >
-          Join AMP India Foundation&apos;s initiatives that empower communities through education,
-          employment, mentorship, healthcare, and skill development.
+          Every event at AMP India Foundation is a step towards building stronger communities. From
+          career guidance and job fairs to health camps and skill development workshops, our events
+          create opportunities that transform lives.
         </motion.p>
 
         <motion.div

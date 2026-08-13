@@ -1,4 +1,3 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Education = () => {
@@ -28,13 +27,6 @@ const Education = () => {
           </div>
         </div>
       </main>
-
-      {/* Embedded High-Impact Grid Component */}
-      <FeaturedInitiatives />
-
-  
-
-     
     </div>
   );
 };

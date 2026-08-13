@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 const impactMetrics = [
   { 
     id: 1, 
-    target: 39000, 
+    target: 100000, 
     suffix: '+', 
     label: 'CANDIDATES PLACED', 
     // Professional SVG: Profile/User badge layout
@@ -34,8 +34,8 @@ const impactMetrics = [
   { 
     id: 3, 
     target: 350, 
-    suffix: '', 
-    label: 'EMPLOYABILITY TRAINING PROGRAMS', 
+    suffix: '+', 
+    label: 'EMPLOYABILITY TRAINING PROGRAMMES', 
     // Professional SVG: Graduation mortarboard cap
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -46,9 +46,9 @@ const impactMetrics = [
   },
   { 
     id: 4, 
-    target: 80, 
-    suffix: '', 
-    label: 'JOB FAIRS ORGANISED', 
+    target: 110, 
+    suffix: '+', 
+    label: 'MEGA JOB FAIRS CONDUCTED', 
     // Professional SVG: Global networking / Corporate architecture network
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -130,6 +130,7 @@ const Impact = () => {
   return (
     <section 
       ref={sectionRef} 
+      id="impact"
       className="amp-impact-section"
       // Swapped backdrop image token to a high-end corporate workshop overlay look
       style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.88), rgba(6, 24, 40, 0.93)), url('https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&w=1920&q=80')` }}

@@ -16,14 +16,14 @@ const Home = ({
   return (
     <>
       <Hero slides={heroBanners} />
-      <Preview/>
-      <Impact/>
+      <Preview />
+      <Impact />
       <Projects projects={homeProjects} />
       <Event events={homeEvents} />
       <PhotoGallery images={homeGallery} />
       <Testimonial testimonials={testimonials} />
-  </>
-  )
-}
+    </>
+  );
+};
 
 export default Home;

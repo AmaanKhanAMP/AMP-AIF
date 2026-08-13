@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { LifeBuoy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Reveal, {
@@ -29,40 +29,15 @@ const cardHover = {
   transition: { duration: 0.28, ease: 'easeOut' }
 };
 
-const useStudioCounter = (targetMetric, runningDuration = 2000) => {
-  const [currentDisplayVal, setCurrentDisplayVal] = useState(0);
-
-  useEffect(() => {
-    let trackingStartTime = null;
-    const computeStep = (currentTimestamp) => {
-      if (!trackingStartTime) trackingStartTime = currentTimestamp;
-      const calculatedProgress = Math.min((currentTimestamp - trackingStartTime) / runningDuration, 1);
-      const quadEasingPattern = calculatedProgress * (2 - calculatedProgress);
-
-      setCurrentDisplayVal(Math.floor(quadEasingPattern * targetMetric));
-
-      if (calculatedProgress < 1) {
-        window.requestAnimationFrame(computeStep);
-      }
-    };
-    window.requestAnimationFrame(computeStep);
-  }, [targetMetric, runningDuration]);
-
-  return currentDisplayVal.toLocaleString();
-};
-
 const Support = () => {
   const [copiedFieldToken, setCopiedFieldToken] = useState(null);
   const [copyToast, setCopyToast] = useState(false);
 
-  const totalImpactMetrics = useStudioCounter(450000);
-  const totalVerifiedSectors = useStudioCounter(120);
-
   const bankAccountMatrix = [
-    { label: 'Bank', value: 'Kotak Mahindra', allowCopy: false },
     { label: 'Account Name', value: 'AMP India Foundation', allowCopy: false },
+    { label: 'Bank', value: 'Kotak Mahindra Bank', allowCopy: false },
     { label: 'Account Number', value: '3114476665', allowCopy: true },
-    { label: 'Account Type', value: 'Savings', allowCopy: false },
+    { label: 'Account Type', value: 'Savings Account', allowCopy: false },
     { label: 'IFSC Code', value: 'KKBK0001348', allowCopy: true }
   ];
 
@@ -94,14 +69,14 @@ const Support = () => {
         <div className="premium-hero-split-grid">
           <HeroMotion className="premium-hero-content" variants={heroLeft}>
             <motion.span className="premium-hero-badge" variants={heroBadge}>
-              SUPPORT HOPE
+              SUPPORT US
             </motion.span>
             <motion.h1 className="premium-hero-heading" variants={heroHeading}>
-              Support Hope.<br />
-              <span>Change Lives.</span>
+              Your Support Can<br />
+              <span>Change a Life</span>
             </motion.h1>
             <motion.p className="premium-hero-subtext" variants={heroParagraph}>
-              Every contribution helps us create structural opportunities through premium education, vocational training, industrial placement, and verified community empowerment.
+              Every contribution, big or small, helps create opportunities for education, employment, healthcare and community development. Together, we can empower individuals, strengthen families and build a brighter future for thousands across India.
             </motion.p>
             <motion.div variants={heroButton}>
               <motion.a
@@ -140,10 +115,10 @@ const Support = () => {
         <div className="centerpiece-layout-intent">
           <div className="centerpiece-text-column">
             <Reveal>
-              <span className="donation-mission-label">— SUPPORT OUR MISSION</span>
+              <span className="donation-mission-label">— DONATION DETAILS</span>
               <h2>Make a Donation</h2>
               <p className="donation-intro">
-                Your generosity helps us create opportunities through education, healthcare, skill development, and community empowerment. Every contribution directly supports initiatives that create lasting impact.
+                You can support our work through a direct bank transfer. Every donation helps us reach more individuals and communities through our programmes across India.
               </p>
             </Reveal>
 
@@ -335,7 +310,7 @@ const Support = () => {
 
                 <div className="ledger-footer-notice-bar">
                   <span className="ledger-notice-bullet-symbol">ℹ</span>
-                  <p>Contributions can be made through online (NEFT / RTGS / IMPS) or offline transactions.</p>
+                  <p>Donations can be made through NEFT, RTGS, IMPS or other online banking channels.</p>
                 </div>
               </motion.div>
             </Reveal>
@@ -407,11 +382,11 @@ const Support = () => {
         </div>
       </section>
 
-      {/* ================= TRUST ================= */}
+      {/* ================= TRUST / WHY DONATE ================= */}
       <Reveal as="section" className="editorial-trust-wrapper">
         <div className="editorial-header-segment">
-          <span className="editorial-mini-tag">— MEASURABLE REALITY</span>
-          <h2 className="editorial-main-heading">Transparency. Accountability. Impact.</h2>
+          <span className="editorial-mini-tag">— WHY DONATE</span>
+          <h2 className="editorial-main-heading">Why Donate to AMP India Foundation?</h2>
         </div>
 
         <RevealGroup className="editorial-asymmetric-grid" stagger={0.12}>
@@ -419,10 +394,10 @@ const Support = () => {
             className="editorial-panel-large su-lift-card"
             whileHover={cardHover}
           >
-            <div className="panel-big-number">{totalImpactMetrics}+</div>
+            <div className="panel-big-number">01</div>
             <div className="panel-body-content">
-              <h3>Verified Individuals Uplifted</h3>
-              <p>We deploy rigorous reporting protocols to ensure every resource allocation correlates directly with sustainable family livelihood milestones.</p>
+              <h3>Registered Non-Profit</h3>
+              <p>A registered non-profit organization committed to social development. Thousands of lives transformed through education, employment and community development.</p>
             </div>
           </RevealItem>
 
@@ -430,10 +405,10 @@ const Support = () => {
             className="editorial-panel-small su-lift-card"
             whileHover={cardHover}
           >
-            <div className="panel-big-number">100%</div>
+            <div className="panel-big-number">02</div>
             <div className="panel-body-content">
-              <h3>Accountability Standards</h3>
-              <p>Publicly audited financial management ledgers guaranteeing total institutional operational clarity.</p>
+              <h3>Transparent &amp; Accountable</h3>
+              <p>Transparent and accountable use of funds.</p>
             </div>
           </RevealItem>
 
@@ -441,10 +416,10 @@ const Support = () => {
             className="editorial-panel-alt-1 su-lift-card"
             whileHover={cardHover}
           >
-            <div className="panel-big-number">{totalVerifiedSectors}</div>
+            <div className="panel-big-number">03</div>
             <div className="panel-body-content">
-              <h3>Grassroots Centers Funded</h3>
-              <p>Direct infrastructure pipelines feeding dynamic knowledge generation and technical workspaces inside multiple Indian states.</p>
+              <h3>Nationwide Network</h3>
+              <p>Nationwide network of professionals and volunteers.</p>
             </div>
           </RevealItem>
 
@@ -452,10 +427,10 @@ const Support = () => {
             className="editorial-panel-alt-2 su-lift-card"
             whileHover={cardHover}
           >
-            <div className="panel-big-number">01</div>
+            <div className="panel-big-number">04</div>
             <div className="panel-body-content">
-              <h3>Unified Central Vision</h3>
-              <p>Breaking generational cycles of systemic disadvantage by elevating localized human potential into professional assets.</p>
+              <h3>Sustainable Impact</h3>
+              <p>Sustainable programmes that create long-term impact.</p>
             </div>
           </RevealItem>
         </RevealGroup>
@@ -466,11 +441,11 @@ const Support = () => {
         <div className="emotional-curtain-shade"></div>
         <div className="emotional-typography-hub">
           <h2 className="emotional-statement">
-            &quot;Every contribution creates opportunities.
-            <span>Every opportunity changes lives.&quot;</span>
+            Behind every scholarship is a student&apos;s dream.
+            <span>Behind every job is a family&apos;s hope. Behind every volunteer is a community made stronger.</span>
           </h2>
           <div className="emotional-divider-line"></div>
-          <span className="editorial-mini-tag su-emotional-tag">THE POWER OF INTERVENTION</span>
+          <span className="editorial-mini-tag su-emotional-tag">TOGETHER FOR CHANGE</span>
         </div>
       </Reveal>
 
@@ -478,8 +453,10 @@ const Support = () => {
       <Reveal as="section" className="dramatic-closing-wrapper">
         <div className="su-cta-glow-mesh"></div>
         <div className="dramatic-closing-content">
-          <h2>Be the Reason Someone Has a Better Tomorrow.</h2>
-          <p>Your action today forms the foundation of someone else&apos;s achievement next season.</p>
+          <h2>Together, We Can Build a Better Future</h2>
+          <p>
+            Your generosity helps turn opportunities into success stories and hope into lasting change. Together, let&apos;s empower lives and build a more inclusive India.
+          </p>
           <motion.a
             href="#donation-gateway"
             className="premium-btn-white-lux su-interactive-btn"
@@ -487,7 +464,7 @@ const Support = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
-            <span>Support Us Today</span>
+            <span>Donate Now</span>
             <span className="cta-arrow-vector">➔</span>
           </motion.a>
         </div>

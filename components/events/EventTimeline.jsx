@@ -4,12 +4,13 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const timelineData = [
-  { month: 'January', event: 'Education Workshops' },
-  { month: 'March', event: 'Career Guidance Sessions' },
-  { month: 'June', event: 'Employment Drives' },
-  { month: 'August', event: 'Medical Camps' },
-  { month: 'October', event: 'Skill Development Programs' },
-  { month: 'December', event: 'Community Outreach' },
+  { month: 'January – March', event: 'Education and Career Guidance Programmes' },
+  { month: 'April – June', event: 'Employability Training and Skill Development' },
+  { month: 'July – September', event: 'Mega Job Fairs, Medical Camps and Community Outreach' },
+  {
+    month: 'October – December',
+    event: 'Mentorship Programmes, Volunteer Engagement and Social Development Initiatives',
+  },
 ];
 
 const EventTimeline = () => {
@@ -27,7 +28,7 @@ const EventTimeline = () => {
         <header className="ev-section-header">
           <span className="ev-section-tag">Year at a Glance</span>
           <h2 className="ev-section-title">
-            Event <span className="ev-accent">Calendar</span>
+            Events Throughout <span className="ev-accent">the Year</span>
           </h2>
           <p className="ev-section-subtitle">
             A year-round journey of empowerment — from classrooms to communities across India.

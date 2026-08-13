@@ -5,14 +5,14 @@ import EventSection from './EventSection';
 const FALLBACK_UPCOMING = [
   {
     id: 1,
-    title: 'Scholarship Awareness & Education Workshop',
-    category: 'Education',
-    date: '18 Jan 2026',
-    venue: 'Delhi NCR',
+    title: 'Kupwara Mega Job Fair',
+    category: 'Employment',
+    date: '22 August 2026',
+    venue: 'Kupwara, Jammu & Kashmir',
     description:
-      'Guiding meritorious underprivileged students on scholarship applications, higher education pathways, and Centres of Excellence programs.',
-    image:
-      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80',
+      'A Mega Job Fair connecting job seekers with employers across multiple industries and creating opportunities for meaningful employment.',
+    image: '/assets/kupwara-mega-job-fair.jpeg',
+    imagePosition: 'center top',
   },
   {
     id: 2,

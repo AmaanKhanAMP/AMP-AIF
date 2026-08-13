@@ -8,36 +8,39 @@ const FALLBACK_SLIDES = [
   {
     id: 1,
     image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1920&q=80',
-    titleStart: 'Empowering Youth Through',
+    titleStart: 'Empowering Lives Through',
     titleAccent: 'Education',
-    subtitle: 'Every brilliant mind deserves an opportunity. We build impactful educational paths to secure sustainable futures for underprivileged students.',
-    primaryBtnText: 'READ MORE',
-    secondaryBtnText: 'OUR PROJECTS',
+    subtitle:
+      'Every child deserves the opportunity to learn, grow and succeed. We support underprivileged students through scholarships, mentoring, career guidance and skill development to help them build a brighter future.',
+    primaryBtnText: 'Learn More',
+    secondaryBtnText: 'Our Projects',
     primaryLink: '/about',
-    secondaryLink: '/projects'
+    secondaryLink: '/projects',
   },
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1920&q=80',
-    titleStart: 'Bridging the Gap to Rightful',
+    titleStart: 'Creating Opportunities Through',
     titleAccent: 'Employment',
-    subtitle: 'Transforming potential into professions. Our structured training modules open direct job avenues for deserving job seekers.',
-    primaryBtnText: 'JOIN US',
-    secondaryBtnText: 'VIEW IMPACT',
+    subtitle:
+      "A good job can transform a family's future. Through employability training, career guidance, job fairs and placement support, we help young people become job-ready and connect them with meaningful employment opportunities.",
+    primaryBtnText: 'Join Us',
+    secondaryBtnText: 'Our Impact',
     primaryLink: '/volunteer',
-    secondaryLink: '/about'
+    secondaryLink: '/#impact',
   },
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1920&q=80',
-    titleStart: 'Sustaining Growth via Economic',
-    titleAccent: 'Empowerment',
-    subtitle: 'Uplifting grassroots communities by fostering self-reliance, practical skill development setups, and small-scale business incubation.',
-    primaryBtnText: 'SUPPORT US',
-    secondaryBtnText: 'OUR MISSION',
+    titleStart: 'Building Stronger',
+    titleAccent: 'Communities',
+    subtitle:
+      'We empower individuals and families through skill development, entrepreneurship support, healthcare initiatives and community development programs, enabling them to become self-reliant and lead dignified lives.',
+    primaryBtnText: 'Support Us',
+    secondaryBtnText: 'Our Mission',
     primaryLink: '/support-us',
-    secondaryLink: '/what-we-do'
-  }
+    secondaryLink: '/what-we-do',
+  },
 ];
 
 const HeroCarousel = ({ slides }) => {

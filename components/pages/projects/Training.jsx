@@ -1,4 +1,3 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Training = () => {
@@ -26,10 +25,6 @@ const Training = () => {
           </div>
         </div>
       </main>
-
-      <FeaturedInitiatives />
-
-     
     </div>
   );
 };

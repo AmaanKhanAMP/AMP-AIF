@@ -3,48 +3,61 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+import communityRegistrationDrive from '@/src/assets/gallery/community-registration-drive.png';
+import communityEventRegistration from '@/src/assets/gallery/community-event-registration.png';
+import ampAhmedabadWorkshop from '@/src/assets/gallery/amp-ahmedabad-chapter-workshop.png';
+import megaJobFairByculla from '@/src/assets/gallery/mega-job-fair-byculla-mumbai.png';
+import megaJobFairBallari from '@/src/assets/gallery/mega-job-fair-ballari.png';
+import megaJobFairThassimBeevi from '@/src/assets/gallery/mega-job-fair-thassim-beevi-college.png';
+
 const FALLBACK_GALLERY = [
   {
     id: 1,
-    src: 'https://images.unsplash.com/photo-1692269725836-fbd72e98883f?auto=format&fit=crop&w=900&q=80',
-    alt: 'Indian schoolchildren seated together in a classroom learning session',
-    title: 'Classroom Learning',
-    description: 'Students engaged together in a supported classroom learning session.',
+    src: communityRegistrationDrive,
+    alt: 'Large outdoor crowd queued for a community registration and outreach drive',
+    title: 'Community Outreach & Registration Drive',
+    description:
+      'A massive turnout of community members gathering for an organized event, showcasing large-scale engagement and participation.',
   },
   {
     id: 2,
-    src: 'https://images.unsplash.com/photo-1692269725911-87697c558be1?auto=format&fit=crop&w=900&q=80',
-    alt: 'Two young Indian girls studying at a school desk with notebooks',
-    title: 'Focused Study Time',
-    description: 'Young learners building strong foundations through guided study.',
+    src: communityEventRegistration,
+    alt: 'Organizers assisting participants with registration at a community event desk',
+    title: 'Community Outreach and Registration',
+    description:
+      'A glimpse into one of our community outreach programs, where local residents receive guidance and register for essential services at a dedicated event hub.',
   },
   {
     id: 3,
-    src: 'https://images.unsplash.com/photo-1692269725827-699e04a11cdf?auto=format&fit=crop&w=900&q=80',
-    alt: 'Indian boys reading and studying together during an education support session',
-    title: 'Reading Together',
-    description: 'Peer learning and reading support during an education session.',
+    src: ampAhmedabadWorkshop,
+    alt: 'Presenter leading an AMP Ahmedabad Chapter workshop for seated members',
+    title: 'AMP Ahmedabad Chapter Meeting',
+    description:
+      'Members of the Association of Muslim Professionals (AMP) Ahmedabad Chapter attend a professional development workshop and presentation focused on community initiatives.',
   },
   {
     id: 4,
-    src: 'https://images.unsplash.com/photo-1522661067900-ab829854a57f?auto=format&fit=crop&w=900&q=80',
-    alt: 'Indian teacher volunteering at a chalkboard to guide students in class',
-    title: 'Volunteer Teaching',
-    description: 'Dedicated volunteers guiding students through classroom lessons.',
+    src: megaJobFairByculla,
+    alt: 'Speaker at the podium during the Mega Job Fair at Byculla, Mumbai',
+    title: 'Mega Job Fair at Byculla, Mumbai',
+    description:
+      'Dignitaries and speakers at the Mega Job Fair held on December 8, 2018, at Saboo Siddik College, Mumbai, organized by the Association of Muslim Professionals (AMP) and World Memon Organization.',
   },
   {
     id: 5,
-    src: 'https://images.unsplash.com/photo-1759738098462-90ffac98c554?auto=format&fit=crop&w=900&q=80',
-    alt: 'Rural Indian women engaged in a livelihood weaving and skill development program',
-    title: 'Livelihood Skills',
-    description: 'Women building sustainable livelihoods through skill development.',
+    src: megaJobFairBallari,
+    alt: 'Audience seated under a tent at the Mega Job Fair in Ballari, Karnataka',
+    title: 'Mega Job Fair — Ballari, Karnataka',
+    description:
+      'A large-scale recruitment event held at The English Medium High School in Ballari, where hundreds of candidates gathered to connect with employers.',
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=900&q=80',
-    alt: 'Indian children learning outdoors during a community education outreach program',
-    title: 'Community Outreach',
-    description: 'Outdoor learning moments from our community education programs.',
+    src: megaJobFairThassimBeevi,
+    alt: 'Interview stations filled with candidates at a Mega Job Fair college auditorium',
+    title: 'Mega Job Fair at Thassim Beevi Abdul Kader College',
+    description:
+      'A wide-angle view of the Mega Job Fair held in the college auditorium, showing numerous interview stations and attendees engaged in career opportunities.',
   },
 ];
 

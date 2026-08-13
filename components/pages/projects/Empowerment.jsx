@@ -1,4 +1,3 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Empowerment = () => {
@@ -27,9 +26,6 @@ const Empowerment = () => {
           </div>
         </div>
       </main>
-
-      <FeaturedInitiatives />
-
     </div>
   );
 };

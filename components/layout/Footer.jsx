@@ -80,7 +80,6 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
 
   return (
     <footer className="amp-footer">
-      
       {/* Top Banner Call-to-Action */}
       <div className="footer-cta-bar">
         <div className="footer-cta-container">
@@ -90,7 +89,7 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
           </Link>
         </div>
       </div>
-      
+
       {/* Main 4-Column Grid Section */}
       <div className="footer-main-content">
         <div className="footer-grid-container">

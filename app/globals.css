@@ -1671,11 +1671,6 @@ margin-left:-100px;
   font-weight: 400;
   line-height: 1.45;
   color: #666666;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .home-gallery-card:hover {
@@ -2668,6 +2663,10 @@ margin-left:-100px;
 .hero-title { font-size: 54px; font-weight: 800; color: #ffffff; line-height: 1.2; margin: 0 auto 20px auto; letter-spacing: -1px; text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6); }
 .hero-gradient-text { background: linear-gradient(135deg, #2dd4bf, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-divider { width: 60px; height: 4px; background: linear-gradient(90deg, var(--brand-teal), var(--brand-indigo)); margin: 0 auto; border-radius: 2px; }
+.about-hero-banner .hero-description,
+.about-hero-banner .hero-description p {
+  color: #FFFFFF;
+}
 
 /* ================= EDITORIAL CONTENT SYSTEM ================= */
 .about-content-sec {
@@ -2715,6 +2714,114 @@ margin-left:-100px;
 @media (max-width: 968px) {
   .about-max-wrapper { grid-template-columns: 1fr; gap: 60px; }
   .image-canvas-column { height: 400px; }
+}
+
+/* Compact horizontal Vision & Mission highlights inside Who We Are */
+.editorial-description-wrapper .about-vm-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+  margin: 4px 0 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.editorial-description-wrapper .about-vm-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 12px 16px 14px;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(145deg, #1e4a8a 0%, #2b5ca5 55%, #3a72bd 100%);
+  box-shadow: 0 4px 14px rgba(30, 74, 138, 0.16);
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    background 300ms ease;
+}
+
+.editorial-description-wrapper .about-vm-card-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.12) 0%, transparent 55%);
+}
+
+.editorial-description-wrapper .about-vm-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.editorial-description-wrapper .about-vm-card-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.editorial-description-wrapper .about-vm-icon-wrap {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  transition: transform 300ms ease, background 300ms ease;
+}
+
+.editorial-description-wrapper .about-vm-card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.15px;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.editorial-description-wrapper .about-vm-card-body {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.editorial-description-wrapper .about-vm-card:hover {
+  box-shadow: 0 8px 20px rgba(16, 48, 102, 0.26);
+  background: linear-gradient(145deg, #2459a0 0%, #3470bc 55%, #4a8ee0 100%);
+}
+
+.editorial-description-wrapper .about-vm-card:hover .about-vm-icon-wrap {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+@media (max-width: 640px) {
+  .editorial-description-wrapper .about-vm-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 /* ================= 3-COLUMN BANNER THEME (WHY CHOOSE AIF) ================= */

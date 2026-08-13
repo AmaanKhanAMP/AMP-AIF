@@ -7,34 +7,38 @@ import { ArrowRight } from 'lucide-react';
 
 const FALLBACK_EVENTS = [
   {
+    id: 'kupwara-mega-job-fair',
+    title: 'Kupwara Mega Job Fair',
+    description:
+      'A Mega Job Fair connecting job seekers with employers across multiple industries and creating opportunities for meaningful employment.',
+    speaker: '',
+    date: '22 August 2026',
+    venue: 'Kupwara, Jammu & Kashmir',
+    category: 'Employment',
+    image: '/assets/kupwara-mega-job-fair.jpeg',
+    detailsLink: '/events',
+  },
+  {
     id: 1,
     title: "Employability Training Programme (ETP)",
-    description: "A comprehensive pre-employment preparation workshop focused on grooming young graduates. Enhance your skills in resume building, communication, and mock corporate interview execution.",
-    speaker: "Mr. Tirmizi Ashrafi",
-    date: "24 Jul 2026",
-    venue: "Seminar Hall 2, Mumbai Campus",
+    description:
+      "A practical training programme that prepares graduates for today's job market through resume writing, communication skills and interview preparation.",
+    speaker: "",
+    date: "24 July 2026",
+    venue: "Mumbai",
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=300&h=300&q=80",
     detailsLink: "#etp-details"
   },
   {
     id: 2,
-    title: "National Mega Job Fair & Campus Placement Drive",
-    description: "Bridging the gap between skilled, underprivileged youth and top-tier corporate employers. Open registration platform for multiple industrial and corporate sectors across India.",
-    speaker: "Corporate HR Panel",
-    date: "12 Aug 2026",
-    venue: "Main Exhibition Grounds, Nagpada",
+    title: "Unity Mega Job Fair",
+    description:
+      "Meet leading employers, attend interviews and explore career opportunities across multiple industries at one of India's largest job fairs.",
+    speaker: "",
+    date: "12 August 2026",
+    venue: "Mumbai",
     image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=300&h=300&q=80",
     detailsLink: "#job-fair"
-  },
-  {
-    id: 3,
-    title: "Skill Training & Vocational Orientation",
-    description: "Specialized professional career guidance seminar meant to introduce self-employment micro-financing structures, small-scale business incubation, and vocational paths.",
-    speaker: "AIF Mentorship Board",
-    date: "05 Sep 2026",
-    venue: "Centre of Excellence, Auditorium B",
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&h=300&q=80",
-    detailsLink: "#skill-training"
   }
 ];
 
@@ -103,9 +107,11 @@ const Event = ({ events }) => {
                 <p className="event-row-desc">{event.description}</p>
                 
                 <div className="event-metadata-row">
-                  <span className="meta-badge-item">
-                    <span className="badge-icon">👤</span> {event.speaker}
-                  </span>
+                  {event.speaker ? (
+                    <span className="meta-badge-item">
+                      <span className="badge-icon">👤</span> {event.speaker}
+                    </span>
+                  ) : null}
                   <span className="meta-badge-item">
                     <span className="badge-icon">📅</span> {event.date}
                   </span>

@@ -1,4 +1,3 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const Mentorship = () => {
@@ -27,10 +26,6 @@ const Mentorship = () => {
           </div>
         </div>
       </main>
-
-      <FeaturedInitiatives />
-
-     
     </div>
   );
 };

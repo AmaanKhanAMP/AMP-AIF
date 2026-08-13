@@ -1,5 +1,5 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
+import ProjectsPage from '@/components/pages/ProjectsPage';
 
-export default function ProjectsPage() {
-  return <FeaturedInitiatives />;
+export default function ProjectsRoutePage() {
+  return <ProjectsPage />;
 }

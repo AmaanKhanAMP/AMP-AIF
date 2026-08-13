@@ -14,7 +14,7 @@ const FALLBACK_NAVBAR = {
 const FALLBACK_ITEMS = [
   { id: 1, label: 'HOME', href: '/home', itemType: 'link', itemKey: null, parentKey: null, order: 1 },
   { id: 2, label: 'ABOUT US', href: '/about', itemType: 'link', itemKey: null, parentKey: null, order: 2 },
-  { id: 3, label: 'PROJECTS', href: '/projects/education', itemType: 'dropdown', itemKey: 'projects', parentKey: null, order: 3 },
+  { id: 3, label: 'PROJECTS', href: '/projects', itemType: 'dropdown', itemKey: 'projects', parentKey: null, order: 3 },
   { id: 4, label: 'Education', href: '/projects/education', itemType: 'link', itemKey: null, parentKey: 'projects', order: 4 },
   { id: 5, label: 'Medical Relief', href: '/projects/medical', itemType: 'link', itemKey: null, parentKey: 'projects', order: 5 },
   { id: 6, label: 'Employment Support', href: '/projects/employment', itemType: 'link', itemKey: null, parentKey: 'projects', order: 6 },
@@ -30,13 +30,19 @@ const FALLBACK_ITEMS = [
 function buildNavTree(items) {
   const sorted = [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   const roots = sorted.filter((item) => !item.parentKey);
-  return roots.map((root) => ({
-    ...root,
-    children:
-      root.itemType === 'dropdown' && root.itemKey
-        ? sorted.filter((item) => item.parentKey === root.itemKey)
-        : [],
-  }));
+  return roots.map((root) => {
+    const normalized =
+      root.itemType === 'dropdown' && root.itemKey === 'projects'
+        ? { ...root, href: '/projects' }
+        : root;
+    return {
+      ...normalized,
+      children:
+        normalized.itemType === 'dropdown' && normalized.itemKey
+          ? sorted.filter((item) => item.parentKey === normalized.itemKey)
+          : [],
+    };
+  });
 }
 
 const Navbar = ({ settings, items }) => {

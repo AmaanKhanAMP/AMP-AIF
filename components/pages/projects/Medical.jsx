@@ -1,4 +1,3 @@
-import FeaturedInitiatives from '@/components/layout/FeaturedInitiative';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const medical = '/assets/about.webp';
@@ -29,7 +28,6 @@ const Medical = () => {
           </div>
         </div>
       </main>
-      <FeaturedInitiatives />
    </div>
   );
 };

@@ -7,85 +7,121 @@ const AUTO_SCROLL_MS = 5000;
 const SWIPE_THRESHOLD_PX = 48;
 const EASE = [0.45, 0, 0.2, 1];
 
+/**
+ * Local fallbacks use public/assets paths (same pattern as Medical, Contact, Navbar).
+ * Do not ES-import from src/assets for site images — this project serves them from public/.
+ */
+const DEFAULT_AVATAR = '/assets/logo.png';
+
+const LOCAL_AVATARS_BY_NAME = {
+  'mrinal kanti debnath': '/assets/testimonials/aamir-malik.png',
+  'yawar ihsan': '/assets/testimonials/imran-shaikh.png',
+  'chandrakant khade': '/assets/testimonials/rahul-sharma.png',
+  'mohammed farrok gheewala': '/assets/testimonials/imran-siddiqui.png',
+  'vikram singh': '/assets/testimonials/mohammed-arif.png',
+  'mohammed ekramuddin shaikh': '/assets/testimonials/mohammed-ekramuddin-shaikh.png',
+};
+
+function normalizeName(name) {
+  return String(name || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+}
+
+/**
+ * True when avatar looks like a real CMS/media upload (not empty, not stock Unsplash,
+ * not a local public fallback under /assets/).
+ * Priority: CMS upload → local fallback → default placeholder.
+ */
+function isCmsUploadedAvatar(url) {
+  if (!url || typeof url !== 'string') return false;
+  const value = url.trim();
+  if (!value) return false;
+  if (/unsplash\.com/i.test(value)) return false;
+  if (/^https?:\/\/images\.unsplash\.com/i.test(value)) return false;
+  // Local public assets are fallbacks, not CMS uploads
+  if (value.startsWith('/assets/')) return false;
+  return true;
+}
+
+function localAvatarForName(name) {
+  return LOCAL_AVATARS_BY_NAME[normalizeName(name)] || null;
+}
+
+function resolveTestimonialAvatar(item) {
+  if (isCmsUploadedAvatar(item?.avatar)) {
+    return item.avatar;
+  }
+  return localAvatarForName(item?.name) || DEFAULT_AVATAR;
+}
+
 const FALLBACK_TESTIMONIALS = [
   {
     id: 1,
-    name: 'Aamir Malik',
-    role: 'ACE Alumnus / UPSC Aspirant',
-    location: 'New Delhi',
-    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"AMP India Foundations Academy for Competitive Exams provided me with not just premium resources, but unmatched mentorship from industry experts. It broke down financial barriers for my civil services preparation."',
+    name: 'Mrinal Kanti Debnath',
+    role: 'HR Recruiter, Godrej Appliances',
+    location: '',
+    avatar: '/assets/testimonials/aamir-malik.png',
+    quote:
+      '"We have been associated with AMP India Foundation\'s employment initiatives for several years. Their job fairs are well-organized and help us connect with quality candidates. We look forward to continuing this valuable partnership in the years ahead."',
   },
   {
     id: 2,
-    name: 'Sana Khan',
-    role: 'Placed Candidate',
-    location: 'Mumbai Cell',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"Through AMPs Employment Assistance Cell, I attended a mega job fair and secured a position as a Software Engineer. Their mock interviews and soft-skill bootcamps completely changed my career trajectory."',
+    name: 'Yawar Ihsan',
+    role: 'Operations Officer, G4S Secure',
+    location: '',
+    avatar: '/assets/testimonials/imran-shaikh.png',
+    quote:
+      '"Participating in the employment drive was a rewarding experience. It gave me the opportunity to interact with talented candidates from diverse backgrounds while witnessing the Foundation\'s commitment to creating meaningful career opportunities for job seekers."',
   },
   {
     id: 3,
-    name: 'Imran Shaikh',
-    role: 'Active Chapter Volunteer',
-    location: 'Pune Chapter',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"Volunteering with the National Talent Search (NTS) projects has given me immense purpose. Seeing grassroots students get access to higher education scholarships is the ultimate reward."',
+    name: 'Chandrakant Khade',
+    role: 'Apprentice Recruitment Officer, Allied Resource Management Services Pvt. Ltd.',
+    location: '',
+    avatar: '/assets/testimonials/rahul-sharma.png',
+    quote:
+      '"It was a wonderful experience participating in the event. The programme was professionally managed and provided an excellent platform for connecting deserving candidates with employment opportunities."',
   },
   {
     id: 4,
-    name: 'Aisha Khan',
-    role: 'Scholarship Recipient',
-    location: 'Hyderabad',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"AIF\'s higher education scholarship changed my life. As a meritorious student from an underprivileged family, I could never afford college fees. AMP India Foundation funded my degree and connected me with mentors who guided me through every academic challenge. Today, I am the first graduate in my family."',
+    name: 'Mohammed Farrok Gheewala',
+    role: 'Chairman, F. Gheewala HR Consultants',
+    location: '',
+    avatar: '/assets/testimonials/imran-siddiqui.png',
+    quote:
+      '"The Mumbai Job Fair was a well-coordinated initiative, and we appreciate the dedication and professionalism of the AMP India Foundation team. We value our association and look forward to participating in many more such impactful programmes."',
   },
   {
     id: 5,
-    name: 'Rahul Sharma',
-    role: 'Software Engineer',
-    location: 'Bengaluru',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"After attending AMP\'s Employability Training Programme, I gained real confidence in interviews and resume building. The national job fair organized by AIF connected me directly with recruiters. Within weeks, I secured a role as a Software Engineer. Their structured approach turned my potential into a lasting profession."',
+    name: 'Vikram Singh',
+    role: 'Lead Recruiter, PVK HR Solutions Pvt. Ltd.',
+    location: '',
+    avatar: '/assets/testimonials/mohammed-arif.png',
+    quote:
+      '"AMP India Foundation is creating meaningful social impact by connecting underprivileged youth with employment opportunities. Their commitment, transparency and nationwide outreach make them a trusted partner in community development."',
   },
   {
     id: 6,
-    name: 'Fatima Shaikh',
-    role: 'Volunteer',
-    location: 'Mumbai',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"Volunteering with AMP India Foundation has been deeply fulfilling. I helped coordinate medical relief camps and education workshops across Maharashtra. The professionalism and transparency of the team inspired me to contribute more. Serving underserved communities through AIF gave my skills a meaningful purpose beyond the corporate world."',
-  },
-  {
-    id: 7,
-    name: 'Imran Siddiqui',
-    role: 'Entrepreneur',
-    location: 'Ahmedabad',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"AIF\'s vocational training and economic empowerment program helped me launch my small tailoring business. They provided skill development workshops, micro-financing guidance, and mentorship on setting up self-help groups. What started as a single sewing machine is now a livelihood supporting my entire family."',
-  },
-  {
-    id: 8,
-    name: 'Neha Patel',
-    role: 'Parent',
-    location: 'Pune',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"As a parent, I was worried about my daughter\'s future until we discovered AMP\'s Centres of Excellence. The career counselling and scholarship support she received transformed her academic journey. AIF bridges the opportunity gap for deserving children — I am forever grateful for their unbiased approach."',
-  },
-  {
-    id: 9,
-    name: 'Mohammed Arif',
-    role: 'Career Guidance Participant',
-    location: 'Lucknow',
-    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&h=300&q=80',
-    quote: '"The career guidance sessions conducted by AIF professionals opened doors I never knew existed. From choosing the right vocational path to preparing for employment drives, every step was supported. Their pan-India network of volunteers truly empowers youth who lack access to quality mentorship and corporate exposure."',
+    name: 'Mohammed Ekramuddin Shaikh',
+    role: 'Co-Founder & Managing Partner, Nutra Essenza Wellness LLP',
+    location: '',
+    avatar: '/assets/testimonials/mohammed-ekramuddin-shaikh.png',
+    quote:
+      '"My association with AMP India Foundation\'s Employment Assistance Cell has been truly inspiring. Their dedication to career guidance, mentoring and skill development is empowering thousands of young people and helping build a stronger and more confident society."',
   },
 ];
 
 const Testimonial = ({ testimonials }) => {
-  const testimonialsData = Array.isArray(testimonials)
+  const rawTestimonials = Array.isArray(testimonials)
     ? testimonials
     : FALLBACK_TESTIMONIALS;
+
+  const testimonialsData = rawTestimonials.map((item) => ({
+    ...item,
+    avatar: resolveTestimonialAvatar(item),
+  }));
   const total = testimonialsData.length;
 
   const [activeIndex, setActiveIndex] = useState(1);
@@ -209,6 +245,13 @@ const Testimonial = ({ testimonials }) => {
     resumeAutoplay(600);
   };
 
+  const handleAvatarError = (event, item) => {
+    const img = event.currentTarget;
+    if (img.dataset.fallbackApplied === '1') return;
+    img.dataset.fallbackApplied = '1';
+    img.src = localAvatarForName(item?.name) || DEFAULT_AVATAR;
+  };
+
   const active = testimonialsData[activeIndex];
   if (!active) return null;
 
@@ -217,13 +260,17 @@ const Testimonial = ({ testimonials }) => {
       <div className="testimonials-container">
         <header className="testimonials-header">
           <h2>
-            WORDS FROM <span className="text-blue-accent">PEOPLE</span>
+            SUCCESS <span className="text-blue-accent">STORIES</span>
           </h2>
           <div className="decorative-line-wrapper" aria-hidden="true">
             <span className="line-segment short" />
             <span className="line-segment long" />
             <span className="line-segment short" />
           </div>
+          <p className="section-intro-text">
+            Hear inspiring stories from students, job seekers, volunteers and beneficiaries whose
+            lives have been transformed through AMP India Foundation&apos;s initiatives.
+          </p>
         </header>
 
         <div
@@ -264,7 +311,12 @@ const Testimonial = ({ testimonials }) => {
                   aria-label={`Show testimonial from ${item.name}`}
                   aria-current={index === activeIndex ? 'true' : undefined}
                 >
-                  <img src={item.avatar} alt="" className="testimonial-avatar" />
+                  <img
+                    src={item.avatar}
+                    alt=""
+                    className="testimonial-avatar"
+                    onError={(event) => handleAvatarError(event, item)}
+                  />
                 </button>
               ))}
             </div>

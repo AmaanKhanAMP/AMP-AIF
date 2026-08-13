@@ -1,6 +1,6 @@
 "use client";
 
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 const volunteer = '/assets/download.jpg'; // Ensure the path is correct based on your project structure
 
 // Custom lightweight counter hook for smooth UI performance
@@ -30,10 +30,9 @@ const useCounter = (endValue, duration = 2000, suffix = '') => {
 
 const Volunteer = () => {
   // Setup automated counting states mapped to your layouts
-  const totalDonors = useCounter(195000, 2000, '+'); 
-  const liveVolunteers = useCounter(874, 1800);
-  const partnerNgos = useCounter(38, 1500);
-  const statesCovered = useCounter(16, 1200);
+  const liveVolunteers = useCounter(874, 1800, '+');
+  const partnerOrgs = useCounter(38, 1500, '+');
+  const statesReached = useCounter(16, 1200, '+');
 
   return (
     <div className="volunteer-page-container">
@@ -47,12 +46,11 @@ const Volunteer = () => {
             <span className="volunteer-badge-icon">✦</span> VOLUNTEER PROGRAM · 2026
           </div>
           <h1 className="volunteer-hero-title">
-            Do work <br />
-            <span className="volunteer-italic-text">that matters.</span>
+            Be the Change. <br />
+            <span className="volunteer-italic-text">Volunteer with AMP India Foundation.</span>
           </h1>
           <p className="volunteer-hero-subtitle">
-            A quiet, skilled volunteer network — plugged into grassroots programs <br />
-            across India. Real hours. Real projects. Real people.
+            Every skill, every hour and every act of kindness can change a life. Join our growing family of volunteers and use your time, knowledge and experience to create opportunities for those who need them most.
           </p>
           
           <div className="volunteer-hero-actions">
@@ -60,8 +58,14 @@ const Volunteer = () => {
               Become a Volunteer 
               <span className="volunteer-arrow-circle">➔</span>
             </a>
-            <button className="volunteer-btn-text">
-              See how it works ↓
+            <button
+              type="button"
+              className="volunteer-btn-text"
+              onClick={() =>
+                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
+              How It Works
             </button>
           </div>
         </div>
@@ -69,8 +73,8 @@ const Volunteer = () => {
         <div className="volunteer-hero-right">
           <div className="volunteer-floating-impact">
             <span className="volunteer-mini-tag">IMPACT</span>
-            <div className="volunteer-stat-large">{totalDonors}</div>
-            <span className="volunteer-stat-sublabel">lives reached</span>
+            <div className="volunteer-stat-large">Thousands</div>
+            <span className="volunteer-stat-sublabel">Lives Impacted Every Year</span>
           </div>
 
           <div className="volunteer-image-card">
@@ -97,28 +101,28 @@ const Volunteer = () => {
         </div>
       </section>
 
-      {/* ---------------- SECTION 2: OUR MISSION (With Updated Copywriting) ---------------- */}
+      {/* ---------------- SECTION 2: WHY VOLUNTEER + IMPACT ---------------- */}
       <section className="volunteer-mission-section">
         <div className="volunteer-mission-left">
-          <div className="volunteer-section-line-tag">— OUR MISSION</div>
+          <div className="volunteer-section-line-tag">— WHY VOLUNTEER WITH US?</div>
           <h2 className="volunteer-mission-title">
-            Skills applied <br />
-            where they <br />
-            <span className="volunteer-italic-blue">matter.</span>
+            Make Your <br />
+            Time <br />
+            <span className="volunteer-italic-blue">Count</span>
           </h2>
           
           <p className="volunteer-mission-callout" style={{ marginTop: '32px', fontSize: '18px', fontWeight: '500', color: '#1d52d4', lineHeight: '1.5' }}>
-            "Join us today as a Volunteer and become the Change that you want to see around you."
+            Volunteering with AMP India Foundation is more than giving your time—it&apos;s about making a meaningful difference.
           </p>
         </div>
 
         <div className="volunteer-mission-right">
           <div className="volunteer-mission-desc-container">
             <p className="volunteer-mission-desc" style={{ marginBottom: '20px' }}>
-              Participate in Nation-Building and take your Fellow-Indians especially the underprivileged and the under-served to respectable level where you feel proud of the Country and its Citizens.
+              Whether you&apos;re a student, working professional, entrepreneur, teacher or retiree, your skills can help educate a child, guide a student, support a family or empower a community. Together, we are building a stronger, more inclusive India.
             </p>
             <p className="volunteer-mission-desc" style={{ fontSize: '16px', color: '#718096', marginBottom: '48px' }}>
-              Register yourself as a Volunteer to help the needy with your Talent and get valuable experience in the Social Development sector and also earn Blessings from the needy.
+              Everyone has something valuable to offer. Choose a role that matches your interests, skills and availability: Mentor Students, Support Education Programmes, Career &amp; Employability Support, Organise Events, Digital &amp; Creative Volunteering, and Community Outreach.
             </p>
           </div>
 
@@ -128,27 +132,27 @@ const Volunteer = () => {
               <div className="volunteer-metric-label">ACTIVE VOLUNTEERS</div>
             </div>
             <div className="volunteer-metric-card metric-border-sides">
-              <div className="volunteer-metric-value">{partnerNgos}</div>
-              <div className="volunteer-metric-label">PARTNER NGOS</div>
+              <div className="volunteer-metric-value">{partnerOrgs}</div>
+              <div className="volunteer-metric-label">PARTNER ORGANIZATIONS</div>
             </div>
             <div className="volunteer-metric-card">
-              <div className="volunteer-metric-value">{statesCovered}</div>
-              <div className="volunteer-metric-label">STATES COVERED</div>
+              <div className="volunteer-metric-value">{statesReached}</div>
+              <div className="volunteer-metric-label">STATES REACHED</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ---------------- SECTION 3: GATEWAY SPLIT ---------------- */}
+      {/* ---------------- SECTION 3: HOW TO JOIN / FINAL CTA ---------------- */}
       <section id="registration-form" className="volunteer-portal-section">
         <div className="volunteer-portal-left">
-          <div className="volunteer-line-tag-white">— READY?</div>
+          <div id="how-it-works" className="volunteer-line-tag-white">— READY TO MAKE A DIFFERENCE?</div>
           <h2 className="volunteer-portal-title">
-            Register as an <br />
-            <span className="volunteer-italic-blue-light">AIF volunteer.</span>
+            Joining is <br />
+            <span className="volunteer-italic-blue-light">simple.</span>
           </h2>
           <p className="volunteer-portal-desc">
-            Please fill the form below to register through our external secure portal gateway.
+            Step 1: Complete the online volunteer registration form. Step 2: Our team will review your application and contact you. Step 3: Attend a short orientation session to understand our programmes and volunteer opportunities. Step 4: Start contributing to projects that match your interests, skills and availability. Together, let&apos;s build a brighter future for all.
           </p>
           
           <div className="volunteer-portal-meta">
@@ -171,8 +175,8 @@ const Volunteer = () => {
             
             <div className="volunteer-card-body">
               <div className="volunteer-card-heading">
-                Launch <br />
-                the form
+                Register <br />
+                Now
               </div>
               <div className="volunteer-blue-action-circle">
                 <span className="volunteer-arrow-diagonal">➔</span>
