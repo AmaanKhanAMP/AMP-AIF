@@ -731,6 +731,32 @@ margin-left:-100px;
   z-index: 2;
 }
 
+/* Education slide: keep the student's face in frame on cover crop */
+.carousel-slide-education {
+  background-size: cover;
+  background-position: 72% 28%;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide-education {
+    background-position: 80% 22%;
+  }
+}
+
+/* Employment slide: keep interview desks and job-fair activity in frame */
+.carousel-slide-employment {
+  background-size: cover;
+  background-position: 65% center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide-employment {
+    background-position: 72% 48%;
+  }
+}
+
 /* Content Layout Alignment Box */
 .carousel-content-container {
   max-width: 1240px;
@@ -1051,6 +1077,7 @@ margin-left:-100px;
 }
 
 .welcome-section .card-image-box {
+  position: relative;
   width: 100%;
   height: 220px;
   flex-shrink: 0;
@@ -1059,8 +1086,11 @@ margin-left:-100px;
 }
 
 .welcome-section .feature-card-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -1421,9 +1451,13 @@ margin-left:-100px;
 }
 
 .project-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform 0.4s ease;
 }
@@ -2637,20 +2671,32 @@ margin-left:-100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1c3f7885; 
-  background-image:url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?q=80&w=1600&auto=format&fit=crop');
-  background-blend-mode: multiply;
+  background-color: #0b2c48;
   background-size: cover;
-  background-position: center 40%; 
+  background-position: center;
   background-repeat: no-repeat;
   padding: 100px 24px;
   overflow: hidden;
   text-align: center;
 }
 
+.about-hero-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 44, 72, 0.58) 0%,
+    rgba(0, 45, 98, 0.46) 42%,
+    rgba(6, 24, 40, 0.62) 100%
+  );
+}
+
 .hero-overlay-mesh {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
   background-image: linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
   background-size: 30px 30px;
@@ -2685,11 +2731,38 @@ margin-left:-100px;
 
 .image-canvas-column { position: relative; height: 500px; }
 .image-base-accent-box { position: absolute; width: 70%; height: 70%; background: linear-gradient(135deg, var(--brand-indigo), var(--brand-teal)); bottom: 0; left: 5%; border-radius: 24px; opacity: 0.06; transform: rotate(-3deg); }
-.overlap-frame-card { position: absolute; overflow: hidden; border-radius: 20px; box-shadow: 0 20px 40px rgba(15,23,42,0.06); transition: transform 0.4s ease; }
-.overlap-frame-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.overlap-frame-card {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(15,23,42,0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
+  cursor: pointer;
+}
+.overlap-frame-card img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
+}
 .image-overlay-gradient { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 60%, rgba(15, 23, 42, 0.3)); pointer-events: none; }
 .frame-top-left { width: 65%; height: 320px; top: 0; left: 0; z-index: 3; }
 .frame-bottom-right { width: 60%; height: 280px; bottom: 10px; right: 0; z-index: 4; border: 6px solid #ffffff; }
+
+@media (hover: hover) and (pointer: fine) {
+  .overlap-frame-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 44px rgba(15, 23, 42, 0.12);
+    z-index: 5;
+  }
+
+  .overlap-frame-card:hover img {
+    transform: scale(1.05);
+  }
+}
 
 .editorial-tag { display: inline-block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--brand-teal); margin-bottom: 16px; }
 .editorial-heading { font-size: 40px; line-height: 1.25; font-weight: 800; color: #02183a; margin-bottom: 24px; letter-spacing: -0.5px; }
@@ -3251,6 +3324,7 @@ margin-left:-100px;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .geo-badge-tag {
@@ -5489,10 +5563,18 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1600');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.emotional-immersive-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .emotional-curtain-shade {

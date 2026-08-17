@@ -5,7 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { Eye, Rocket } from 'lucide-react';
 
+import aboutOpportunitySeminar from '@/src/assets/about-opportunity-seminar.png';
+import aboutOpportunityCareerChart from '@/src/assets/about-opportunity-career-chart.png';
+import aboutHeroBanner from '@/src/assets/about-hero.png';
+
 const MotionLink = motion.create(Link);
+
+const assetSrc = (image) => (typeof image === 'string' ? image : image?.src);
+const aboutSeminarSrc = assetSrc(aboutOpportunitySeminar);
+const aboutCareerChartSrc = assetSrc(aboutOpportunityCareerChart);
+const aboutHeroSrc = assetSrc(aboutHeroBanner);
 
 
 const About = () => {
@@ -147,6 +156,14 @@ const About = () => {
     setOpenFaq(openFaq === id ? null : id);
   };
 
+  const resolvedHero = aboutHeroSrc;
+  const resolvedSeminar = aboutSeminarSrc;
+  const resolvedChart = aboutCareerChartSrc;
+  const resolvedAvenues = avenues;
+  const resolvedFeatures = features;
+  const resolvedObjectives = objectives;
+  const resolvedFaqs = faqData;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
@@ -165,12 +182,17 @@ const About = () => {
   return (
     <div className="about-page-canvas">
       {/* ================= HERO BANNER ================= */}
-      <header className="about-hero-banner">
+      <header
+        className="about-hero-banner"
+        style={{ backgroundImage: `url(${resolvedHero})` }}
+      >
+        <div className="about-hero-gradient" aria-hidden="true" />
         <div className="hero-overlay-mesh"></div>
         <div className="hero-content-wrapper">  
          
           <h1 className="hero-title">
-            Empowering Lives. <span className="hero-gradient-text">Transforming Communities.</span>
+            Empowering Lives.{' '}
+            <span className="hero-gradient-text">Transforming Communities.</span>
           </h1>
           <div className="hero-description"><p>At AMP India Foundation, we believe that every individual deserves an opportunity to learn, earn and live with dignity. Through education, employment, healthcare, skill development and community empowerment, we work to create lasting change for underprivileged communities across India.</p>
           </div>
@@ -190,11 +212,11 @@ const About = () => {
           <motion.div className="image-canvas-column" variants={itemVariants}>
             <div className="image-base-accent-box" />
             <div className="overlap-frame-card frame-top-left">
-              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800" alt="Education" />
+              <img src={resolvedSeminar} alt="Career guidance seminar" />
               <div className="image-overlay-gradient"></div>
             </div>
             <div className="overlap-frame-card frame-bottom-right">
-              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800" alt="Mentorship" />
+              <img src={resolvedChart} alt="Career guidance workshop" />
               <div className="image-overlay-gradient"></div>
             </div>
           </motion.div>
@@ -273,7 +295,7 @@ const About = () => {
               <div className="capsule-container">
                 <p className="capsule-instruction">Click an initiative to explore our scope:</p>
                 <div className="capsule-row">
-                  {avenues.map((item) => (
+                  {resolvedAvenues.map((item) => (
                     <button
                       key={item.id}
                       className={`capsule-badge ${activeBadge?.id === item.id ? 'active' : ''}`}
@@ -307,7 +329,7 @@ const About = () => {
           </motion.div>
 
           <div className="banner-features-grid">
-            {features.map((feat, index) => (
+            {resolvedFeatures.map((feat, index) => (
               <motion.div 
                 key={feat.id} 
                 className="banner-feature-item"
@@ -354,7 +376,7 @@ const About = () => {
 
           {/* RIGHT SIDE ALTERNATING STRIPS */}
           <div className="wwd-right-content">
-            {objectives.map((item) => (
+            {resolvedObjectives.map((item) => (
               <motion.div 
                 key={item.num} 
                 className={`wwd-item-row ${item.highlighted ? 'shaded-bg' : ''}`}
@@ -413,7 +435,7 @@ const About = () => {
           </div>
 
           <div className="faq-accordion-grid">
-            {faqData.map((faq) => {
+            {resolvedFaqs.map((faq) => {
               const isOpen = openFaq === faq.id;
               return (
                 <motion.div 

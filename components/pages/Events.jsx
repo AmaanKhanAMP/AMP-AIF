@@ -4,9 +4,7 @@ import UpcomingEvents from '@/components/events/UpcomingEvents';
 import EventCategories from '@/components/events/EventCategories';
 import EventTimeline from '@/components/events/EventTimeline';
 import PastEventsGallery from '@/components/events/PastEventsGallery';
-// import ImpactStats from '@/components/events/ImpactStats';
 import VolunteerCTA from '@/components/events/VolunteerCTA';
-// import FAQ from '@/components/events/FAQ';
 import '@/styles/Events.css';
 
 const Events = ({
@@ -28,7 +26,6 @@ const Events = ({
         text="Whether you are a student, volunteer, professional, institution or corporate partner, your participation helps create opportunities that transform lives. Together, we can make every event a step towards a stronger and more inclusive society."
         secondaryLabel="Partner With Us"
       />
-      
     </div>
   );
 };

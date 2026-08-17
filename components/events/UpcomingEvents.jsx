@@ -1,6 +1,14 @@
 "use client";
 
 import EventSection from './EventSection';
+import medicalCamp from '@/src/assets/medical-relief-camp.png';
+import trainingWorkshop from '@/src/assets/employment-training-workshop.png';
+import mentorshipAgra from '@/src/assets/mentorship-agra-chapter.png';
+import communityDrive from '@/src/assets/gallery/community-registration-drive.png';
+
+function assetSrc(image) {
+  return typeof image === 'string' ? image : image?.src;
+}
 
 const FALLBACK_UPCOMING = [
   {
@@ -22,8 +30,7 @@ const FALLBACK_UPCOMING = [
     venue: 'Mumbai',
     description:
       'Bridging skilled youth with top-tier corporate employers across multiple industrial sectors with on-spot interviews and hiring.',
-    image:
-      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/kupwara-mega-job-fair.jpeg',
   },
   {
     id: 3,
@@ -33,8 +40,7 @@ const FALLBACK_UPCOMING = [
     venue: 'Hyderabad',
     description:
       'Providing free health check-ups, critical illness screenings, and medical relief support for underserved communities.',
-    image:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+    image: assetSrc(medicalCamp),
   },
   {
     id: 4,
@@ -44,8 +50,7 @@ const FALLBACK_UPCOMING = [
     venue: 'Bengaluru',
     description:
       'Intensive vocational training in digital skills, tailoring, and small-scale entrepreneurship for sustainable livelihoods.',
-    image:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80',
+    image: assetSrc(trainingWorkshop),
   },
   {
     id: 5,
@@ -55,8 +60,7 @@ const FALLBACK_UPCOMING = [
     venue: 'Pune',
     description:
       'One-on-one mentoring sessions with industry professionals to guide students through academic and career decision-making.',
-    image:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
+    image: assetSrc(mentorshipAgra),
   },
   {
     id: 6,
@@ -66,8 +70,7 @@ const FALLBACK_UPCOMING = [
     venue: 'Kolkata',
     description:
       'Grassroots community development initiative distributing essential supplies, financial literacy workshops, and self-help group setups.',
-    image:
-      'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80',
+    image: assetSrc(communityDrive),
   },
 ];
 

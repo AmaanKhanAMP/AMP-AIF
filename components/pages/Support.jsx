@@ -16,6 +16,12 @@ import Reveal, {
   timelineIconVariants,
   timelineLineVariants
 } from '@/components/support/Reveal';
+import communityImpactBanner from '@/src/assets/hero-community-impact.png';
+
+const togetherForChangeImage =
+  typeof communityImpactBanner === 'string'
+    ? communityImpactBanner
+    : communityImpactBanner?.src;
 
 const btnHover = {
   scale: 1.02,
@@ -33,12 +39,13 @@ const Support = () => {
   const [copiedFieldToken, setCopiedFieldToken] = useState(null);
   const [copyToast, setCopyToast] = useState(false);
 
+  const extra = {};
   const bankAccountMatrix = [
-    { label: 'Account Name', value: 'AMP India Foundation', allowCopy: false },
-    { label: 'Bank', value: 'Kotak Mahindra Bank', allowCopy: false },
-    { label: 'Account Number', value: '3114476665', allowCopy: true },
-    { label: 'Account Type', value: 'Savings Account', allowCopy: false },
-    { label: 'IFSC Code', value: 'KKBK0001348', allowCopy: true }
+    { label: 'Account Name', value: extra.account_name || 'AMP India Foundation', allowCopy: false },
+    { label: 'Bank', value: extra.bank || 'Kotak Mahindra Bank', allowCopy: false },
+    { label: 'Account Number', value: extra.account_number || '3114476665', allowCopy: true },
+    { label: 'Account Type', value: extra.account_type || 'Savings Account', allowCopy: false },
+    { label: 'IFSC Code', value: extra.ifsc || 'KKBK0001348', allowCopy: true }
   ];
 
   const executeClipboardProtocol = (valueString, targetLabel) => {
@@ -101,7 +108,7 @@ const Support = () => {
 
             <div className="support-hero-illustration-parallax">
               <img
-                src="/images/support-hero-donate.png"
+                src={'/images/support-hero-donate.png'}
                 alt="Hand placing a heart into a donate jar"
                 className="support-hero-illustration"
               />
@@ -438,6 +445,12 @@ const Support = () => {
 
       {/* ================= EMOTIONAL ================= */}
       <Reveal as="section" className="emotional-immersive-layer">
+        <img
+          src={togetherForChangeImage}
+          alt=""
+          className="emotional-immersive-bg"
+          aria-hidden="true"
+        />
         <div className="emotional-curtain-shade"></div>
         <div className="emotional-typography-hub">
           <h2 className="emotional-statement">

@@ -3,11 +3,20 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import communityImpactBanner from '@/src/assets/hero-community-impact.png';
+import educationBanner from '@/src/assets/hero-education.png';
+import employmentBanner from '@/src/assets/hero-employment.png';
+
+const assetSrc = (image) => (typeof image === 'string' ? image : image?.src);
+
+const communityImpactImage = assetSrc(communityImpactBanner);
+const educationBannerImage = assetSrc(educationBanner);
+const employmentBannerImage = assetSrc(employmentBanner);
 
 const FALLBACK_SLIDES = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1920&q=80',
+    image: educationBannerImage,
     titleStart: 'Empowering Lives Through',
     titleAccent: 'Education',
     subtitle:
@@ -19,7 +28,7 @@ const FALLBACK_SLIDES = [
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1920&q=80',
+    image: employmentBannerImage,
     titleStart: 'Creating Opportunities Through',
     titleAccent: 'Employment',
     subtitle:
@@ -31,7 +40,7 @@ const FALLBACK_SLIDES = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1920&q=80',
+    image: communityImpactImage,
     titleStart: 'Building Stronger',
     titleAccent: 'Communities',
     subtitle:
@@ -84,10 +93,18 @@ const HeroCarousel = ({ slides }) => {
 
   return (
     <div className="hero-carousel-wrapper">
-      {slidesData.map((slide, index) => (
+      {slidesData.map((slide, index) => {
+        const isEducationSlide =
+          slide.image === educationBannerImage ||
+          (typeof slide.image === 'string' && slide.image.includes('hero-education'));
+        const isEmploymentSlide =
+          slide.image === employmentBannerImage ||
+          (typeof slide.image === 'string' && slide.image.includes('hero-employment'));
+
+        return (
         <div
           key={slide.id}
-          className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+          className={`carousel-slide ${index === currentSlide ? 'active' : ''} ${isEducationSlide ? 'carousel-slide-education' : ''} ${isEmploymentSlide ? 'carousel-slide-employment' : ''}`}
           style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.65), rgba(6, 24, 40, 0.75)), url(${slide.image})` }}
         >
           <div className="carousel-content-container">
@@ -104,7 +121,8 @@ const HeroCarousel = ({ slides }) => {
             </div>
           </div>
         </div>
-      ))}
+        );
+      })}
 
       <button className="nav-arrow arrow-left" onClick={handlePrev} aria-label="Previous slide">
         <span>‹</span>

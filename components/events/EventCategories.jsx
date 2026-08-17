@@ -60,6 +60,7 @@ const itemVariants = {
 };
 
 const EventCategories = () => {
+  const categoryItems = categories;
   return (
     <section className="event-categories-section" aria-label="Event categories">
       <div className="ev-container">
@@ -80,7 +81,7 @@ const EventCategories = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
         >
-          {categories.map((cat) => {
+          {categoryItems.map((cat) => {
             const Icon = cat.icon;
             return (
               <motion.div key={cat.id} className="event-category-card" variants={itemVariants}>

@@ -15,6 +15,12 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formFeedback, setFormFeedback] = useState({ type: '', text: '' });
 
+  const address =
+    'Room 9, 1st Floor, Halima Manzil, Mirza Ghalib Marg, A Clare Road, Nagpada, Mumbai - 400008';
+  const phone = '+91 8291101312';
+  const email = 'contact@ampindiafoundation.org';
+  const heroImage = contact;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (formFeedback.text) {
@@ -85,7 +91,7 @@ const Contact = () => {
       {/* Dynamic Immersive Background Image Banner */}
       <header 
         className="hero-section full-bleed-bg" 
-        style={{ backgroundImage: `linear-gradient(to right, rgba(0, 31, 71, 0.41) 30%, rgba(0, 21, 51, 0.85) 60%, rgba(2, 6, 23, 0.4) 100%), url(${contact})` }}
+        style={{ backgroundImage: `linear-gradient(to right, rgba(0, 31, 71, 0.41) 30%, rgba(0, 21, 51, 0.85) 60%, rgba(2, 6, 23, 0.4) 100%), url(${heroImage})` }}
       >
         <div className="hero-ambient-glow-1"></div>
         <div className="hero-content full-bleed-layout">
@@ -128,7 +134,7 @@ const Contact = () => {
             </div>
             <h3 className="card-title text-heading">Our Address</h3>
             <p className="card-desc-text">
-              Room 9, 1st Floor, Halima Manzil, Mirza Ghalib Marg, A Clare Road, Nagpada, Mumbai - 400008
+              {address}
             </p>
           </div>
 
@@ -139,7 +145,7 @@ const Contact = () => {
             </div>
             <h3 className="card-title text-heading">Call Us</h3>
             <p style={{ margin: 0 }}>
-              <a href="tel:+918291101312" className="card-anchor-link">+91 8291101312</a>
+              <a href={`tel:${phone.replace(/\s/g, '')}`} className="card-anchor-link">{phone}</a>
             </p>
             <span className="card-sub-meta">Mon - Sat, 9AM to 6PM</span>
           </div>
@@ -151,7 +157,7 @@ const Contact = () => {
             </div>
             <h3 className="card-title text-heading">Email Us</h3>
             <p style={{ margin: 0 }}>
-              <a href="mailto:contact@ampindiafoundation.org" className="card-anchor-link">contact@ampindiafoundation.org</a>
+              <a href={`mailto:${email}`} className="card-anchor-link">{email}</a>
             </p>
             <span className="card-sub-meta">We reply within 24 hours</span>
           </div>

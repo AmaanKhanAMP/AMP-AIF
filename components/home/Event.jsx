@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import etpWorkshop from '@/src/assets/employment-training-workshop.png';
+
+const etpImage = typeof etpWorkshop === 'string' ? etpWorkshop : etpWorkshop?.src;
 
 
 const FALLBACK_EVENTS = [
@@ -16,29 +19,18 @@ const FALLBACK_EVENTS = [
     venue: 'Kupwara, Jammu & Kashmir',
     category: 'Employment',
     image: '/assets/kupwara-mega-job-fair.jpeg',
-    detailsLink: '/events',
+    detailsLink: "/events"
   },
   {
-    id: 1,
+    id: 2,
     title: "Employability Training Programme (ETP)",
     description:
       "A practical training programme that prepares graduates for today's job market through resume writing, communication skills and interview preparation.",
     speaker: "",
-    date: "24 July 2026",
+    date: "20 September 2026",
     venue: "Mumbai",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=300&h=300&q=80",
-    detailsLink: "#etp-details"
-  },
-  {
-    id: 2,
-    title: "Unity Mega Job Fair",
-    description:
-      "Meet leading employers, attend interviews and explore career opportunities across multiple industries at one of India's largest job fairs.",
-    speaker: "",
-    date: "12 August 2026",
-    venue: "Mumbai",
-    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=300&h=300&q=80",
-    detailsLink: "#job-fair"
+    image: etpImage,
+    detailsLink: "/events"
   }
 ];
 

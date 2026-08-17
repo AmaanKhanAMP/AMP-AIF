@@ -1,17 +1,20 @@
 import Link from 'next/link';
 
 import employmentSupportImage from '@/src/assets/employment-support-job-fair.jpg';
+import careerGuidanceSeminar from '@/src/assets/career-guidance-seminar.png';
+import educationSupportStudents from '@/src/assets/education-support-students.png';
 
-const employmentSupportSrc =
-  typeof employmentSupportImage === 'string'
-    ? employmentSupportImage
-    : employmentSupportImage?.src;
+const assetSrc = (image) => (typeof image === 'string' ? image : image?.src);
+
+const employmentSupportSrc = assetSrc(employmentSupportImage);
+const careerGuidanceSeminarSrc = assetSrc(careerGuidanceSeminar);
+const educationSupportSrc = assetSrc(educationSupportStudents);
 
 const cardData = [
   {
     id: 1,
     href: '/projects/education',
-    image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80',
+    image: educationSupportSrc,
     title: 'Education Support',
     subtitle: 'Building Brighter Futures',
     description:
@@ -29,7 +32,7 @@ const cardData = [
   {
     id: 3,
     href: '/projects/mentorship',
-    image: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=600&q=80',
+    image: careerGuidanceSeminarSrc,
     title: 'Mentorship & Guidance',
     subtitle: 'Inspiring the Next Generation',
     description:
@@ -38,12 +41,20 @@ const cardData = [
 ];
 
 const Preview = () => {
+  const items = cardData;
+  const heading = 'WELCOME TO';
+  const accent = 'AMP INDIA FOUNDATION';
+  const lead = 'Together, We Create Lasting Change';
+  const intro =
+    'AMP India Foundation (AIF) is a registered non-profit organization working to improve the lives of underprivileged communities across India. Through education, employment, skill development, healthcare and community empowerment, we help people build better futures with dignity and confidence.';
+  const extra =
+    'Supported by a nationwide network of professionals, volunteers, donors and partner organizations, we strive to create opportunities that bring lasting social impact.';
   return (
     <section className="welcome-section">
       <div className="section-container">
         <div className="section-header-block">
           <h2 className="main-section-title">
-            WELCOME TO <span className="title-accent-blue">AMP INDIA FOUNDATION</span>
+            {heading} <span className="title-accent-blue">{accent}</span>
           </h2>
           <div className="decorative-line-wrapper">
             <span className="line-segment short"></span>
@@ -51,22 +62,14 @@ const Preview = () => {
             <span className="line-segment short"></span>
           </div>
           <p className="section-intro-text">
-            <strong>Together, We Create Lasting Change</strong>
+            <strong>{lead}</strong>
           </p>
-          <p className="section-intro-text">
-            AMP India Foundation (AIF) is a registered non-profit organization working to improve
-            the lives of underprivileged communities across India. Through education, employment,
-            skill development, healthcare and community empowerment, we help people build better
-            futures with dignity and confidence.
-          </p>
-          <p className="section-intro-text">
-            Supported by a nationwide network of professionals, volunteers, donors and partner
-            organizations, we strive to create opportunities that bring lasting social impact.
-          </p>
+          <p className="section-intro-text">{intro}</p>
+          <p className="section-intro-text">{extra}</p>
         </div>
 
         <div className="cards-grid-layout">
-          {cardData.map((card) => (
+          {items.map((card) => (
             <Link
               key={card.id}
               href={card.href}

@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import communityImpactBanner from '@/src/assets/hero-community-impact.png';
+
+const assetSrc = (image) => (typeof image === 'string' ? image : image?.src);
+const IMPACT_BG_FALLBACK = assetSrc(communityImpactBanner);
 
 
 const impactMetrics = [
@@ -108,6 +112,8 @@ const CountUpItem = ({ target, suffix, label, icon, startTrigger }) => {
 const Impact = () => {
   const [hasTriggered, setHasTriggered] = useState(false);
   const sectionRef = useRef(null);
+  const metrics = impactMetrics;
+  const bgImage = IMPACT_BG_FALLBACK;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -133,11 +139,11 @@ const Impact = () => {
       id="impact"
       className="amp-impact-section"
       // Swapped backdrop image token to a high-end corporate workshop overlay look
-      style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.88), rgba(6, 24, 40, 0.93)), url('https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&w=1920&q=80')` }}
+      style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.88), rgba(6, 24, 40, 0.93)), url('${bgImage}')` }}
     >
       <div className="impact-container">
         <div className="impact-grid-layout">
-          {impactMetrics.map((metric) => (
+          {metrics.map((metric) => (
             <CountUpItem 
               key={metric.id}
               target={metric.target}

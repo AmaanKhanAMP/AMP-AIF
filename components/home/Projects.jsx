@@ -2,26 +2,33 @@
 
 import { useState, useRef } from 'react';
 
+import etpImage from '@/src/assets/home-project-etp.png';
+import megaJobFairImage from '@/src/assets/home-project-mega-job-fair.png';
+import careerGuidanceImage from '@/src/assets/home-project-career-guidance.png';
+import educationSupportImage from '@/src/assets/home-project-education-support.png';
+
+const assetSrc = (image) => (typeof image === 'string' ? image : image?.src);
+
 const FALLBACK_PROJECTS = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=600&q=80',
-    title: 'ACE - Academy for Competitive Exams',
+    image: assetSrc(etpImage),
+    title: 'Employability Training Program (ETP)',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80',
-    title: 'AMP Employment Assistance Cell',
+    image: assetSrc(megaJobFairImage),
+    title: 'Mega Job Fair',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80',
-    title: 'National Talent Search (NTS)',
+    image: assetSrc(careerGuidanceImage),
+    title: 'Career Guidance & Mentorship',
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
-    title: 'AMP Higher Education Scholarship',
+    image: assetSrc(educationSupportImage),
+    title: 'Education Support',
   },
 ];
 

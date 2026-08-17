@@ -819,6 +819,23 @@
   word-break: break-word;
 }
 
+.aif-chat-link {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.aif-chat-link:hover {
+  color: #1e40af;
+}
+
+.aif-chat-message--user .aif-chat-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .aif-chat-timestamp {
   margin-top: 4px;
   font-size: 10.5px;

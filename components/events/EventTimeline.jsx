@@ -14,6 +14,7 @@ const timelineData = [
 ];
 
 const EventTimeline = () => {
+  const timelineItems = timelineData;
   const wrapperRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
@@ -40,7 +41,7 @@ const EventTimeline = () => {
             <motion.div className="event-timeline-line-fill" style={{ height: lineHeight }} />
           </div>
 
-          {timelineData.map((item, index) => (
+          {timelineItems.map((item, index) => (
             <motion.div
               key={item.month}
               className="event-timeline-item"

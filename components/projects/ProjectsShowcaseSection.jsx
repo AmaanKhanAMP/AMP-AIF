@@ -9,6 +9,7 @@ import { PROJECT_CATEGORIES } from '@/lib/projectAssets';
 const ease = [0.16, 1, 0.3, 1];
 
 const ProjectsShowcaseSection = () => {
+  const projects = PROJECT_CATEGORIES;
   return (
     <section
       id="our-projects"
@@ -34,7 +35,7 @@ const ProjectsShowcaseSection = () => {
         </motion.header>
 
         <div className="cards-grid-layout">
-          {PROJECT_CATEGORIES.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 24 }}

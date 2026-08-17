@@ -3,6 +3,10 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
+import eventsHeroBanner from '@/src/assets/events-hero.png';
+
+const eventsHeroSrc =
+  typeof eventsHeroBanner === 'string' ? eventsHeroBanner : eventsHeroBanner?.src;
 
 const EventsHero = () => {
   const scrollToEvents = () => {
@@ -11,6 +15,12 @@ const EventsHero = () => {
 
   return (
     <section className="events-hero" aria-label="Events hero">
+      <img
+        src={eventsHeroSrc}
+        alt=""
+        className="events-hero-bg"
+        aria-hidden="true"
+      />
       <div className="events-hero-mesh" aria-hidden="true" />
       <div className="events-hero-blob events-hero-blob-1" aria-hidden="true" />
       <div className="events-hero-blob events-hero-blob-2" aria-hidden="true" />
@@ -47,9 +57,7 @@ const EventsHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.7 }}
         >
-          Every event at AMP India Foundation is a step towards building stronger communities. From
-          career guidance and job fairs to health camps and skill development workshops, our events
-          create opportunities that transform lives.
+          Every event at AMP India Foundation is a step towards building stronger communities. From career guidance and job fairs to health camps and skill development workshops, our events create opportunities that transform lives.
         </motion.p>
 
         <motion.div
