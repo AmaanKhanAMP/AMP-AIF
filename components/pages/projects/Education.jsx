@@ -7,16 +7,18 @@ const educationImageSrc =
     : educationProjectSeminar?.src;
 
 const Education = () => {
-  const title = 'EDUCATION';
-  const subtitle = 'SKILL DEVELOPMENT & LIVELIHOOD LIFTS';
-  const quote = 'Empowering BPL youth through localized technical skill frameworks.';
-  const badge = 'NSDC COMPLIANT';
+  const title = 'Building Brighter Futures Through Education';
+  const subtitle =
+    'Every child deserves the opportunity to learn, grow and build a better future.';
+  const quote =
+    'Every child deserves the opportunity to learn, grow and build a better future.';
+  const badge = 'EDUCATION & SKILL DEVELOPMENT';
   const image = educationImageSrc;
   const paragraphs = [
-        'Indian youth from the lower-strata of society, especially from BPL families, are unable to continue their education after the Primary section as they must support their families to make ends meet. Consequently, they resort to menial jobs that yield minimal earnings and lock them into structural poverty circles.',
-        'AIF conducts targeted vocational training for these school dropouts, focusing on easy-to-learn, market-driven technical skills like Mobile Repairing, Air-Conditioning & Refrigerator Maintenance, Water Filter Repairing, and Motor Vehicle Servicing.',
-        'Through strategic tie-ups with NSDC-sponsored CSR programmes, AIF delivers free, short-term vocational skills training models nationwide, opening secure employment pipelines and self-sustaining entrepreneurial opportunities.',
-      ];
+    'For many children and young people from underprivileged families, financial hardship and limited access to quality educational support can become major barriers to achieving their potential.',
+    'AIF works to address these challenges by creating opportunities for students to learn, develop and make informed choices about their future.',
+    'Our education initiatives include scholarships, school development programmes, teacher training, career guidance seminars and skill development, helping students access better learning opportunities and supporting schools and teachers in creating stronger educational environments. Through these initiatives and partnerships with institutions, professionals and donors, AIF strives to make quality education more accessible and help students build the knowledge, skills and confidence they need for a brighter future.',
+  ];
   return (
     <div className="editorial-portfolio-page">
       <ScrollToTop />

@@ -2,15 +2,19 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { EMPLOYMENT_TRAINING_IMAGE } from '@/lib/projectAssets';
 
 const Training = () => {
-  const title = 'TRAINING';
-  const subtitle = 'CORPORATE GROOMING & PREPARATION';
-  const quote = 'Polishing core foundational skills to ensure immediate employment fit.';
-  const badge = 'ETP ADVANCED';
+  const title = 'Job Preparation & Professional Skills';
+  const subtitle =
+    'Helping young people become confident and ready for the workplace.';
+  const quote =
+    'Helping young people become confident and ready for the workplace.';
+  const badge = 'EMPLOYABILITY TRAINING';
   const image = EMPLOYMENT_TRAINING_IMAGE;
   const paragraphs = [
-        'AIF conducts the Employability Training Program (ETP) to train youngsters in crucial pre-employment preparation, assisting job seekers in finding the right opportunity, at the right time and place.',
-        'Spearheaded by corporate trainers, ETP focuses on critical professional metrics including target job hunting strategies, effective resume structuring, interview performance management, professional grooming, and communications.',
-      ];
+    'Having a qualification is important, but young people also need practical skills and confidence to successfully enter today’s job market.',
+    'AIF’s Employability Training Programme (ETP) helps bridge this gap.',
+    'Led by experienced trainers, ETP focuses on practical job-preparation skills such as finding suitable opportunities, writing an effective resume, preparing for interviews, professional grooming, workplace behaviour and communication.',
+    'The programme helps job seekers become better prepared, more confident and ready to make the most of the employment opportunities available to them.',
+  ];
   return (
     <div className="editorial-portfolio-page">
       <ScrollToTop />

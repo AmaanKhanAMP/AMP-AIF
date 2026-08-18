@@ -661,17 +661,65 @@ margin-left:-100px;
 
 /* Responsive Scaling Breakpoints scaling checks */
 @media (max-width: 768px) {
+  .hero-carousel-wrapper {
+    min-height: 58vh;
+  }
+
+  .carousel-slide {
+    top: 0;
+  }
+
   .carousel-title {
     font-size: 34px;
   }
   .carousel-subtitle {
     font-size: 14px;
+    margin-bottom: 24px;
   }
   .nav-arrow {
     display: none;
   }
   .carousel-content-container {
     padding: 0 20px;
+  }
+
+  .welcome-section {
+    padding: 80px 18px 72px;
+  }
+
+  .welcome-section .section-header-block,
+  .section-header-block {
+    margin-bottom: 48px;
+  }
+
+  .welcome-section .card-image-box,
+  .card-image-box {
+    height: 180px;
+  }
+
+  .amp-impact-section {
+    padding: 76px 18px;
+    background-attachment: scroll;
+  }
+
+  .latest-projects-section {
+    padding: 76px 0;
+  }
+
+  .events-list-section {
+    padding: 76px 18px;
+  }
+
+  .events-section-header {
+    margin-bottom: 48px;
+  }
+
+  .home-photo-gallery {
+    padding: 72px 18px;
+  }
+
+  .testimonials-section {
+    padding: 72px 18px;
   }
 }
 
@@ -833,10 +881,23 @@ margin-left:-100px;
     gap: 30px;
   }
   .welcome-section {
-    padding: 60px 15px;
+    padding: 72px 15px 64px;
+  }
+  .card-image-box {
+    height: 168px;
   }
   .main-section-title {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 375px) {
+  .welcome-section {
+    padding: 64px 14px 60px;
+  }
+
+  .card-image-box {
+    height: 160px;
   }
 }
 
@@ -2409,7 +2470,7 @@ margin-left:-100px;
   width:100%;
   max-width: 100%;
   margin:0px;
-  padding:150px 6% 40px 6%; /* Reduced vertical padding */
+  padding:140px 6% 28px 6%;
   box-sizing: border-box;
   background-color: var(--color-ice-blue);
   font-family: var(--font-sans);
@@ -2423,7 +2484,8 @@ margin-left:-100px;
   justify-content: space-between;
   border-bottom: 1px solid var(--color-border-line);
   padding-bottom: 10px;
-  margin-bottom: 30px; /* Tighter margin space */
+  margin-top: 8px;
+  margin-bottom: 28px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -2432,16 +2494,16 @@ margin-left:-100px;
 .hero-editorial-block {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
-  gap: 45px; /* Tighter column gutters */
+  gap: 45px;
   align-items: center;
-  margin-bottom: 50px; /* Reduced gap before initiatives strip */
+  margin-bottom: 32px;
   animation: slideFadeText 0.7s var(--motion-editorial) forwards;
 }
 
 .main-giant-title,
 .editorial-portfolio-page .premium-hero-heading {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: clamp(36px, 5.5vw, 64px);
+  font-size: clamp(26px, 4vw, 46px);
   font-weight: 700;
   color: var(--color-primary-navy);
   line-height: 1.05;
@@ -2451,19 +2513,19 @@ margin-left:-100px;
 
 .hero-project-subtitle {
   font-family: var(--font-sans);
-  font-size: clamp(15px, 1.7vw, 18px);
+  font-size: clamp(12px, 1.3vw, 14px);
   font-weight: 600;
   letter-spacing: 0.16em;
   color: var(--color-royal-blue);
   text-transform: uppercase;
-  margin: 0 0 22px 0;
+  margin: 0 0 14px 0;
   line-height: 1.5;
 }
 
 .editorial-divider-line {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 .editorial-divider-line::before {
   content: "";
@@ -2480,7 +2542,7 @@ margin-left:-100px;
 .editorial-quote-card {
   border-left: 2px solid var(--color-royal-blue);
   padding: 2px 0 2px 18px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 .quote-text {
   font-family: var(--font-sans);
@@ -2495,7 +2557,7 @@ margin-left:-100px;
   font-size: 15px;
   line-height: 1.7;
   color: #334155;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   text-align: justify;
 }
 
@@ -2592,17 +2654,21 @@ margin-left:-100px;
 }
 
 @media (max-width: 950px) {
+  .editorial-portfolio-page { padding-top: 120px; }
   .hero-editorial-block { grid-template-columns: 1fr; gap: 30px; }
   .hero-graphic-pane { justify-content: center; }
   .geometric-image-frame { max-width: 100%; height: 360px; border-top-left-radius: 140px; }
   .three-column-row { grid-template-columns: 1fr; gap: 24px; }
   .main-giant-title,
   .editorial-portfolio-page .premium-hero-heading {
-    font-size: clamp(34px, 9vw, 48px);
+    font-size: clamp(22px, 7vw, 36px);
     font-weight: 700;
   }
-  .hero-project-subtitle { font-size: 15px; font-weight: 600; letter-spacing: 0.14em; }
-  .editorial-paragraphs .body-para { font-size: 14.5px; }
+  .hero-project-subtitle { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; }
+  .editorial-paragraphs .body-para { font-size: 14px; }
+}
+@media (max-width: 480px) {
+  .editorial-portfolio-page { padding-top: 100px; }
 }
 
 /* featured initiatives */

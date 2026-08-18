@@ -2,15 +2,18 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { ECONOMIC_EMPOWERMENT_IMAGE } from '@/lib/projectAssets';
 
 const Empowerment = () => {
-  const title = 'EMPOWERMENT';
-  const subtitle = 'FINANCIAL INDEPENDENCE SYSTEM';
-  const quote = 'Cultivating entrepreneurial self-reliance across urban and rural chapters.';
-  const badge = 'SUSTAINABLE CAPITAL';
+  const title = 'Financial Independence & Livelihood Support';
+  const subtitle =
+    'Helping people build stable incomes and become financially independent.';
+  const quote =
+    'Helping people build stable incomes and become financially independent.';
+  const badge = 'LIVELIHOOD SUPPORT';
   const image = ECONOMIC_EMPOWERMENT_IMAGE;
   const paragraphs = [
-        'AIF builds dedicated, voluntary social platforms that target sustainable, long-term self-sufficiency through structured regional livelihood assistance programs.',
-        'By opening access to early capital guidance, small enterprise management tools, and direct marketplace connection assistance, we empower vulnerable demographics to successfully establish independent livelihoods.',
-      ];
+    'A sustainable source of income can transform the future of an individual and an entire family.',
+    'AIF supports initiatives that help people explore self-employment and build more secure livelihoods.',
+    'Our programmes provide guidance on starting and managing small businesses, accessing early financial support and reaching customers and markets. By promoting entrepreneurship and livelihood opportunities, we help individuals build their own sources of income, become more self-reliant and create a more secure future for their families.',
+  ];
   return (
     <div className="editorial-portfolio-page">
       <ScrollToTop />

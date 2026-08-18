@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 /**
- * Forces the viewport to the top when a project page mounts.
- * Prevents leftover homepage scroll from landing on Featured Initiatives.
+ * Reset viewport to the top when a page mounts after client-side navigation.
+ * Next.js Link + `html { scroll-behavior: smooth }` can leave leftover
+ * homepage scroll, so Framer `whileInView` sections stay at opacity 0.
  */
 export default function ScrollToTop() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
 
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }, []);
 
   return null;

@@ -2,15 +2,18 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { MENTORSHIP_IMAGE } from '@/lib/projectAssets';
 
 const Mentorship = () => {
-  const title = 'MENTORSHIP';
-  const subtitle = 'INTELLECTUAL GUIDANCE FRAMEWORK';
-  const quote = 'Connecting industry experience with first-generation student networks.';
-  const badge = 'MENTOR NETWORK';
+  const title = 'Professional Guidance & Mentorship';
+  const subtitle =
+    'Connecting students with experienced professionals who can guide their future.';
+  const quote =
+    'Connecting students with experienced professionals who can guide their future.';
+  const badge = 'MENTORSHIP';
   const image = MENTORSHIP_IMAGE;
   const paragraphs = [
-        'Making a real, structural difference to the student community by utilizing the shared knowledge, intellect, professional experience, and competencies of established corporate professionals.',
-        'Our core focus targets the comprehensive educational development of the community—particularly its weakest sections—fostering an environment where every student has an equal stake in regional and national growth.',
-      ];
+    'Many students, especially those from financially weaker backgrounds, have the ability and ambition to succeed but may not have access to experienced people who can guide them in making the right choices.',
+    'AIF connects students with experienced professionals who share their knowledge, skills and work experience. Mentors help students understand their options and make informed decisions about education and careers.',
+    'Through guidance on career choices, higher education, internships, professional skills and personal development, the programme helps students build confidence and prepare for successful futures.',
+  ];
   return (
     <div className="editorial-portfolio-page">
       <ScrollToTop />

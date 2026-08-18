@@ -68,11 +68,6 @@ export default function ChatWidget() {
       />
 
       <div className="aif-chat-fab-wrap">
-        <span className="aif-chat-fab-tooltip" role="tooltip">
-          <strong>Need Help?</strong>
-          <span>Ask AMP AI</span>
-        </span>
-
         {!isOpen ? <span className="aif-chat-fab-pulse" aria-hidden="true" /> : null}
 
         <motion.button

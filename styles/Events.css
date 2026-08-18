@@ -957,6 +957,10 @@
 @media (max-width: 768px) {
   .ev-section { padding: 72px 20px; }
   .ev-section-title { font-size: 32px; }
+  .featured-event-section {
+    margin-top: -36px;
+    padding: 0 20px;
+  }
   .featured-event-card { grid-template-columns: 1fr; }
   .featured-event-image-wrap {
     min-height: 240px;
@@ -971,6 +975,10 @@
 }
 
 @media (max-width: 480px) {
+  .featured-event-section {
+    margin-top: -24px;
+    padding: 0 16px;
+  }
   .event-categories-grid { grid-template-columns: 1fr; }
   .impact-stats-grid { grid-template-columns: 1fr; }
   .events-hero-actions { flex-direction: column; align-items: stretch; }

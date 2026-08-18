@@ -7,16 +7,18 @@ const employmentImageSrc =
     : employmentProjectJobFair?.src;
 
 const Employment = () => {
-  const title = 'SUPPORT';
-  const subtitle = 'CAREER PLACEMENT INFRASTRUCTURE';
-  const quote = 'Bridging the transition from student networks to corporate ecosystems.';
-  const badge = 'PLACEMENT READY';
+  const title = 'Career & Job Placement Support';
+  const subtitle =
+    'Helping young people move from education to meaningful employment.';
+  const quote =
+    'Helping young people move from education to meaningful employment.';
+  const badge = 'EMPLOYMENT SUPPORT';
   const image = employmentImageSrc;
   const paragraphs = [
-        'Securing meaningful jobs with adequate compensation is a consistent struggle for the vast majority of the Indian working class, especially with an expanding educated demographic entering the market annually.',
-        'Because traditional academic paths do not place sufficient importance on practical soft-skills and modern corporate grooming, AIF works closely to bridge this transition gap and create market-ready candidates.',
-        'We actively host soft-skills development workshops, intensive employability seminars, and large-scale Job Drives and Fairs across the country to connect talented youth with localized corporate career avenues.',
-      ];
+    'Finding a suitable job can be challenging for young people, particularly when they lack practical workplace skills, confidence and access to the right opportunities.',
+    'AIF helps bridge this gap through career guidance, soft-skills workshops, employability programmes, Job Drives and Mega Job Fairs. These initiatives prepare candidates for the workplace and connect them with potential employers.',
+    'By bringing job seekers and employers together, we aim to help deserving youth find meaningful employment and take an important step towards a better future.',
+  ];
   return (
     <div className="editorial-portfolio-page">
       <ScrollToTop />

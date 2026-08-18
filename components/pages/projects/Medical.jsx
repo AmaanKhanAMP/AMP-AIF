@@ -2,15 +2,18 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { MEDICAL_RELIEF_IMAGE } from '@/lib/projectAssets';
 
 const Medical = () => {
-  const title = 'MEDICAL AID';
-  const subtitle = 'HEALTHCARE INTERVENTION & OUTREACH';
-  const quote = 'Breaking barriers to provide essential diagnostic and clinical relief.';
-  const badge = 'CRITICAL HEALTH';
+  const title = 'Healthcare Support & Outreach';
+  const subtitle =
+    'Making essential healthcare and medical support available to people in need.';
+  const quote =
+    'Making essential healthcare and medical support available to people in need.';
+  const badge = 'HEALTHCARE SUPPORT';
   const image = MEDICAL_RELIEF_IMAGE;
   const paragraphs = [
-        'Uplifting the underserved and vulnerable through critical medical relief frameworks, bringing timely aid to individuals without any bias of Caste, Community, Creed, or Religion.',
-        'AIF coordinates responsive healthcare networks and positive medical interventions to manage diagnostic camps, establish free essential medicine distribution clinics, and offer immediate emergency financial workflows for critical tertiary care.',
-      ];
+    'For many underprivileged families, the cost of healthcare can become a serious burden. Timely medical support can make a vital difference, especially when families face illness or medical emergencies.',
+    'AIF supports healthcare initiatives such as health check-up camps, free medicine distribution and medical assistance for individuals who require treatment but may not be able to afford it.',
+    'Our efforts aim to help vulnerable individuals and families access essential healthcare with dignity and without discrimination based on caste, community, religion or background.',
+  ];
   return (
     <div className="editorial-portfolio-page">
       <ScrollToTop />
