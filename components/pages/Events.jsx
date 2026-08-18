@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from 'react';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import EventsHero from '@/components/events/EventsHero';
 import FeaturedEvent from '@/components/events/FeaturedEvent';
@@ -9,32 +6,21 @@ import EventCategories from '@/components/events/EventCategories';
 import EventTimeline from '@/components/events/EventTimeline';
 import PastEventsGallery from '@/components/events/PastEventsGallery';
 import VolunteerCTA from '@/components/events/VolunteerCTA';
-import { loadEventsCms } from '@/lib/loadCms';
 import '@/styles/Events.css';
 
-const Events = () => {
-  const [cms, setCms] = useState(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    loadEventsCms().then((data) => {
-      if (!cancelled) setCms(data);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
+const Events = ({
+  featuredEvents,
+  upcomingEvents,
+  pastEvents,
+  upcomingVisible,
+}) => {
   return (
     <div className="events-page-canvas">
       <ScrollToTop />
       <EventsHero />
-      <FeaturedEvent items={cms?.featuredEvents} />
-      <UpcomingEvents
-        events={cms?.upcomingEvents}
-        isVisible={cms?.upcomingVisible}
-      />
-      <PastEventsGallery events={cms?.pastEvents} />
+      <FeaturedEvent items={featuredEvents} />
+      <UpcomingEvents events={upcomingEvents} isVisible={upcomingVisible} />
+      <PastEventsGallery events={pastEvents} />
       <EventTimeline />
       <EventCategories />
       <VolunteerCTA
