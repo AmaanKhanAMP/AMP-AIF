@@ -111,17 +111,17 @@ const Volunteer = () => {
             <span className="volunteer-italic-blue">Count</span>
           </h2>
           
-          <p className="volunteer-mission-callout" style={{ marginTop: '32px', fontSize: '18px', fontWeight: '500', color: '#1d52d4', lineHeight: '1.5' }}>
+          <p className="volunteer-mission-callout">
             Volunteering with AMP India Foundation is more than giving your time—it&apos;s about making a meaningful difference.
           </p>
         </div>
 
         <div className="volunteer-mission-right">
           <div className="volunteer-mission-desc-container">
-            <p className="volunteer-mission-desc" style={{ marginBottom: '20px' }}>
+            <p className="volunteer-mission-desc">
               Whether you&apos;re a student, working professional, entrepreneur, teacher or retiree, your skills can help educate a child, guide a student, support a family or empower a community. Together, we are building a stronger, more inclusive India.
             </p>
-            <p className="volunteer-mission-desc" style={{ fontSize: '16px', color: '#718096', marginBottom: '48px' }}>
+            <p className="volunteer-mission-desc volunteer-mission-desc-muted">
               Everyone has something valuable to offer. Choose a role that matches your interests, skills and availability: Mentor Students, Support Education Programmes, Career &amp; Employability Support, Organise Events, Digital &amp; Creative Volunteering, and Community Outreach.
             </p>
           </div>
