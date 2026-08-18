@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+
 import communityImpactBanner from '@/src/assets/hero-community-impact.png';
 import educationBanner from '@/src/assets/hero-education.png';
 import employmentBanner from '@/src/assets/hero-employment.png';
@@ -52,6 +54,41 @@ const FALLBACK_SLIDES = [
   },
 ];
 
+const HeroSlide = ({ slide, isActive }) => {
+  const fallbackSrc = fallbackByTitle(FALLBACK_SLIDES, slide.titleStart);
+  const { src, onError } = useCmsImageSrc(slide.image, fallbackSrc);
+  const isEducationSlide =
+    src === educationBannerImage ||
+    (typeof src === 'string' && src.includes('hero-education'));
+  const isEmploymentSlide =
+    src === employmentBannerImage ||
+    (typeof src === 'string' && src.includes('hero-employment'));
+
+  return (
+    <div
+      className={`carousel-slide ${isActive ? 'active' : ''} ${isEducationSlide ? 'carousel-slide-education' : ''} ${isEmploymentSlide ? 'carousel-slide-employment' : ''}`}
+      style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.65), rgba(6, 24, 40, 0.75)), url(${src})` }}
+    >
+      {slide.image ? (
+        <img src={slide.image} alt="" onError={onError} hidden />
+      ) : null}
+      <div className="carousel-content-container">
+        <div className="carousel-text-block">
+          <h1 className="carousel-title">
+            {slide.titleStart} <span className="title-blue-accent">{slide.titleAccent}</span>
+          </h1>
+          <p className="carousel-subtitle">{slide.subtitle}</p>
+
+          <div className="carousel-btn-group">
+            <Link href={slide.primaryLink} className="btn-primary-blue">{slide.primaryBtnText}</Link>
+            <Link href={slide.secondaryLink} className="btn-outline-white">{slide.secondaryBtnText}</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HeroCarousel = ({ slides }) => {
   // Server-provided CMS data (array, possibly empty). Fallback only when fetch failed (null/undefined).
   const slidesData = Array.isArray(slides) ? slides : FALLBACK_SLIDES;
@@ -66,7 +103,7 @@ const HeroCarousel = ({ slides }) => {
     if (animating) return;
     setAnimating(true);
     callback();
-    setTimeout(() => setAnimating(false), 800); 
+    setTimeout(() => setAnimating(false), 800);
   };
 
   const handlePrev = () => {
@@ -93,36 +130,13 @@ const HeroCarousel = ({ slides }) => {
 
   return (
     <div className="hero-carousel-wrapper">
-      {slidesData.map((slide, index) => {
-        const isEducationSlide =
-          slide.image === educationBannerImage ||
-          (typeof slide.image === 'string' && slide.image.includes('hero-education'));
-        const isEmploymentSlide =
-          slide.image === employmentBannerImage ||
-          (typeof slide.image === 'string' && slide.image.includes('hero-employment'));
-
-        return (
-        <div
+      {slidesData.map((slide, index) => (
+        <HeroSlide
           key={slide.id}
-          className={`carousel-slide ${index === currentSlide ? 'active' : ''} ${isEducationSlide ? 'carousel-slide-education' : ''} ${isEmploymentSlide ? 'carousel-slide-employment' : ''}`}
-          style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.65), rgba(6, 24, 40, 0.75)), url(${slide.image})` }}
-        >
-          <div className="carousel-content-container">
-            <div className="carousel-text-block">
-              <h1 className="carousel-title">
-                {slide.titleStart} <span className="title-blue-accent">{slide.titleAccent}</span>
-              </h1>
-              <p className="carousel-subtitle">{slide.subtitle}</p>
-              
-              <div className="carousel-btn-group">
-                <Link href={slide.primaryLink} className="btn-primary-blue">{slide.primaryBtnText}</Link>
-                <Link href={slide.secondaryLink} className="btn-outline-white">{slide.secondaryBtnText}</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        );
-      })}
+          slide={slide}
+          isActive={index === currentSlide}
+        />
+      ))}
 
       <button className="nav-arrow arrow-left" onClick={handlePrev} aria-label="Previous slide">
         <span>‹</span>

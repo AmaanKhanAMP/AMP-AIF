@@ -1,5 +1,6 @@
 "use client";
 import EventSection from './EventSection';
+import { fallbackByTitle } from '@/lib/cmsImage';
 import srinagarJobFair from '@/src/assets/past-events/srinagar-job-fair.jpg';
 import kolkataJobFair from '@/src/assets/past-events/kolkata-job-fair.jpg';
 import doddaballapurJobFair from '@/src/assets/past-events/doddaballapur-job-fair.jpg';
@@ -80,7 +81,11 @@ const FALLBACK_PAST_EVENTS = [
 ];
 
 const PastEventsGallery = ({ events }) => {
-  const pastEvents = Array.isArray(events) ? events : FALLBACK_PAST_EVENTS;
+  const rawEvents = Array.isArray(events) ? events : FALLBACK_PAST_EVENTS;
+  const pastEvents = rawEvents.map((event) => ({
+    ...event,
+    fallbackImage: fallbackByTitle(FALLBACK_PAST_EVENTS, event.title),
+  }));
 
   return (
     <EventSection

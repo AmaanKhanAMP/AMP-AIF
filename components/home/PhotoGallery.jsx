@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
 
 import communityRegistrationDrive from '@/src/assets/gallery/community-registration-drive.png';
 import communityEventRegistration from '@/src/assets/gallery/community-event-registration.png';
@@ -88,6 +89,22 @@ const imageVariants = {
   },
 };
 
+const GalleryCardImage = ({ item }) => {
+  const fallbackSrc = fallbackByTitle(FALLBACK_GALLERY, item.title, 'src');
+  const { src, onError } = useCmsImageSrc(item.src, fallbackSrc);
+  return (
+    <Image
+      src={src}
+      alt={item.alt || item.title || 'Gallery image'}
+      fill
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      className="home-gallery-image"
+      loading="lazy"
+      onError={onError}
+    />
+  );
+};
+
 const PhotoGallery = ({ images }) => {
   const galleryImages = Array.isArray(images) ? images : FALLBACK_GALLERY;
 
@@ -128,14 +145,7 @@ const PhotoGallery = ({ images }) => {
               variants={imageVariants}
             >
               <div className="home-gallery-media">
-                <Image
-                  src={item.src}
-                  alt={item.alt || item.title || 'Gallery image'}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="home-gallery-image"
-                  loading="lazy"
-                />
+                <GalleryCardImage item={item} />
               </div>
               <figcaption className="home-gallery-caption">
                 <h3 className="home-gallery-item-title">{item.title}</h3>

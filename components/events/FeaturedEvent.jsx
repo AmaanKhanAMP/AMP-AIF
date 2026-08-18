@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
+import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
 
 const FALLBACK_FEATURED = {
   title: 'Kupwara Mega Job Fair',
@@ -14,13 +15,12 @@ const FALLBACK_FEATURED = {
   imageFit: 'contain',
 };
 
-const FeaturedEvent = ({ items: itemsProp }) => {
-  const items = Array.isArray(itemsProp) ? itemsProp : [FALLBACK_FEATURED];
-  const featuredEvent = items[0];
-
-  // No published featured event — do not resurrect hardcoded fallback
-  if (!featuredEvent) return null;
-
+const FeaturedEventCard = ({ featuredEvent }) => {
+  const fallbackSrc = fallbackByTitle([FALLBACK_FEATURED], featuredEvent.title);
+  const { src: imageSrc, onError: onImageError } = useCmsImageSrc(
+    featuredEvent.image,
+    fallbackSrc
+  );
   const imageContain = featuredEvent.imageFit === 'contain';
 
   return (
@@ -36,9 +36,10 @@ const FeaturedEvent = ({ items: itemsProp }) => {
           className={`featured-event-image-wrap${imageContain ? ' featured-event-image-wrap--contain' : ''}`}
         >
           <img
-            src={featuredEvent.image}
+            src={imageSrc}
             alt={featuredEvent.title}
             loading="lazy"
+            onError={onImageError}
             style={
               imageContain
                 ? { objectFit: 'contain', objectPosition: 'center' }
@@ -73,6 +74,16 @@ const FeaturedEvent = ({ items: itemsProp }) => {
       </motion.article>
     </section>
   );
+};
+
+const FeaturedEvent = ({ items: itemsProp }) => {
+  const items = Array.isArray(itemsProp) ? itemsProp : [FALLBACK_FEATURED];
+  const featuredEvent = items[0];
+
+  // No published featured event — do not resurrect hardcoded fallback
+  if (!featuredEvent) return null;
+
+  return <FeaturedEventCard featuredEvent={featuredEvent} />;
 };
 
 export default FeaturedEvent;

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
 import etpWorkshop from '@/src/assets/employment-training-workshop.png';
 
 const etpImage = typeof etpWorkshop === 'string' ? etpWorkshop : etpWorkshop?.src;
@@ -33,6 +34,14 @@ const FALLBACK_EVENTS = [
     detailsLink: "/events"
   }
 ];
+
+const HomeEventImage = ({ event }) => {
+  const fallbackSrc = fallbackByTitle(FALLBACK_EVENTS, event.title);
+  const { src, onError } = useCmsImageSrc(event.image, fallbackSrc);
+  return (
+    <img src={src} alt={event.title} className="event-row-img" onError={onError} />
+  );
+};
 
 const Event = ({ events }) => {
   const eventsData = Array.isArray(events) ? events : FALLBACK_EVENTS;
@@ -90,7 +99,7 @@ const Event = ({ events }) => {
               
               {/* Left Image Thumbnail */}
               <div className="event-thumbnail-box">
-                <img src={event.image} alt={event.title} className="event-row-img" />
+                <HomeEventImage event={event} />
               </div>
 
               {/* Central Details */}

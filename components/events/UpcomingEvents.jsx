@@ -1,6 +1,7 @@
 "use client";
 
 import EventSection from './EventSection';
+import { fallbackByTitle } from '@/lib/cmsImage';
 import medicalCamp from '@/src/assets/medical-relief-camp.png';
 import trainingWorkshop from '@/src/assets/employment-training-workshop.png';
 import mentorshipAgra from '@/src/assets/mentorship-agra-chapter.png';
@@ -75,7 +76,11 @@ const FALLBACK_UPCOMING = [
 ];
 
 const UpcomingEvents = ({ events, isVisible = true }) => {
-  const upcomingEvents = Array.isArray(events) ? events : FALLBACK_UPCOMING;
+  const rawEvents = Array.isArray(events) ? events : FALLBACK_UPCOMING;
+  const upcomingEvents = rawEvents.map((event) => ({
+    ...event,
+    fallbackImage: fallbackByTitle(FALLBACK_UPCOMING, event.title),
+  }));
 
   if (!isVisible) return null;
 

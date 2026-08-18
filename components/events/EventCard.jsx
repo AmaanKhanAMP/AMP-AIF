@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, MapPin } from 'lucide-react';
+import { useCmsImageSrc } from '@/lib/cmsImage';
 
 const DEFAULT_DESCRIPTION =
   'A memorable AMP India Foundation event bringing communities together for lasting impact.';
@@ -22,6 +23,10 @@ const EventCard = ({
   const imageStyle = event.imagePosition
     ? { objectPosition: event.imagePosition }
     : undefined;
+  const { src: imageSrc, onError: onImageError } = useCmsImageSrc(
+    event.image,
+    event.fallbackImage
+  );
 
   return (
     <motion.article
@@ -34,9 +39,10 @@ const EventCard = ({
     >
       <div className="event-card-image">
         <img
-          src={event.image}
+          src={imageSrc}
           alt={event.title}
           loading="lazy"
+          onError={onImageError}
           style={imageStyle}
         />
         {event.category ? (

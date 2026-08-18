@@ -2,6 +2,8 @@
 
 import { useState, useRef } from 'react';
 
+import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+
 import etpImage from '@/src/assets/home-project-etp.png';
 import megaJobFairImage from '@/src/assets/home-project-mega-job-fair.png';
 import careerGuidanceImage from '@/src/assets/home-project-career-guidance.png';
@@ -31,6 +33,14 @@ const FALLBACK_PROJECTS = [
     title: 'Education Support',
   },
 ];
+
+const ProjectCardImage = ({ project }) => {
+  const fallbackSrc = fallbackByTitle(FALLBACK_PROJECTS, project.title);
+  const { src, onError } = useCmsImageSrc(project.image, fallbackSrc);
+  return (
+    <img src={src} alt={project.title} className="project-img" onError={onError} />
+  );
+};
 
 const Projects = ({ projects }) => {
   const projectsData = Array.isArray(projects) ? projects : FALLBACK_PROJECTS;
@@ -69,7 +79,7 @@ const Projects = ({ projects }) => {
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
               >
-                <img src={project.image} alt={project.title} className="project-img" />
+                <ProjectCardImage project={project} />
                 <div className="project-hover-overlay">
                   <div className="overlay-content">
                     <p className="project-description-text">{project.title}</p>
