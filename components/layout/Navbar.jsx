@@ -85,7 +85,7 @@ const Navbar = ({ settings, items }) => {
         
         {/* AMP India Foundation Logo Section */}
         <div className="navbar-brand-amp">
-          <Link href={logoLink} prefetch={false} onClick={handleLinkClick}>
+          <Link href={logoLink} onClick={handleLinkClick}>
             <img src={logoSrc} className="amp-logo" alt={logoAlt} />
           </Link>
         </div>
@@ -124,7 +124,6 @@ const Navbar = ({ settings, items }) => {
                   >
                     <Link
                       href={item.href || '#'}
-                      prefetch={false}
                       className="dropdown-toggle"
                       onClick={(e) => handleDropdownToggle(e, item)}
                       aria-expanded={isExpanded}
@@ -144,7 +143,7 @@ const Navbar = ({ settings, items }) => {
                     >
                       {item.children.map((child) => (
                         <li key={child.id}>
-                          <Link href={child.href || '#'} prefetch={false} onClick={handleLinkClick}>
+                          <Link href={child.href || '#'} onClick={handleLinkClick}>
                             {child.label}
                           </Link>
                         </li>
@@ -156,7 +155,7 @@ const Navbar = ({ settings, items }) => {
 
               return (
                 <li key={item.id}>
-                  <Link href={item.href || '#'} prefetch={false} onClick={handleLinkClick}>
+                  <Link href={item.href || '#'} onClick={handleLinkClick}>
                     {item.label}
                   </Link>
                 </li>
