@@ -69,6 +69,34 @@ object-fit:contain;
   box-sizing: border-box;
 }
 
+/* Instant feedback while soft-navigating to slow force-dynamic CMS pages */
+.route-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 1100;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.route-loading-bar {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, #2b5ca5, #1190ff);
+  animation: route-loading-slide 1.1s ease-in-out infinite;
+}
+
+@keyframes route-loading-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
 .navbar-container {
   max-width: 1240px;
   margin: 0 auto;
@@ -751,12 +779,18 @@ object-fit:contain;
   display: flex;
   align-items: center;
   z-index: 1;
+  /* Slides overlap the absolute navbar band (top: 50px). Never steal nav clicks. */
+  pointer-events: none;
 }
 
 .carousel-slide.active {
   opacity: 1;
   visibility: visible;
   z-index: 2;
+}
+
+.carousel-slide .carousel-btn-group a {
+  pointer-events: auto;
 }
 
 /* Education slide: keep the student's face in frame on cover crop */
@@ -896,6 +930,7 @@ object-fit:contain;
   align-items: center;
   justify-content: center;
   transition: background-color 0.25s ease, border-color 0.25s ease;
+  pointer-events: auto;
 }
 
 .nav-arrow span {
@@ -927,6 +962,7 @@ object-fit:contain;
   display: flex;
   gap: 10px;
   z-index: 10;
+  pointer-events: auto;
 }
 
 .indicator-dot {

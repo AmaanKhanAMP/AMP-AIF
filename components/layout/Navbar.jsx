@@ -8,7 +8,7 @@ import { resolveSiteAssetUrl } from '@/lib/contentApi';
 const FALLBACK_NAVBAR = {
   logo_url: '/assets/logo.png',
   logo_alt: 'AMP Logo',
-  logo_link: '/',
+  logo_link: '/home',
 };
 
 const FALLBACK_ITEMS = [
@@ -85,7 +85,7 @@ const Navbar = ({ settings, items }) => {
         
         {/* AMP India Foundation Logo Section */}
         <div className="navbar-brand-amp">
-          <Link href={logoLink} onClick={handleLinkClick}>
+          <Link href={logoLink} prefetch={false} onClick={handleLinkClick}>
             <img src={logoSrc} className="amp-logo" alt={logoAlt} />
           </Link>
         </div>
@@ -124,6 +124,7 @@ const Navbar = ({ settings, items }) => {
                   >
                     <Link
                       href={item.href || '#'}
+                      prefetch={false}
                       className="dropdown-toggle"
                       onClick={(e) => handleDropdownToggle(e, item)}
                       aria-expanded={isExpanded}
@@ -143,7 +144,7 @@ const Navbar = ({ settings, items }) => {
                     >
                       {item.children.map((child) => (
                         <li key={child.id}>
-                          <Link href={child.href || '#'} onClick={handleLinkClick}>
+                          <Link href={child.href || '#'} prefetch={false} onClick={handleLinkClick}>
                             {child.label}
                           </Link>
                         </li>
@@ -155,7 +156,7 @@ const Navbar = ({ settings, items }) => {
 
               return (
                 <li key={item.id}>
-                  <Link href={item.href || '#'} onClick={handleLinkClick}>
+                  <Link href={item.href || '#'} prefetch={false} onClick={handleLinkClick}>
                     {item.label}
                   </Link>
                 </li>
