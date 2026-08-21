@@ -15,7 +15,6 @@ const FALLBACK_UPCOMING = [
   {
     id: 1,
     title: 'Kupwara Mega Job Fair',
-    category: 'Employment',
     date: '22 August 2026',
     venue: 'Kupwara, Jammu & Kashmir',
     description:
@@ -26,7 +25,6 @@ const FALLBACK_UPCOMING = [
   {
     id: 2,
     title: 'National Mega Job Fair & Placement Drive',
-    category: 'Employment',
     date: '12 Aug 2026',
     venue: 'Mumbai',
     description:
@@ -36,7 +34,6 @@ const FALLBACK_UPCOMING = [
   {
     id: 3,
     title: 'Free Medical Camp & Health Screening',
-    category: 'Medical Camp',
     date: '22 Aug 2026',
     venue: 'Hyderabad',
     description:
@@ -46,7 +43,6 @@ const FALLBACK_UPCOMING = [
   {
     id: 4,
     title: 'Vocational Skill Development Bootcamp',
-    category: 'Skill Development',
     date: '05 Sep 2026',
     venue: 'Bengaluru',
     description:
@@ -56,7 +52,6 @@ const FALLBACK_UPCOMING = [
   {
     id: 5,
     title: 'Student Mentorship & Career Guidance Summit',
-    category: 'Career Guidance',
     date: '14 Oct 2026',
     venue: 'Pune',
     description:
@@ -66,7 +61,6 @@ const FALLBACK_UPCOMING = [
   {
     id: 6,
     title: 'Community Outreach & Upliftment Drive',
-    category: 'Community Outreach',
     date: '12 Dec 2026',
     venue: 'Kolkata',
     description:

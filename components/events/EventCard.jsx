@@ -45,9 +45,6 @@ const EventCard = ({
           onError={onImageError}
           style={imageStyle}
         />
-        {event.category ? (
-          <span className="event-card-category">{event.category}</span>
-        ) : null}
       </div>
 
       <div className="event-card-body">

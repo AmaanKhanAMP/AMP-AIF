@@ -21,7 +21,6 @@ const FALLBACK_PAST_EVENTS = [
   {
     id: 1,
     title: "AMP's 2nd Srinagar, Kashmir Job Fair",
-    category: 'Employment',
     date: '30 August 2025',
     venue: 'Srinagar, Jammu & Kashmir',
     description:
@@ -31,7 +30,6 @@ const FALLBACK_PAST_EVENTS = [
   {
     id: 2,
     title: 'AMP Kolkata Job Fair',
-    category: 'Employment',
     date: '23 August 2025',
     venue: 'Kolkata, West Bengal',
     description:
@@ -41,7 +39,6 @@ const FALLBACK_PAST_EVENTS = [
   {
     id: 3,
     title: 'AMP Mega Job Fair in Doddaballapur',
-    category: 'Employment',
     date: '12 April 2025',
     venue: 'Doddaballapur, Karnataka',
     description:
@@ -51,7 +48,6 @@ const FALLBACK_PAST_EVENTS = [
   {
     id: 4,
     title: 'AMP Mega Job Fair in Nanded',
-    category: 'Employment',
     date: '11 January 2025',
     venue: 'Nanded, Maharashtra',
     description:
@@ -61,7 +57,6 @@ const FALLBACK_PAST_EVENTS = [
   {
     id: 5,
     title: 'AMP National Talent Search 2025 – Grand Launch',
-    category: 'Education',
     date: '7 December 2024',
     venue: 'Pan India',
     description:
@@ -71,7 +66,6 @@ const FALLBACK_PAST_EVENTS = [
   {
     id: 6,
     title: 'AMP Unity Job Fair at Mumbai 2024',
-    category: 'Employment',
     date: '17 August 2024',
     venue: 'Mumbai, Maharashtra',
     description:

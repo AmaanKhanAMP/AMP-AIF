@@ -8,7 +8,6 @@ const FALLBACK_FEATURED = {
   title: 'Kupwara Mega Job Fair',
   date: '22 August 2026',
   venue: 'Kupwara, Jammu & Kashmir',
-  category: 'Employment',
   description:
     'A Mega Job Fair connecting job seekers with employers across multiple industries and creating opportunities for meaningful employment.',
   image: '/assets/kupwara-mega-job-fair.jpeg',
@@ -46,7 +45,6 @@ const FeaturedEventCard = ({ featuredEvent }) => {
                 : undefined
             }
           />
-          <span className="featured-event-badge">{featuredEvent.category}</span>
         </div>
 
         <div className="featured-event-body">
