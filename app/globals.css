@@ -165,6 +165,29 @@ object-fit:contain;
   transform: rotate(180deg);
 }
 
+/* Projects label + chevron as one visual unit (desktop + mobile) */
+.dropdown-toggle-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.projects-submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -321,8 +344,8 @@ object-fit:contain;
     text-align: center;
   }
 
-  /* Projects toggle: centered as one unit with chevron */
-  .navbar-menu.active .nav-links > li > a.dropdown-toggle {
+  /* Projects label + chevron: centered as one unit */
+  .navbar-menu.active .nav-links > li > .dropdown-toggle-row {
     display: inline-flex;
     width: auto;
     max-width: 100%;
@@ -331,14 +354,23 @@ object-fit:contain;
     gap: 6px;
   }
 
+  .navbar-menu.active .nav-links > li > .dropdown-toggle-row > a.dropdown-toggle {
+    width: auto;
+  }
+
   .navbar-menu.active .nav-links .dropdown .projects-chevron {
     margin-left: 0;
     flex-shrink: 0;
   }
 
+  .navbar-menu.active .nav-links .dropdown .projects-submenu-toggle {
+    color: #2E529A;
+  }
+
   /* Projects + all top-level mobile links: consistent hover/active/focus */
   .navbar-menu.active .nav-links > li > a,
-  .navbar-menu.active .nav-links > li > a.dropdown-toggle {
+  .navbar-menu.active .nav-links > li > .dropdown-toggle-row > a.dropdown-toggle,
+  .navbar-menu.active .nav-links > li > .dropdown-toggle-row > .projects-submenu-toggle {
     transition: opacity 0.25s ease, color 0.25s ease;
   }
 
@@ -348,8 +380,10 @@ object-fit:contain;
   .navbar-menu.active .nav-links > li > a:active,
   .navbar-menu.active .nav-links > li:hover > a,
   .navbar-menu.active .nav-links > li:focus-within > a,
-  .navbar-menu.active .nav-links .dropdown:hover > a.dropdown-toggle,
-  .navbar-menu.active .nav-links .dropdown:focus-within > a.dropdown-toggle {
+  .navbar-menu.active .nav-links .dropdown:hover > .dropdown-toggle-row > a.dropdown-toggle,
+  .navbar-menu.active .nav-links .dropdown:focus-within > .dropdown-toggle-row > a.dropdown-toggle,
+  .navbar-menu.active .nav-links .dropdown:hover > .dropdown-toggle-row > .projects-submenu-toggle,
+  .navbar-menu.active .nav-links .dropdown:focus-within > .dropdown-toggle-row > .projects-submenu-toggle {
     opacity: 0.7;
     color: #1190ff;
   }

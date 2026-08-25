@@ -70,13 +70,8 @@ const Navbar = ({ settings, items }) => {
     setExpandedKey(null);
   };
 
-  const handleDropdownToggle = (e, item) => {
-    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches) {
-      e.preventDefault();
-      setExpandedKey((key) => (key === item.itemKey ? null : item.itemKey));
-      return;
-    }
-    handleLinkClick();
+  const toggleProjectsSubmenu = (itemKey) => {
+    setExpandedKey((key) => (key === itemKey ? null : itemKey));
   };
 
   return (
@@ -122,21 +117,39 @@ const Navbar = ({ settings, items }) => {
                     onMouseEnter={() => setOpenDropdownKey(item.itemKey)}
                     onMouseLeave={() => setOpenDropdownKey(null)}
                   >
-                    <Link
-                      href={item.href || '#'}
-                      className="dropdown-toggle"
-                      onClick={(e) => handleDropdownToggle(e, item)}
-                      aria-expanded={isExpanded}
-                      aria-controls={`submenu-${item.itemKey || item.id}`}
-                    >
-                      {item.label}{' '}
-                      <span
-                        className={`arrow-down projects-chevron${isExpanded ? ' is-open' : ''}`}
-                        aria-hidden="true"
+                    {/*
+                      Projects label navigates to /projects (all viewports).
+                      Chevron alone expands the submenu on mobile — previously
+                      preventDefault on the whole link blocked Projects navigation.
+                    */}
+                    <div className="dropdown-toggle-row">
+                      <Link
+                        href={item.href || '#'}
+                        className="dropdown-toggle"
+                        onClick={handleLinkClick}
                       >
-                        ▼
-                      </span>
-                    </Link>
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        className={`projects-submenu-toggle${isExpanded ? ' is-open' : ''}`}
+                        aria-label={
+                          isExpanded
+                            ? `Collapse ${item.label} submenu`
+                            : `Expand ${item.label} submenu`
+                        }
+                        aria-expanded={isExpanded}
+                        aria-controls={`submenu-${item.itemKey || item.id}`}
+                        onClick={() => toggleProjectsSubmenu(item.itemKey)}
+                      >
+                        <span
+                          className={`arrow-down projects-chevron${isExpanded ? ' is-open' : ''}`}
+                          aria-hidden="true"
+                        >
+                          ▼
+                        </span>
+                      </button>
+                    </div>
                     <ul
                       id={`submenu-${item.itemKey || item.id}`}
                       className={`dropdown-menu ${isHoverOpen || isExpanded ? 'show' : ''}`}
