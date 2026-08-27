@@ -56,9 +56,6 @@ export default function BackToTop() {
       rightPx = Math.max(0, window.innerWidth - fabRect.right);
     }
 
-    // Fine-tune so the control shares the FAB center axis
-    rightPx += 5;
-
     const clearance = Math.max(0, window.innerHeight - fabRect.top) + GAP_FROM_FAB_PX;
 
     button.style.width = `${size}px`;

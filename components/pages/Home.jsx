@@ -12,6 +12,7 @@ const Home = ({
   homeEvents,
   homeGallery,
   testimonials,
+  homeEventsVisible = true,
 }) => {
   return (
     <>
@@ -19,7 +20,7 @@ const Home = ({
       <Preview />
       <Impact />
       <Projects projects={homeProjects} />
-      <Event events={homeEvents} />
+      <Event events={homeEvents} isVisible={homeEventsVisible} />
       <PhotoGallery images={homeGallery} />
       <Testimonial testimonials={testimonials} />
     </>

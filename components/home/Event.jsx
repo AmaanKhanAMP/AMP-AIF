@@ -43,7 +43,7 @@ const HomeEventImage = ({ event }) => {
   );
 };
 
-const Event = ({ events }) => {
+const Event = ({ events, isVisible = true }) => {
   const eventsData = Array.isArray(events) ? events : FALLBACK_EVENTS;
   const [hoveredEventId, setHoveredEventId] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -66,6 +66,8 @@ const Event = ({ events }) => {
 
     return () => observer.disconnect();
   }, []);
+
+  if (!isVisible) return null;
 
   return (
     <section className="events-list-section">
