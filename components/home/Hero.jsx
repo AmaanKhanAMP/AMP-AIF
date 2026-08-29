@@ -75,7 +75,19 @@ const HeroSlide = ({ slide, isActive }) => {
       <div className="carousel-content-container">
         <div className="carousel-text-block">
           <h1 className="carousel-title">
-            {slide.titleStart} <span className="title-blue-accent">{slide.titleAccent}</span>
+            {slide.titleStart?.endsWith(' Through') ? (
+              <>
+                {slide.titleStart.slice(0, -8)}
+                <br aria-hidden="true" />
+                {' Through '}
+                <span className="title-blue-accent">{slide.titleAccent}</span>
+              </>
+            ) : (
+              <>
+                {slide.titleStart}{' '}
+                <span className="title-blue-accent">{slide.titleAccent}</span>
+              </>
+            )}
           </h1>
           <p className="carousel-subtitle">{slide.subtitle}</p>
 
