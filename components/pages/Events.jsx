@@ -13,18 +13,13 @@ import { loadEventsCmsClient } from '@/lib/contentApi';
 import '@/styles/Events.css';
 
 /**
- * upcomingVisible starts as `null` (unknown) — not `true`.
- * Gated sections mount only after CMS returns a real boolean so a
- * CMS-hidden section never paints during the first-load fetch window.
- * Soft-nav stays non-blocking (pages do not await CMS on the server).
+ * CMS payload is `null` until the client fetch finishes.
+ * While pending: do not mount CMS sections (no FALLBACK → API flash).
+ * upcomingVisible is applied only after load: render only when === true.
+ * Soft-nav stays non-blocking — pages do not await CMS on the server.
  */
 const Events = () => {
-  const [cms, setCms] = useState({
-    featuredEvents: null,
-    upcomingEvents: null,
-    pastEvents: null,
-    upcomingVisible: null,
-  });
+  const [cms, setCms] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -41,11 +36,11 @@ const Events = () => {
     <div className="events-page-canvas">
       <ScrollToTop />
       <EventsHero />
-      <FeaturedEvent items={cms.featuredEvents} />
-      {cms.upcomingVisible === true ? (
+      {cms ? <FeaturedEvent items={cms.featuredEvents} /> : null}
+      {cms?.upcomingVisible === true ? (
         <UpcomingEvents events={cms.upcomingEvents} isVisible />
       ) : null}
-      <PastEventsGallery events={cms.pastEvents} />
+      {cms ? <PastEventsGallery events={cms.pastEvents} /> : null}
       <EventTimeline />
       <EventCategories />
       <VolunteerCTA

@@ -43,13 +43,14 @@ const HomeEventImage = ({ event }) => {
   );
 };
 
-const Event = ({ events, isVisible = true }) => {
+const Event = ({ events, isVisible = null }) => {
   const eventsData = Array.isArray(events) ? events : FALLBACK_EVENTS;
   const [hoveredEventId, setHoveredEventId] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    if (isVisible !== true) return undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -65,9 +66,10 @@ const Event = ({ events, isVisible = true }) => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [isVisible]);
 
-  if (!isVisible) return null;
+  // Three-state: only `true` paints. `null`/`false` → nothing (no optimistic show).
+  if (isVisible !== true) return null;
 
   return (
     <section className="events-list-section">

@@ -5,8 +5,6 @@ import { ChatWidget } from '@/chatbot';
 import { loadSiteShellCms } from '@/lib/loadCms';
 import './globals.css';
 
-export const dynamic = 'force-dynamic';
-
 export const metadata = {
   title: 'AMP India Foundation',
   description:

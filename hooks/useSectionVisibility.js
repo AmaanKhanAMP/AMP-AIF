@@ -5,13 +5,14 @@ import { API_URL } from "@/lib/api";
 
 /**
  * Loads Hide/Show visibility for a website section.
- * Fail-open: if the API is unreachable, treat the section as visible.
+ * Three-state while resolving: null → unknown (do not render), then boolean.
+ * Fail-open after the request: unreachable API → true.
  *
  * @param {string} sectionName e.g. "upcoming_events"
- * @returns {{ isVisible: boolean, loading: boolean }}
+ * @returns {{ isVisible: boolean | null, loading: boolean }}
  */
 export default function useSectionVisibility(sectionName) {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

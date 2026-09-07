@@ -69,14 +69,15 @@ const FALLBACK_UPCOMING = [
   },
 ];
 
-const UpcomingEvents = ({ events, isVisible = true }) => {
+const UpcomingEvents = ({ events, isVisible = null }) => {
+  // Three-state: only `true` paints. Unknown/hidden → nothing (no FALLBACK flash).
+  if (isVisible !== true) return null;
+
   const rawEvents = Array.isArray(events) ? events : FALLBACK_UPCOMING;
   const upcomingEvents = rawEvents.map((event) => ({
     ...event,
     fallbackImage: fallbackByTitle(FALLBACK_UPCOMING, event.title),
   }));
-
-  if (!isVisible) return null;
 
   return (
     <EventSection
