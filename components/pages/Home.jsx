@@ -11,14 +11,21 @@ import Event from '@/components/home/Event';
 import { loadHomeCmsClient } from '@/lib/contentApi';
 
 /**
- * CMS payload is `null` until the client fetch finishes.
- * While pending: do not mount CMS sections (no FALLBACK → API flash).
- * homeEventsVisible is three-state once loaded: true | false
- * (unknown while pending because the whole payload is null).
- * Soft-nav stays non-blocking — pages do not await CMS on the server.
+ * Page chrome and non-gated sections always render (CMS content uses
+ * per-section props; components keep local FALLBACK until fetch succeeds).
+ *
+ * Only `home_events` section visibility is three-state (null/true/false).
+ * Soft-nav stays non-blocking — no server CMS await on this route.
  */
 const Home = () => {
-  const [cms, setCms] = useState(null);
+  const [cms, setCms] = useState({
+    heroBanners: null,
+    homeProjects: null,
+    homeEvents: null,
+    homeGallery: null,
+    testimonials: null,
+    homeEventsVisible: null,
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -33,15 +40,15 @@ const Home = () => {
 
   return (
     <>
-      {cms ? <Hero slides={cms.heroBanners} /> : null}
+      <Hero slides={cms.heroBanners} />
       <Preview />
       <Impact />
-      {cms ? <Projects projects={cms.homeProjects} /> : null}
-      {cms?.homeEventsVisible === true ? (
+      <Projects projects={cms.homeProjects} />
+      {cms.homeEventsVisible === true ? (
         <Event events={cms.homeEvents} isVisible />
       ) : null}
-      {cms ? <PhotoGallery images={cms.homeGallery} /> : null}
-      {cms ? <Testimonial testimonials={cms.testimonials} /> : null}
+      <PhotoGallery images={cms.homeGallery} />
+      <Testimonial testimonials={cms.testimonials} />
     </>
   );
 };

@@ -102,7 +102,7 @@ const HeroSlide = ({ slide, isActive }) => {
 };
 
 const HeroCarousel = ({ slides }) => {
-  // Server-provided CMS data (array, possibly empty). Fallback only when fetch failed (null/undefined).
+  // Empty published list → hide hero only. null/undefined (fetch failed) → FALLBACK.
   const slidesData = Array.isArray(slides) ? slides : FALLBACK_SLIDES;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);

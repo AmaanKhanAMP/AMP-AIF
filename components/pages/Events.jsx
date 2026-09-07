@@ -13,13 +13,17 @@ import { loadEventsCmsClient } from '@/lib/contentApi';
 import '@/styles/Events.css';
 
 /**
- * CMS payload is `null` until the client fetch finishes.
- * While pending: do not mount CMS sections (no FALLBACK → API flash).
- * upcomingVisible is applied only after load: render only when === true.
- * Soft-nav stays non-blocking — pages do not await CMS on the server.
+ * Events page always renders; CMS content hydrates into sections via props.
+ * Only `upcoming_events` visibility is three-state (null/true/false).
+ * Soft-nav stays non-blocking — no server CMS await on this route.
  */
 const Events = () => {
-  const [cms, setCms] = useState(null);
+  const [cms, setCms] = useState({
+    featuredEvents: null,
+    upcomingEvents: null,
+    pastEvents: null,
+    upcomingVisible: null,
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -36,11 +40,11 @@ const Events = () => {
     <div className="events-page-canvas">
       <ScrollToTop />
       <EventsHero />
-      {cms ? <FeaturedEvent items={cms.featuredEvents} /> : null}
-      {cms?.upcomingVisible === true ? (
+      <FeaturedEvent items={cms.featuredEvents} />
+      {cms.upcomingVisible === true ? (
         <UpcomingEvents events={cms.upcomingEvents} isVisible />
       ) : null}
-      {cms ? <PastEventsGallery events={cms.pastEvents} /> : null}
+      <PastEventsGallery events={cms.pastEvents} />
       <EventTimeline />
       <EventCategories />
       <VolunteerCTA

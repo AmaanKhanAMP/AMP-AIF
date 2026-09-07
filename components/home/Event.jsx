@@ -51,6 +51,14 @@ const Event = ({ events, isVisible = null }) => {
 
   useEffect(() => {
     if (isVisible !== true) return undefined;
+
+    const node = sectionRef.current;
+    if (!node) {
+      // Mounted and visible — reveal even if the ref attach races one frame.
+      setIsRevealed(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -58,13 +66,10 @@ const Event = ({ events, isVisible = null }) => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: '80px 0px' }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    observer.observe(node);
     return () => observer.disconnect();
   }, [isVisible]);
 
