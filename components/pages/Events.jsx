@@ -13,15 +13,17 @@ import { loadEventsCmsClient } from '@/lib/contentApi';
 import '@/styles/Events.css';
 
 /**
- * Events paints immediately (existing section fallbacks), then swaps in CMS
- * data after mount — same non-blocking soft-nav pattern as Home.
+ * upcomingVisible starts as `null` (unknown) — not `true`.
+ * Gated sections mount only after CMS returns a real boolean so a
+ * CMS-hidden section never paints during the first-load fetch window.
+ * Soft-nav stays non-blocking (pages do not await CMS on the server).
  */
 const Events = () => {
   const [cms, setCms] = useState({
     featuredEvents: null,
     upcomingEvents: null,
     pastEvents: null,
-    upcomingVisible: true,
+    upcomingVisible: null,
   });
 
   useEffect(() => {
@@ -40,7 +42,9 @@ const Events = () => {
       <ScrollToTop />
       <EventsHero />
       <FeaturedEvent items={cms.featuredEvents} />
-      <UpcomingEvents events={cms.upcomingEvents} isVisible={cms.upcomingVisible} />
+      {cms.upcomingVisible === true ? (
+        <UpcomingEvents events={cms.upcomingEvents} isVisible />
+      ) : null}
       <PastEventsGallery events={cms.pastEvents} />
       <EventTimeline />
       <EventCategories />

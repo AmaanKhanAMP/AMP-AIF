@@ -11,8 +11,10 @@ import Event from '@/components/home/Event';
 import { loadHomeCmsClient } from '@/lib/contentApi';
 
 /**
- * Home paints immediately (existing section fallbacks), then swaps in CMS
- * data after mount. Soft navigation must not await Render/localhost CMS.
+ * homeEventsVisible starts as `null` (unknown) — not `true`.
+ * Gated sections mount only after CMS returns a real boolean so a
+ * CMS-hidden section never paints during the first-load fetch window.
+ * Soft-nav stays non-blocking (pages do not await CMS on the server).
  */
 const Home = () => {
   const [cms, setCms] = useState({
@@ -21,7 +23,7 @@ const Home = () => {
     homeEvents: null,
     homeGallery: null,
     testimonials: null,
-    homeEventsVisible: true,
+    homeEventsVisible: null,
   });
 
   useEffect(() => {
@@ -41,7 +43,9 @@ const Home = () => {
       <Preview />
       <Impact />
       <Projects projects={cms.homeProjects} />
-      <Event events={cms.homeEvents} isVisible={cms.homeEventsVisible} />
+      {cms.homeEventsVisible === true ? (
+        <Event events={cms.homeEvents} isVisible />
+      ) : null}
       <PhotoGallery images={cms.homeGallery} />
       <Testimonial testimonials={cms.testimonials} />
     </>

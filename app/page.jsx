@@ -1,6 +1,9 @@
 import Home from '@/components/pages/Home';
 
-/** Home must not await CMS here — that blocked soft navigation to `/`. */
+/**
+ * Soft navigation must not await CMS on the server.
+ * Visibility is resolved in the client Home tree after mount.
+ */
 export default function HomePage() {
   return <Home />;
 }
