@@ -44,7 +44,6 @@ const HomeEventImage = ({ event }) => {
 };
 
 const Event = ({ events, isVisible = null }) => {
-  const eventsData = Array.isArray(events) ? events : FALLBACK_EVENTS;
   const [hoveredEventId, setHoveredEventId] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const sectionRef = useRef(null);
@@ -54,7 +53,6 @@ const Event = ({ events, isVisible = null }) => {
 
     const node = sectionRef.current;
     if (!node) {
-      // Mounted and visible — reveal even if the ref attach races one frame.
       setIsRevealed(true);
       return undefined;
     }
@@ -73,8 +71,14 @@ const Event = ({ events, isVisible = null }) => {
     return () => observer.disconnect();
   }, [isVisible]);
 
-  // Three-state: only `true` paints. `null`/`false` → nothing (no optimistic show).
+  // Section Hide/Show: only explicit true may paint.
   if (isVisible !== true) return null;
+
+  // CMS list must be known. null/undefined = not loaded or fetch failed —
+  // never paint FALLBACK_EVENTS (those rows can match unpublished CMS items).
+  if (!Array.isArray(events)) return null;
+
+  const eventsData = events;
 
   return (
     <section className="events-list-section">

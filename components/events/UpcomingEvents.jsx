@@ -70,11 +70,13 @@ const FALLBACK_UPCOMING = [
 ];
 
 const UpcomingEvents = ({ events, isVisible = null }) => {
-  // Three-state: only `true` paints. Unknown/hidden → nothing (no FALLBACK flash).
+  // Section Hide/Show: only explicit true may paint.
   if (isVisible !== true) return null;
 
-  const rawEvents = Array.isArray(events) ? events : FALLBACK_UPCOMING;
-  const upcomingEvents = rawEvents.map((event) => ({
+  // CMS list must be known — never paint FALLBACK_UPCOMING (can match drafts).
+  if (!Array.isArray(events)) return null;
+
+  const upcomingEvents = events.map((event) => ({
     ...event,
     fallbackImage: fallbackByTitle(FALLBACK_UPCOMING, event.title),
   }));

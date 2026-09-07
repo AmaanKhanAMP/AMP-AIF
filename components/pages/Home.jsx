@@ -14,7 +14,9 @@ import { loadHomeCmsClient } from '@/lib/contentApi';
  * Page chrome and non-gated sections always render (CMS content uses
  * per-section props; components keep local FALLBACK until fetch succeeds).
  *
- * Only `home_events` section visibility is three-state (null/true/false).
+ * `home_events` section visibility is three-state (null/true/false).
+ * Individual home-event cards render only from the CMS published array —
+ * never from FALLBACK (avoids flashing unpublished CMS twins).
  * Soft-nav stays non-blocking — no server CMS await on this route.
  */
 const Home = () => {
@@ -44,7 +46,8 @@ const Home = () => {
       <Preview />
       <Impact />
       <Projects projects={cms.homeProjects} />
-      {cms.homeEventsVisible === true ? (
+      {/* Only mount once CMS published list is known (array, maybe empty). */}
+      {cms.homeEventsVisible === true && Array.isArray(cms.homeEvents) ? (
         <Event events={cms.homeEvents} isVisible />
       ) : null}
       <PhotoGallery images={cms.homeGallery} />

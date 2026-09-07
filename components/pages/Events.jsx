@@ -41,7 +41,7 @@ const Events = () => {
       <ScrollToTop />
       <EventsHero />
       <FeaturedEvent items={cms.featuredEvents} />
-      {cms.upcomingVisible === true ? (
+      {cms.upcomingVisible === true && Array.isArray(cms.upcomingEvents) ? (
         <UpcomingEvents events={cms.upcomingEvents} isVisible />
       ) : null}
       <PastEventsGallery events={cms.pastEvents} />
