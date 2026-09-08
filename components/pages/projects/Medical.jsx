@@ -2,12 +2,11 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { MEDICAL_RELIEF_IMAGE } from '@/lib/projectAssets';
 
 const Medical = () => {
-  const title = 'Healthcare Support & Outreach';
-  const subtitle =
-    'Making essential healthcare and medical support available to people in need.';
+  const title = 'Medical Relief';
+  const subtitle = 'Healthcare Support & Outreach';
   const quote =
     'Making essential healthcare and medical support available to people in need.';
-  const badge = 'HEALTHCARE SUPPORT';
+  const badge = 'MEDICAL RELIEF';
   const image = MEDICAL_RELIEF_IMAGE;
   const paragraphs = [
     'For many underprivileged families, the cost of healthcare can become a serious burden. Timely medical support can make a vital difference, especially when families face illness or medical emergencies.',

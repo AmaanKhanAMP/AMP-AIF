@@ -510,6 +510,13 @@ object-fit:contain;
   color: #2b5ca5; /* Flip colors on hover */
 }
 
+.footer-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
 /* 2. Main Footer Body - Deep Slate Blue Background */
 .footer-main-content {
   background-color: #0b2c48; /* Deep high-contrast blue background */
@@ -736,6 +743,9 @@ object-fit:contain;
   .footer-cta-container {
     flex-direction: column;
     text-align: center;
+  }
+  .footer-cta-actions {
+    justify-content: center;
   }
   .footer-grid-container {
     grid-template-columns: 1fr;

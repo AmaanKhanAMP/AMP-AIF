@@ -7,12 +7,11 @@ const educationImageSrc =
     : educationProjectSeminar?.src;
 
 const Education = () => {
-  const title = 'Building Brighter Futures Through Education';
-  const subtitle =
-    'Every child deserves the opportunity to learn, grow and build a better future.';
+  const title = 'Education';
+  const subtitle = 'Building Brighter Futures Through Education';
   const quote =
     'Every child deserves the opportunity to learn, grow and build a better future.';
-  const badge = 'EDUCATION & SKILL DEVELOPMENT';
+  const badge = 'EDUCATION';
   const image = educationImageSrc;
   const paragraphs = [
     'For many children and young people from underprivileged families, financial hardship and limited access to quality educational support can become major barriers to achieving their potential.',

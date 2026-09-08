@@ -7,9 +7,8 @@ const employmentImageSrc =
     : employmentProjectJobFair?.src;
 
 const Employment = () => {
-  const title = 'Career & Job Placement Support';
-  const subtitle =
-    'Helping young people move from education to meaningful employment.';
+  const title = 'Employment Support';
+  const subtitle = 'Career & Job Placement Support';
   const quote =
     'Helping young people move from education to meaningful employment.';
   const badge = 'EMPLOYMENT SUPPORT';

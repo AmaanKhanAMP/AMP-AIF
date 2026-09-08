@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { LifeBuoy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Reveal, {
@@ -23,6 +24,8 @@ const togetherForChangeImage =
     ? communityImpactBanner
     : communityImpactBanner?.src;
 
+const MotionLink = motion.create(Link);
+
 const btnHover = {
   scale: 1.02,
   y: -3,
@@ -38,6 +41,26 @@ const cardHover = {
 const Support = () => {
   const [copiedFieldToken, setCopiedFieldToken] = useState(null);
   const [copyToast, setCopyToast] = useState(false);
+
+  // Scroll to #bank-details (and other Support anchors) after client navigation.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const scrollToHash = () => {
+      const hash = window.location.hash?.replace(/^#/, '');
+      if (!hash) return;
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const frame = window.requestAnimationFrame(() => {
+      window.setTimeout(scrollToHash, 80);
+    });
+    window.addEventListener('hashchange', scrollToHash);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('hashchange', scrollToHash);
+    };
+  }, []);
 
   const extra = {};
   const bankAccountMatrix = [
@@ -270,6 +293,7 @@ const Support = () => {
           <div className="centerpiece-card-column">
             <Reveal>
               <motion.div
+                id="bank-details"
                 className="frosted-ledger-platform su-lift-card"
                 whileHover={cardHover}
               >
@@ -350,7 +374,7 @@ const Support = () => {
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2.1z" />
                       </svg>
-                      <a href="tel:+912223002600">+91 22 2300 2600</a>
+                      <a href="tel:+918291101312">+91 8291101312</a>
                     </li>
                     <li>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -361,7 +385,7 @@ const Support = () => {
                     </li>
                   </ul>
 
-                  <motion.a
+                  <MotionLink
                     href="/contact"
                     className="donation-help-btn su-interactive-btn"
                     whileHover={btnHover}
@@ -373,7 +397,7 @@ const Support = () => {
                       <path d="M5 12h14" />
                       <path d="M13 6l6 6-6 6" />
                     </svg>
-                  </motion.a>
+                  </MotionLink>
                 </div>
 
                 <div className="donation-help-art">

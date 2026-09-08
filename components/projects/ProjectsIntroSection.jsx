@@ -5,6 +5,7 @@ import {
   Briefcase,
   GraduationCap,
   HeartPulse,
+  UserRound,
   Users,
   Wrench,
 } from 'lucide-react';
@@ -13,10 +14,11 @@ const ease = [0.16, 1, 0.3, 1];
 
 const FOCUS_AREAS = [
   { id: 'education', label: 'Education', icon: GraduationCap },
-  { id: 'employment', label: 'Employment', icon: Briefcase },
-  { id: 'healthcare', label: 'Healthcare', icon: HeartPulse },
-  { id: 'skills', label: 'Skills', icon: Wrench },
-  { id: 'community', label: 'Community', icon: Users },
+  { id: 'medical-relief', label: 'Medical Relief', icon: HeartPulse },
+  { id: 'employment-support', label: 'Employment Support', icon: Briefcase },
+  { id: 'economic-empowerment', label: 'Economic Empowerment', icon: Users },
+  { id: 'student-mentorship', label: 'Student Mentorship', icon: UserRound },
+  { id: 'employment-training', label: 'Employment Training', icon: Wrench },
 ];
 
 const ProjectsIntroSection = () => {

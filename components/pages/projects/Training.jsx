@@ -2,12 +2,11 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { EMPLOYMENT_TRAINING_IMAGE } from '@/lib/projectAssets';
 
 const Training = () => {
-  const title = 'Job Preparation & Professional Skills';
-  const subtitle =
-    'Helping young people become confident and ready for the workplace.';
+  const title = 'Employment Training';
+  const subtitle = 'Job Preparation & Professional Skills';
   const quote =
     'Helping young people become confident and ready for the workplace.';
-  const badge = 'EMPLOYABILITY TRAINING';
+  const badge = 'EMPLOYMENT TRAINING';
   const image = EMPLOYMENT_TRAINING_IMAGE;
   const paragraphs = [
     'Having a qualification is important, but young people also need practical skills and confidence to successfully enter today’s job market.',

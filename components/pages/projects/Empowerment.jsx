@@ -2,12 +2,11 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { ECONOMIC_EMPOWERMENT_IMAGE } from '@/lib/projectAssets';
 
 const Empowerment = () => {
-  const title = 'Financial Independence & Livelihood Support';
-  const subtitle =
-    'Helping people build stable incomes and become financially independent.';
+  const title = 'Economic Empowerment';
+  const subtitle = 'Financial Independence & Livelihood Support';
   const quote =
     'Helping people build stable incomes and become financially independent.';
-  const badge = 'LIVELIHOOD SUPPORT';
+  const badge = 'ECONOMIC EMPOWERMENT';
   const image = ECONOMIC_EMPOWERMENT_IMAGE;
   const paragraphs = [
     'A sustainable source of income can transform the future of an individual and an entire family.',

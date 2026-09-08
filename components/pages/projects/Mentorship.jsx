@@ -2,12 +2,11 @@ import ScrollToTop from '@/components/layout/ScrollToTop';
 import { MENTORSHIP_IMAGE } from '@/lib/projectAssets';
 
 const Mentorship = () => {
-  const title = 'Professional Guidance & Mentorship';
-  const subtitle =
-    'Connecting students with experienced professionals who can guide their future.';
+  const title = 'Student Mentorship';
+  const subtitle = 'Professional Guidance & Mentorship';
   const quote =
     'Connecting students with experienced professionals who can guide their future.';
-  const badge = 'MENTORSHIP';
+  const badge = 'STUDENT MENTORSHIP';
   const image = MENTORSHIP_IMAGE;
   const paragraphs = [
     'Many students, especially those from financially weaker backgrounds, have the ability and ambition to succeed but may not have access to experienced people who can guide them in making the right choices.',

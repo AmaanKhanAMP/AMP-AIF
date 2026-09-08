@@ -84,9 +84,29 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
       <div className="footer-cta-bar">
         <div className="footer-cta-container">
           <h2>{settings.cta_heading}</h2>
-          <Link href={settings.cta_button_link || '/volunteer'} className="cta-button">
-            {settings.cta_button_text}
-          </Link>
+          <div className="footer-cta-actions">
+            <Link
+              href="/support-us#bank-details"
+              className="cta-button"
+              onClick={() => {
+                if (typeof window === 'undefined') return;
+                const onSupport =
+                  window.location.pathname === '/support-us' ||
+                  window.location.pathname === '/support';
+                if (!onSupport) return;
+                window.setTimeout(() => {
+                  document
+                    .getElementById('bank-details')
+                    ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+              }}
+            >
+              DONATE NOW
+            </Link>
+            <Link href={settings.cta_button_link || '/volunteer'} className="cta-button">
+              {settings.cta_button_text}
+            </Link>
+          </div>
         </div>
       </div>
 
