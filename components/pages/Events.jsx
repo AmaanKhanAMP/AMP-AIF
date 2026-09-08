@@ -12,6 +12,7 @@ import VolunteerCTA from '@/components/events/VolunteerCTA';
 import { loadEventsCmsClient } from '@/lib/contentApi';
 import {
   cmsSnapshotEqual,
+  mergeEventsCms,
   peekEventsCms,
   rememberEventsCms,
 } from '@/lib/cmsClientCache';
@@ -34,8 +35,8 @@ function seedEventsCms(initialCms) {
 }
 
 /**
- * Initial CMS from Server Component (first paint). Client revalidate never
- * clears to EMPTY. Upcoming section requires visibility === true + array.
+ * SSR seeds the first paint. Client revalidation merges so a failed
+ * /upcoming-events request cannot unmount the Upcoming Events section.
  */
 const Events = ({ initialCms = null }) => {
   const [cms, setCms] = useState(() => seedEventsCms(initialCms));
@@ -43,7 +44,10 @@ const Events = ({ initialCms = null }) => {
   useEffect(() => {
     if (initialCms && typeof initialCms === 'object') {
       rememberEventsCms(initialCms);
-      setCms((prev) => (cmsSnapshotEqual(prev, initialCms) ? prev : initialCms));
+      setCms((prev) => {
+        const next = mergeEventsCms(prev, initialCms);
+        return cmsSnapshotEqual(prev, next) ? prev : next;
+      });
     }
   }, [initialCms]);
 
@@ -52,7 +56,10 @@ const Events = ({ initialCms = null }) => {
     (async () => {
       const data = await loadEventsCmsClient();
       if (cancelled) return;
-      setCms((prev) => (cmsSnapshotEqual(prev, data) ? prev : data));
+      setCms((prev) => {
+        const next = mergeEventsCms(prev, data);
+        return cmsSnapshotEqual(prev, next) ? prev : next;
+      });
     })();
     return () => {
       cancelled = true;

@@ -11,6 +11,7 @@ import Event from '@/components/home/Event';
 import { loadHomeCmsClient } from '@/lib/contentApi';
 import {
   cmsSnapshotEqual,
+  mergeHomeCms,
   peekHomeCms,
   rememberHomeCms,
 } from '@/lib/cmsClientCache';
@@ -26,8 +27,6 @@ const EMPTY_HOME_CMS = {
 
 function seedHomeCms(initialCms) {
   if (initialCms && typeof initialCms === 'object') {
-    // Only touch browser snapshot APIs in the browser (avoid cross-request
-    // pollution of module memory during SSR).
     if (typeof window !== 'undefined') rememberHomeCms(initialCms);
     return initialCms;
   }
@@ -36,9 +35,8 @@ function seedHomeCms(initialCms) {
 }
 
 /**
- * Initial CMS comes from the Server Component (first paint). Client fetch
- * only updates when the payload changes — never clears back to EMPTY.
- * Section still requires visibility === true and a published events array.
+ * SSR seeds the first paint. Client revalidation merges into existing state so
+ * a failed /home-events request (null) cannot unmount Upcoming Events.
  */
 const Home = ({ initialCms = null }) => {
   const [cms, setCms] = useState(() => seedHomeCms(initialCms));
@@ -46,7 +44,10 @@ const Home = ({ initialCms = null }) => {
   useEffect(() => {
     if (initialCms && typeof initialCms === 'object') {
       rememberHomeCms(initialCms);
-      setCms((prev) => (cmsSnapshotEqual(prev, initialCms) ? prev : initialCms));
+      setCms((prev) => {
+        const next = mergeHomeCms(prev, initialCms);
+        return cmsSnapshotEqual(prev, next) ? prev : next;
+      });
     }
   }, [initialCms]);
 
@@ -55,7 +56,10 @@ const Home = ({ initialCms = null }) => {
     (async () => {
       const data = await loadHomeCmsClient();
       if (cancelled) return;
-      setCms((prev) => (cmsSnapshotEqual(prev, data) ? prev : data));
+      setCms((prev) => {
+        const next = mergeHomeCms(prev, data);
+        return cmsSnapshotEqual(prev, next) ? prev : next;
+      });
     })();
     return () => {
       cancelled = true;
