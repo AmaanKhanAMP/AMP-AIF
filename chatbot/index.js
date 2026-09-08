@@ -9,3 +9,4 @@ export { default as SuggestedQuestions } from './components/SuggestedQuestions';
 export { default as ChatRobot } from './components/ChatRobot';
 export { useChat } from './hooks/useChat';
 export { sendChatMessage } from './services/chatApi';
+export { CHATBOT_ENABLED } from './utils/constants';

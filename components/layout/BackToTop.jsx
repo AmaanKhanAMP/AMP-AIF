@@ -4,11 +4,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { HiChevronUp } from 'react-icons/hi2';
 
 const SHOW_AFTER_PX = 400;
-/** Visual gap between Back to Top and chatbot FAB */
+/** Visual gap between Back to Top and chatbot FAB (when chatbot is enabled) */
 const GAP_FROM_FAB_PX = 26;
 const FALLBACK_FAB_SIZE = 68;
 const FALLBACK_RIGHT_PX = 24;
-const FALLBACK_BOTTOM_PX = 24 + FALLBACK_FAB_SIZE + GAP_FROM_FAB_PX;
+/** Corner inset when the chatbot FAB is not in the DOM */
+const FALLBACK_BOTTOM_PX = 24;
 
 /**
  * Global Back to Top control.

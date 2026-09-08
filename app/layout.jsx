@@ -1,7 +1,7 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
-import { ChatWidget } from '@/chatbot';
+import { ChatWidget, CHATBOT_ENABLED } from '@/chatbot';
 import { loadSiteShellCms } from '@/lib/loadCms';
 import './globals.css';
 
@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
           links={shell.footerLinks}
           focusItems={shell.footerFocus}
         />
-        <ChatWidget />
+        {CHATBOT_ENABLED ? <ChatWidget /> : null}
         <BackToTop />
       </body>
     </html>

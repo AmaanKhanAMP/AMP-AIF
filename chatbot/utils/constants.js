@@ -4,6 +4,13 @@ export const AIF_BLUE_DEEP = '#173A9B';
 export const AIF_BLUE_SOFT = '#E8F0FF';
 export const AIF_BLUE_MIST = '#F5F8FF';
 
+/**
+ * Site-wide chatbot widget flag.
+ * Set to `true` to show the AMP AI Assistant again (no other code changes needed).
+ * While `false`, the widget is not rendered and no chat API calls run from the UI.
+ */
+export const CHATBOT_ENABLED = false;
+
 export const LOGO_SRC = '/assets/logo.png';
 
 export const PHASE1_REPLY =
