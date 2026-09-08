@@ -1,7 +1,6 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
-import CmsWarmup from '@/components/layout/CmsWarmup';
 import { ChatWidget } from '@/chatbot';
 import { loadSiteShellCms } from '@/lib/loadCms';
 import './globals.css';
@@ -18,7 +17,6 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <CmsWarmup />
         <Navbar
           settings={shell.navbarSettings}
           items={shell.navbarItems}

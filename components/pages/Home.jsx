@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Hero from '@/components/home/Hero';
 import Impact from '@/components/home/Impact';
 import Preview from '@/components/home/Preview';
@@ -9,7 +9,11 @@ import PhotoGallery from '@/components/home/PhotoGallery';
 import Testimonial from '@/components/home/Testimonial';
 import Event from '@/components/home/Event';
 import { loadHomeCmsClient } from '@/lib/contentApi';
-import { cmsSnapshotEqual, peekHomeCms } from '@/lib/cmsClientCache';
+import {
+  cmsSnapshotEqual,
+  peekHomeCms,
+  rememberHomeCms,
+} from '@/lib/cmsClientCache';
 
 const EMPTY_HOME_CMS = {
   heroBanners: null,
@@ -20,19 +24,31 @@ const EMPTY_HOME_CMS = {
   homeEventsVisible: null,
 };
 
-/**
- * Soft-nav remounts this client page with empty state. A CMS snapshot is
- * restored in useLayoutEffect (before paint) so Hero / Upcoming Events do
- * not FALLBACK→live or unmount→remount flicker. Background fetch updates
- * only when the payload actually changed. Routes stay free of server CMS awaits.
- */
-const Home = () => {
-  const [cms, setCms] = useState(EMPTY_HOME_CMS);
+function seedHomeCms(initialCms) {
+  if (initialCms && typeof initialCms === 'object') {
+    // Only touch browser snapshot APIs in the browser (avoid cross-request
+    // pollution of module memory during SSR).
+    if (typeof window !== 'undefined') rememberHomeCms(initialCms);
+    return initialCms;
+  }
+  if (typeof window !== 'undefined') return peekHomeCms() ?? EMPTY_HOME_CMS;
+  return EMPTY_HOME_CMS;
+}
 
-  useLayoutEffect(() => {
-    const cached = peekHomeCms();
-    if (cached) setCms(cached);
-  }, []);
+/**
+ * Initial CMS comes from the Server Component (first paint). Client fetch
+ * only updates when the payload changes — never clears back to EMPTY.
+ * Section still requires visibility === true and a published events array.
+ */
+const Home = ({ initialCms = null }) => {
+  const [cms, setCms] = useState(() => seedHomeCms(initialCms));
+
+  useEffect(() => {
+    if (initialCms && typeof initialCms === 'object') {
+      rememberHomeCms(initialCms);
+      setCms((prev) => (cmsSnapshotEqual(prev, initialCms) ? prev : initialCms));
+    }
+  }, [initialCms]);
 
   useEffect(() => {
     let cancelled = false;

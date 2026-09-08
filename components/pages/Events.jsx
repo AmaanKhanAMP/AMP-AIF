@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import EventsHero from '@/components/events/EventsHero';
 import FeaturedEvent from '@/components/events/FeaturedEvent';
@@ -10,7 +10,11 @@ import EventTimeline from '@/components/events/EventTimeline';
 import PastEventsGallery from '@/components/events/PastEventsGallery';
 import VolunteerCTA from '@/components/events/VolunteerCTA';
 import { loadEventsCmsClient } from '@/lib/contentApi';
-import { cmsSnapshotEqual, peekEventsCms } from '@/lib/cmsClientCache';
+import {
+  cmsSnapshotEqual,
+  peekEventsCms,
+  rememberEventsCms,
+} from '@/lib/cmsClientCache';
 import '@/styles/Events.css';
 
 const EMPTY_EVENTS_CMS = {
@@ -20,18 +24,28 @@ const EMPTY_EVENTS_CMS = {
   upcomingVisible: null,
 };
 
-/**
- * Soft-nav remounts this client page with empty state. Snapshot restore in
- * useLayoutEffect keeps Upcoming Events mounted across navigations; fetch
- * only replaces state when CMS data changed. No server CMS await on the route.
- */
-const Events = () => {
-  const [cms, setCms] = useState(EMPTY_EVENTS_CMS);
+function seedEventsCms(initialCms) {
+  if (initialCms && typeof initialCms === 'object') {
+    if (typeof window !== 'undefined') rememberEventsCms(initialCms);
+    return initialCms;
+  }
+  if (typeof window !== 'undefined') return peekEventsCms() ?? EMPTY_EVENTS_CMS;
+  return EMPTY_EVENTS_CMS;
+}
 
-  useLayoutEffect(() => {
-    const cached = peekEventsCms();
-    if (cached) setCms(cached);
-  }, []);
+/**
+ * Initial CMS from Server Component (first paint). Client revalidate never
+ * clears to EMPTY. Upcoming section requires visibility === true + array.
+ */
+const Events = ({ initialCms = null }) => {
+  const [cms, setCms] = useState(() => seedEventsCms(initialCms));
+
+  useEffect(() => {
+    if (initialCms && typeof initialCms === 'object') {
+      rememberEventsCms(initialCms);
+      setCms((prev) => (cmsSnapshotEqual(prev, initialCms) ? prev : initialCms));
+    }
+  }, [initialCms]);
 
   useEffect(() => {
     let cancelled = false;

@@ -1,9 +1,11 @@
 import Events from '@/components/pages/Events';
+import { loadEventsCms } from '@/lib/loadCms';
 
 /**
- * Soft navigation must not await CMS on the server.
- * Visibility is resolved in the client Events tree after mount.
+ * Seed Events CMS on the server so Upcoming Events is in the first HTML
+ * paint. Client revalidates after mount; server fetch is time-bounded.
  */
-export default function EventsPage() {
-  return <Events />;
+export default async function EventsPage() {
+  const initialCms = await loadEventsCms();
+  return <Events initialCms={initialCms} />;
 }
