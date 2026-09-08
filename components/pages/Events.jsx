@@ -35,8 +35,9 @@ function seedEventsCms(initialCms) {
 }
 
 /**
- * SSR seeds the first paint. Client revalidation merges so a failed
- * /upcoming-events request cannot unmount the Upcoming Events section.
+ * Paints immediately on soft-nav. CMS is loaded client-side so Vercel
+ * navigation is not blocked on Render. Session snapshot seeds return visits;
+ * merge keeps published lists from being wiped by a failed revalidation.
  */
 const Events = ({ initialCms = null }) => {
   const [cms, setCms] = useState(() => seedEventsCms(initialCms));
@@ -58,7 +59,9 @@ const Events = ({ initialCms = null }) => {
       if (cancelled) return;
       setCms((prev) => {
         const next = mergeEventsCms(prev, data);
-        return cmsSnapshotEqual(prev, next) ? prev : next;
+        if (cmsSnapshotEqual(prev, next)) return prev;
+        rememberEventsCms(next);
+        return next;
       });
     })();
     return () => {
