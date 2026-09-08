@@ -44,18 +44,17 @@ const HomeEventImage = ({ event }) => {
 };
 
 const Event = ({ events, isVisible = null }) => {
+  // Start revealed: cinematic opacity:0 until IntersectionObserver was itself
+  // a disappear→appear flicker when the section mounted after CMS load.
   const [hoveredEventId, setHoveredEventId] = useState(null);
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(true);
   const sectionRef = useRef(null);
 
   useEffect(() => {
     if (isVisible !== true) return undefined;
 
     const node = sectionRef.current;
-    if (!node) {
-      setIsRevealed(true);
-      return undefined;
-    }
+    if (!node) return undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

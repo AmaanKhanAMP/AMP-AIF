@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import EventsHero from '@/components/events/EventsHero';
 import FeaturedEvent from '@/components/events/FeaturedEvent';
@@ -10,26 +10,35 @@ import EventTimeline from '@/components/events/EventTimeline';
 import PastEventsGallery from '@/components/events/PastEventsGallery';
 import VolunteerCTA from '@/components/events/VolunteerCTA';
 import { loadEventsCmsClient } from '@/lib/contentApi';
+import { cmsSnapshotEqual, peekEventsCms } from '@/lib/cmsClientCache';
 import '@/styles/Events.css';
 
+const EMPTY_EVENTS_CMS = {
+  featuredEvents: null,
+  upcomingEvents: null,
+  pastEvents: null,
+  upcomingVisible: null,
+};
+
 /**
- * Events page always renders; CMS content hydrates into sections via props.
- * Only `upcoming_events` visibility is three-state (null/true/false).
- * Soft-nav stays non-blocking — no server CMS await on this route.
+ * Soft-nav remounts this client page with empty state. Snapshot restore in
+ * useLayoutEffect keeps Upcoming Events mounted across navigations; fetch
+ * only replaces state when CMS data changed. No server CMS await on the route.
  */
 const Events = () => {
-  const [cms, setCms] = useState({
-    featuredEvents: null,
-    upcomingEvents: null,
-    pastEvents: null,
-    upcomingVisible: null,
-  });
+  const [cms, setCms] = useState(EMPTY_EVENTS_CMS);
+
+  useLayoutEffect(() => {
+    const cached = peekEventsCms();
+    if (cached) setCms(cached);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const data = await loadEventsCmsClient();
-      if (!cancelled) setCms(data);
+      if (cancelled) return;
+      setCms((prev) => (cmsSnapshotEqual(prev, data) ? prev : data));
     })();
     return () => {
       cancelled = true;

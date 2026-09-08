@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import Hero from '@/components/home/Hero';
 import Impact from '@/components/home/Impact';
 import Preview from '@/components/home/Preview';
@@ -9,31 +9,37 @@ import PhotoGallery from '@/components/home/PhotoGallery';
 import Testimonial from '@/components/home/Testimonial';
 import Event from '@/components/home/Event';
 import { loadHomeCmsClient } from '@/lib/contentApi';
+import { cmsSnapshotEqual, peekHomeCms } from '@/lib/cmsClientCache';
+
+const EMPTY_HOME_CMS = {
+  heroBanners: null,
+  homeProjects: null,
+  homeEvents: null,
+  homeGallery: null,
+  testimonials: null,
+  homeEventsVisible: null,
+};
 
 /**
- * Page chrome and non-gated sections always render (CMS content uses
- * per-section props; components keep local FALLBACK until fetch succeeds).
- *
- * `home_events` section visibility is three-state (null/true/false).
- * Individual home-event cards render only from the CMS published array —
- * never from FALLBACK (avoids flashing unpublished CMS twins).
- * Soft-nav stays non-blocking — no server CMS await on this route.
+ * Soft-nav remounts this client page with empty state. A CMS snapshot is
+ * restored in useLayoutEffect (before paint) so Hero / Upcoming Events do
+ * not FALLBACK→live or unmount→remount flicker. Background fetch updates
+ * only when the payload actually changed. Routes stay free of server CMS awaits.
  */
 const Home = () => {
-  const [cms, setCms] = useState({
-    heroBanners: null,
-    homeProjects: null,
-    homeEvents: null,
-    homeGallery: null,
-    testimonials: null,
-    homeEventsVisible: null,
-  });
+  const [cms, setCms] = useState(EMPTY_HOME_CMS);
+
+  useLayoutEffect(() => {
+    const cached = peekHomeCms();
+    if (cached) setCms(cached);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const data = await loadHomeCmsClient();
-      if (!cancelled) setCms(data);
+      if (cancelled) return;
+      setCms((prev) => (cmsSnapshotEqual(prev, data) ? prev : data));
     })();
     return () => {
       cancelled = true;
@@ -46,7 +52,6 @@ const Home = () => {
       <Preview />
       <Impact />
       <Projects projects={cms.homeProjects} />
-      {/* Only mount once CMS published list is known (array, maybe empty). */}
       {cms.homeEventsVisible === true && Array.isArray(cms.homeEvents) ? (
         <Event events={cms.homeEvents} isVisible />
       ) : null}

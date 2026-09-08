@@ -102,14 +102,17 @@ const HeroSlide = ({ slide, isActive }) => {
 };
 
 const HeroCarousel = ({ slides }) => {
-  // Empty published list → hide hero only. null/undefined (fetch failed) → FALLBACK.
+  // Empty published list → hide hero only. null/undefined → FALLBACK only when
+  // there is no CMS snapshot yet (snapshot restore avoids FALLBACK→CMS flash).
   const slidesData = Array.isArray(slides) ? slides : FALLBACK_SLIDES;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);
+  // Preserve slide index across CMS refresh when length is unchanged.
+  const slideCount = slidesData.length;
 
   useEffect(() => {
-    if (currentSlide >= slidesData.length) setCurrentSlide(0);
-  }, [slidesData.length, currentSlide]);
+    if (currentSlide >= slideCount) setCurrentSlide(0);
+  }, [slideCount, currentSlide]);
 
   const triggerAnimation = (callback) => {
     if (animating) return;
@@ -120,25 +123,25 @@ const HeroCarousel = ({ slides }) => {
 
   const handlePrev = () => {
     triggerAnimation(() => {
-      setCurrentSlide((prev) => (prev === 0 ? slidesData.length - 1 : prev - 1));
+      setCurrentSlide((prev) => (prev === 0 ? slideCount - 1 : prev - 1));
     });
   };
 
   const handleNext = () => {
     triggerAnimation(() => {
-      setCurrentSlide((prev) => (prev === slidesData.length - 1 ? 0 : prev + 1));
+      setCurrentSlide((prev) => (prev === slideCount - 1 ? 0 : prev + 1));
     });
   };
 
   useEffect(() => {
-    if (!slidesData.length) return;
+    if (!slideCount) return;
     const timer = setInterval(() => {
       handleNext();
     }, 6000);
     return () => clearInterval(timer);
-  }, [currentSlide, animating, slidesData.length]);
+  }, [currentSlide, animating, slideCount]);
 
-  if (!slidesData.length) return null;
+  if (!slideCount) return null;
 
   return (
     <div className="hero-carousel-wrapper">
