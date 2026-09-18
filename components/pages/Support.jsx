@@ -24,6 +24,10 @@ const togetherForChangeImage =
     ? communityImpactBanner
     : communityImpactBanner?.src;
 
+/* Temporarily hidden on Support Us — set to true to restore these options. */
+const SHOW_ONLINE_DONATION = false;
+const SHOW_UPI_DONATION = false;
+
 const MotionLink = motion.create(Link);
 
 const btnHover = {
@@ -153,6 +157,7 @@ const Support = () => {
             </Reveal>
 
             <RevealGroup className="donation-timeline" stagger={0.14}>
+              {SHOW_ONLINE_DONATION && (
               <RevealItem className="donation-timeline-item">
                 <div className="donation-timeline-rail" aria-hidden="true">
                   <motion.div className="donation-timeline-dot su-timeline-icon" variants={timelineIconVariants}>
@@ -189,7 +194,9 @@ const Support = () => {
                   </motion.a>
                 </div>
               </RevealItem>
+              )}
 
+              {SHOW_UPI_DONATION && (
               <RevealItem className="donation-timeline-item">
                 <div className="donation-timeline-rail" aria-hidden="true">
                   <motion.div className="donation-timeline-dot su-timeline-icon" variants={timelineIconVariants}>
@@ -229,6 +236,7 @@ const Support = () => {
                   </div>
                 </div>
               </RevealItem>
+              )}
 
               <RevealItem className="donation-timeline-item donation-timeline-item-last">
                 <div className="donation-timeline-rail" aria-hidden="true">
@@ -243,7 +251,7 @@ const Support = () => {
                   </motion.div>
                 </div>
                 <div className="donation-timeline-body">
-                  <h3>4. Cheque / DD</h3>
+                  <h3>Cheque / DD</h3>
                   <p className="donation-cheque-line">
                     <span className="donation-cheque-label">Cheque/DD in favour of:</span>{" "}
                     <strong>Association of Muslim Professionals</strong>

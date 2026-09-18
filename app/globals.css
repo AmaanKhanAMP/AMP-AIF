@@ -70,12 +70,15 @@ object-fit:contain;
 }
 
 .navbar-container {
-  max-width: 1240px;
+  width: 100%;
+  max-width: min(1240px, 100%);
+  min-width: 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 20px;
+  box-sizing: border-box;
 }
 
 /* Crisp White Logo Configuration (Zero Background) */
@@ -463,25 +466,32 @@ object-fit:contain;
 
 .amp-footer {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
   font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
-
 }
 
 /* 1. Top CTA Banner Styling - Royal Blue Base */
 .footer-cta-bar {
   background-color: #2b5ca5; /* Royal Blue theme color */
   padding: 30px 20px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-cta-container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: min(1200px, 100%);
+  min-width: 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
+  box-sizing: border-box;
 }
 
 .footer-cta-container h2 {
@@ -490,6 +500,9 @@ object-fit:contain;
   font-weight: 600;
   margin: 0;
   letter-spacing: 0.5px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .cta-button {
@@ -502,6 +515,8 @@ object-fit:contain;
   text-decoration: none;
   letter-spacing: 1px;
   border-radius: 3px;
+  max-width: 100%;
+  box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
@@ -521,15 +536,26 @@ object-fit:contain;
 .footer-main-content {
   background-color: #0b2c48; /* Deep high-contrast blue background */
   padding: 60px 20px;
+  max-width: 100%;
+  box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-grid-container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: min(1200px, 100%);
+  min-width: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 40px;
+  box-sizing: border-box;
+}
+
+.footer-column {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer-column h3 {
@@ -655,6 +681,9 @@ object-fit:contain;
   font-size: 13px;
   margin: 0;
   line-height: 1.4;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Follow Us — under Get In Touch */
@@ -709,22 +738,30 @@ object-fit:contain;
 .footer-bottom-bar {
   background-color: #061828; /* Deep dark blue boundary tone */
   padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-bottom-container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: min(1200px, 100%);
+  min-width: 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  box-sizing: border-box;
 }
 
 .copyright-text {
   color: #b0c4de;
   font-size: 12px;
   margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .highlight-text {
@@ -735,7 +772,7 @@ object-fit:contain;
 /* Responsive Media Queries */
 @media (max-width: 992px) {
   .footer-grid-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -6963,12 +7000,17 @@ html {
 /* ================= TERMS & CONDITIONS PAGE ================= */
 .terms-page {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  box-sizing: border-box;
   background: #f5f8ff;
 }
 
 .terms-hero {
   position: relative;
   width: 100%;
+  max-width: 100%;
   min-height: 42vh;
   display: flex;
   align-items: center;
@@ -6976,6 +7018,7 @@ html {
   padding: 110px 24px 88px;
   overflow: hidden;
   text-align: center;
+  box-sizing: border-box;
   background: linear-gradient(135deg, #173A9B 0%, #1E4FD8 42%, #2F5FEA 78%, #4B7BFF 100%);
 }
 
@@ -7036,13 +7079,19 @@ html {
 .terms-hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 760px;
+  width: 100%;
+  max-width: min(760px, 100%);
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .terms-breadcrumb {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  max-width: 100%;
   margin-bottom: 22px;
   font-size: 13px;
   font-weight: 600;
@@ -7068,26 +7117,39 @@ html {
   letter-spacing: -0.03em;
   color: #ffffff;
   text-shadow: 0 8px 28px rgba(15, 23, 42, 0.25);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-hero-subtitle {
   margin: 0 auto;
-  max-width: 560px;
+  max-width: min(560px, 100%);
   font-size: clamp(15px, 2vw, 17px);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.88);
   font-weight: 400;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-content-section {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: 40px 24px 100px;
+  box-sizing: border-box;
   background: linear-gradient(180deg, #f5f8ff 0%, #eef3ff 45%, #f8fafc 100%);
 }
 
 .terms-content-card {
-  max-width: 1100px;
+  width: 100%;
+  max-width: min(1100px, 100%);
+  min-width: 0;
   margin: 0 auto;
   padding: 64px 70px;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   background: #ffffff;
   border-radius: 20px;
   box-shadow:
@@ -7096,6 +7158,10 @@ html {
 }
 
 .terms-document-title {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 0 0 12px;
   padding-bottom: 20px;
   font-size: clamp(28px, 3.5vw, 34px);
@@ -7104,8 +7170,8 @@ html {
   letter-spacing: -0.02em;
   line-height: 1.25;
   border-bottom: 3px solid #2F5FEA;
-  display: inline-block;
-  width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-updated {
@@ -7133,6 +7199,8 @@ html {
   font-size: 17px;
   line-height: 1.8;
   color: #4B5563;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-general-heading {
@@ -7173,6 +7241,8 @@ html {
   color: #1E4FD8;
   letter-spacing: -0.01em;
   line-height: 1.35;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-section p {
@@ -7180,6 +7250,8 @@ html {
   font-size: 17px;
   line-height: 1.8;
   color: #4B5563;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-section p:last-child {
@@ -7199,6 +7271,8 @@ html {
   padding-left: 22px;
   font-size: 17px;
   line-height: 1.8;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-list li::before {
@@ -7234,12 +7308,19 @@ html {
   font-size: 17px;
   line-height: 1.8;
   color: #4B5563;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-help-card {
-  max-width: 1100px;
+  width: 100%;
+  max-width: min(1100px, 100%);
+  min-width: 0;
   margin: 32px auto 0;
   padding: 40px 48px;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   background: linear-gradient(135deg, #e8f0ff 0%, #f0f5ff 100%);
   border-radius: 20px;
   box-shadow: 0 12px 36px rgba(47, 95, 234, 0.08);
@@ -7273,6 +7354,9 @@ html {
   font-size: 15px;
   line-height: 1.65;
   color: #334155;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .terms-help-details span {
@@ -7289,6 +7373,8 @@ html {
   color: #0f172a;
   text-decoration: none;
   font-weight: 600;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   transition: color 0.2s ease;
 }
 
@@ -7314,20 +7400,20 @@ html {
 @media (max-width: 600px) {
   .terms-hero {
     min-height: auto;
-    padding: 96px 20px 72px;
+    padding: 96px 16px 64px;
   }
 
   .terms-hero-ring {
-    width: 320px;
-    height: 320px;
+    width: 280px;
+    height: 280px;
   }
 
   .terms-content-section {
-    padding: 28px 16px 72px;
+    padding: 24px 12px 64px;
   }
 
   .terms-content-card {
-    padding: 36px 22px;
+    padding: 28px 16px;
     border-radius: 16px;
   }
 
@@ -7354,6 +7440,30 @@ html {
   }
 
   .terms-help-card h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .terms-hero {
+    padding: 88px 12px 56px;
+  }
+
+  .terms-hero-title {
+    font-size: 30px;
+  }
+
+  .terms-content-section {
+    padding: 20px 10px 56px;
+  }
+
+  .terms-content-card,
+  .terms-help-card {
+    padding: 24px 14px;
+  }
+
+  .terms-document-title,
+  .terms-general-heading {
     font-size: 22px;
   }
 }
