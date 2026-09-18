@@ -487,9 +487,10 @@ object-fit:contain;
   min-width: 0;
   margin: 0 auto;
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 20px;
   box-sizing: border-box;
 }
@@ -500,9 +501,9 @@ object-fit:contain;
   font-weight: 600;
   margin: 0;
   letter-spacing: 0.5px;
+  flex: 1 1 0%;
   min-width: 0;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .cta-button {
@@ -517,6 +518,8 @@ object-fit:contain;
   border-radius: 3px;
   max-width: 100%;
   box-sizing: border-box;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.3s ease;
 }
 
@@ -527,7 +530,9 @@ object-fit:contain;
 
 .footer-cta-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
   align-items: center;
   gap: 12px;
 }
@@ -779,9 +784,17 @@ object-fit:contain;
 @media (max-width: 600px) {
   .footer-cta-container {
     flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
     text-align: center;
   }
+  .footer-cta-container h2 {
+    flex: 1 1 auto;
+    width: 100%;
+  }
   .footer-cta-actions {
+    flex-wrap: wrap;
+    flex: 1 1 auto;
     justify-content: center;
   }
   .footer-grid-container {
