@@ -1,11 +1,12 @@
 import Home from '@/components/pages/Home';
 import { loadHomeCms } from '@/lib/loadCms';
 
+export const revalidate = 60;
+
 /**
- * Seed Home CMS on the server so Upcoming Events / Hero are in the first
- * HTML paint (no empty→fetch→appear flicker). Client still revalidates
- * after mount. Fetches use a short timeout + revalidate so soft-nav cannot
- * hang indefinitely on a dead API.
+ * ISR page: CMS is baked into the static HTML. Client navigations reuse that
+ * payload and do not remount Home with a null seed (that flicker was caused
+ * by a Suspense fallback of <Home initialCms={null} />).
  */
 export default async function HomePage() {
   const initialCms = await loadHomeCms();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import EventsHero from '@/components/events/EventsHero';
 import FeaturedEvent from '@/components/events/FeaturedEvent';
@@ -12,6 +12,8 @@ import VolunteerCTA from '@/components/events/VolunteerCTA';
 import { loadEventsCmsClient } from '@/lib/contentApi';
 import {
   cmsSnapshotEqual,
+  hasCmsList,
+  holdRenderableEvents,
   mergeEventsCms,
   peekEventsCms,
   rememberEventsCms,
@@ -26,33 +28,53 @@ const EMPTY_EVENTS_CMS = {
 };
 
 function seedEventsCms(initialCms) {
-  if (initialCms && typeof initialCms === 'object') {
-    if (typeof window !== 'undefined') rememberEventsCms(initialCms);
-    return initialCms;
-  }
-  if (typeof window !== 'undefined') return peekEventsCms() ?? EMPTY_EVENTS_CMS;
-  return EMPTY_EVENTS_CMS;
+  const peek = typeof window !== 'undefined' ? peekEventsCms() : null;
+  const next = mergeEventsCms(peek, initialCms && typeof initialCms === 'object' ? initialCms : null);
+  if (typeof window !== 'undefined') rememberEventsCms(next);
+  return next.featuredEvents !== undefined ? next : EMPTY_EVENTS_CMS;
 }
 
 /**
- * Paints immediately on soft-nav. CMS is loaded client-side so Vercel
- * navigation is not blocked on Render. Session snapshot seeds return visits;
- * merge keeps published lists from being wiped by a failed revalidation.
+ * ISR seeds first paint. A previously visible Upcoming Events section is
+ * held through transient null/empty revalidation and is not remounted by
+ * a null Suspense fallback.
  */
 const Events = ({ initialCms = null }) => {
   const [cms, setCms] = useState(() => seedEventsCms(initialCms));
+  const heldUpcomingRef = useRef(null);
+  heldUpcomingRef.current = holdRenderableEvents(
+    heldUpcomingRef.current,
+    cms.upcomingVisible,
+    cms.upcomingEvents
+  );
+  const heldUpcoming = heldUpcomingRef.current;
+  const showUpcoming =
+    heldUpcoming.visible !== false && Array.isArray(heldUpcoming.events);
 
   useEffect(() => {
     if (initialCms && typeof initialCms === 'object') {
-      rememberEventsCms(initialCms);
       setCms((prev) => {
         const next = mergeEventsCms(prev, initialCms);
-        return cmsSnapshotEqual(prev, next) ? prev : next;
+        if (cmsSnapshotEqual(prev, next)) return prev;
+        rememberEventsCms(next);
+        return next;
       });
     }
   }, [initialCms]);
 
   useEffect(() => {
+    const peeked = peekEventsCms();
+    if (!peeked) return;
+    setCms((prev) => {
+      const next = mergeEventsCms(peeked, prev);
+      if (cmsSnapshotEqual(prev, next)) return prev;
+      rememberEventsCms(next);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (hasCmsList(initialCms) || hasCmsList(peekEventsCms())) return undefined;
     let cancelled = false;
     (async () => {
       const data = await loadEventsCmsClient();
@@ -67,15 +89,18 @@ const Events = ({ initialCms = null }) => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initialCms]);
 
   return (
     <div className="events-page-canvas">
       <ScrollToTop />
       <EventsHero />
       <FeaturedEvent items={cms.featuredEvents} />
-      {cms.upcomingVisible === true && Array.isArray(cms.upcomingEvents) ? (
-        <UpcomingEvents events={cms.upcomingEvents} isVisible />
+      {showUpcoming ? (
+        <UpcomingEvents
+          events={heldUpcoming.events}
+          isVisible={heldUpcoming.visible !== false}
+        />
       ) : null}
       <PastEventsGallery events={cms.pastEvents} />
       <EventTimeline />

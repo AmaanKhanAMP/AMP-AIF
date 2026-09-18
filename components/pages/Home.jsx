@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Hero from '@/components/home/Hero';
 import Impact from '@/components/home/Impact';
 import Preview from '@/components/home/Preview';
@@ -11,6 +11,8 @@ import Event from '@/components/home/Event';
 import { loadHomeCmsClient } from '@/lib/contentApi';
 import {
   cmsSnapshotEqual,
+  hasCmsList,
+  holdRenderableEvents,
   mergeHomeCms,
   peekHomeCms,
   rememberHomeCms,
@@ -26,45 +28,67 @@ const EMPTY_HOME_CMS = {
 };
 
 function seedHomeCms(initialCms) {
-  if (initialCms && typeof initialCms === 'object') {
-    if (typeof window !== 'undefined') rememberHomeCms(initialCms);
-    return initialCms;
-  }
-  if (typeof window !== 'undefined') return peekHomeCms() ?? EMPTY_HOME_CMS;
-  return EMPTY_HOME_CMS;
+  const peek = typeof window !== 'undefined' ? peekHomeCms() : null;
+  const next = mergeHomeCms(peek, initialCms && typeof initialCms === 'object' ? initialCms : null);
+  if (typeof window !== 'undefined') rememberHomeCms(next);
+  return next.heroBanners !== undefined ? next : EMPTY_HOME_CMS;
 }
 
 /**
- * SSR seeds the first paint. Client revalidation merges into existing state so
- * a failed /home-events request (null) cannot unmount Upcoming Events.
+ * ISR seeds first paint. Client fetch only runs when no snapshot exists.
+ * Upcoming Events stays mounted from the last valid list unless CMS
+ * explicitly sets visible false.
  */
 const Home = ({ initialCms = null }) => {
   const [cms, setCms] = useState(() => seedHomeCms(initialCms));
+  const heldEventsRef = useRef(null);
+  heldEventsRef.current = holdRenderableEvents(
+    heldEventsRef.current,
+    cms.homeEventsVisible,
+    cms.homeEvents
+  );
+  const heldEvents = heldEventsRef.current;
+  const showUpcoming = heldEvents.visible !== false && Array.isArray(heldEvents.events);
 
   useEffect(() => {
     if (initialCms && typeof initialCms === 'object') {
-      rememberHomeCms(initialCms);
       setCms((prev) => {
         const next = mergeHomeCms(prev, initialCms);
-        return cmsSnapshotEqual(prev, next) ? prev : next;
+        if (cmsSnapshotEqual(prev, next)) return prev;
+        rememberHomeCms(next);
+        return next;
       });
     }
   }, [initialCms]);
 
   useEffect(() => {
+    const peeked = peekHomeCms();
+    if (!peeked) return;
+    setCms((prev) => {
+      const next = mergeHomeCms(peeked, prev);
+      if (cmsSnapshotEqual(prev, next)) return prev;
+      rememberHomeCms(next);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (hasCmsList(initialCms) || hasCmsList(peekHomeCms())) return undefined;
     let cancelled = false;
     (async () => {
       const data = await loadHomeCmsClient();
       if (cancelled) return;
       setCms((prev) => {
         const next = mergeHomeCms(prev, data);
-        return cmsSnapshotEqual(prev, next) ? prev : next;
+        if (cmsSnapshotEqual(prev, next)) return prev;
+        rememberHomeCms(next);
+        return next;
       });
     })();
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initialCms]);
 
   return (
     <>
@@ -72,8 +96,8 @@ const Home = ({ initialCms = null }) => {
       <Preview />
       <Impact />
       <Projects projects={cms.homeProjects} />
-      {cms.homeEventsVisible === true && Array.isArray(cms.homeEvents) ? (
-        <Event events={cms.homeEvents} isVisible />
+      {showUpcoming ? (
+        <Event events={heldEvents.events} isVisible={heldEvents.visible !== false} />
       ) : null}
       <PhotoGallery images={cms.homeGallery} />
       <Testimonial testimonials={cms.testimonials} />

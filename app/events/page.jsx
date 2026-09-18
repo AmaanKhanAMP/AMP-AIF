@@ -1,10 +1,13 @@
 import Events from '@/components/pages/Events';
+import { loadEventsCms } from '@/lib/loadCms';
+
+export const revalidate = 60;
 
 /**
- * Soft-nav must not await the CMS API (Render latency blocked Vercel
- * navigations for up to ~4s). The client Events page paints immediately,
- * seeds from session cache when available, then loads CMS in the background.
+ * ISR page: Upcoming Events is in the static HTML. No Suspense null-seed
+ * remount, so the section cannot flash away during client navigation.
  */
-export default function EventsPage() {
-  return <Events initialCms={null} />;
+export default async function EventsPage() {
+  const initialCms = await loadEventsCms();
+  return <Events initialCms={initialCms} />;
 }

@@ -11,6 +11,9 @@ export const metadata = {
     'AMP India Foundation — empowering communities through education, employment, mentorship, healthcare, and skill development.',
 };
 
+/** ISR so the shell is prerendered and client navigations do not wait on Render. */
+export const revalidate = 60;
+
 export default async function RootLayout({ children }) {
   const shell = await loadSiteShellCms();
 

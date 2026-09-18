@@ -70,8 +70,8 @@ const FALLBACK_UPCOMING = [
 ];
 
 const UpcomingEvents = ({ events, isVisible = null }) => {
-  // Section Hide/Show: only explicit true may paint.
-  if (isVisible !== true) return null;
+  // Hide only when CMS/backend explicitly says hidden.
+  if (isVisible === false) return null;
 
   // CMS list must be known — never paint FALLBACK_UPCOMING (can match drafts).
   if (!Array.isArray(events)) return null;

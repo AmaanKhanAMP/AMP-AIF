@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
@@ -44,34 +44,10 @@ const HomeEventImage = ({ event }) => {
 };
 
 const Event = ({ events, isVisible = null }) => {
-  // Start revealed: cinematic opacity:0 until IntersectionObserver was itself
-  // a disappear→appear flicker when the section mounted after CMS load.
   const [hoveredEventId, setHoveredEventId] = useState(null);
-  const [isRevealed, setIsRevealed] = useState(true);
-  const sectionRef = useRef(null);
 
-  useEffect(() => {
-    if (isVisible !== true) return undefined;
-
-    const node = sectionRef.current;
-    if (!node) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsRevealed(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.05, rootMargin: '80px 0px' }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [isVisible]);
-
-  // Section Hide/Show: only explicit true may paint.
-  if (isVisible !== true) return null;
+  // Hide only when CMS/backend explicitly says hidden.
+  if (isVisible === false) return null;
 
   // CMS list must be known. null/undefined = not loaded or fetch failed —
   // never paint FALLBACK_EVENTS (those rows can match unpublished CMS items).
@@ -84,7 +60,7 @@ const Event = ({ events, isVisible = null }) => {
       <div className="events-list-container">
         
         {/* Cinematic Header Reveal */}
-        <div className={`events-section-header cinematic-fade-in ${isRevealed ? 'active' : ''}`}>
+        <div className="events-section-header cinematic-fade-in active">
           <h2>
             UPCOMING <span className="text-blue-accent">EVENTS</span>
           </h2>
@@ -96,9 +72,8 @@ const Event = ({ events, isVisible = null }) => {
         </div>
 
         {/* 3D Perspective Animation Wrapper */}
-        <div 
-          ref={sectionRef} 
-          className={`events-vertical-stack perspective-stage ${isRevealed ? 'active' : ''}`}
+        <div
+          className="events-vertical-stack perspective-stage active"
         >
           {eventsData.map((event, index) => (
             <div 
@@ -146,7 +121,7 @@ const Event = ({ events, isVisible = null }) => {
         </div>
 
         {/* View All Events CTA */}
-        <div className={`events-global-action-row spatial-reveal ${isRevealed ? 'active' : ''}`}>
+        <div className="events-global-action-row spatial-reveal active">
           <div className="events-view-all-cta-wrap">
             <Link href="/events" className="events-view-all-btn-premium">
               <span className="events-view-all-btn-text">View All Events</span>
