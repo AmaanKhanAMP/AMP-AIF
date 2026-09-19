@@ -4,15 +4,16 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { resolveSiteAssetUrl } from '@/lib/contentApi';
+import { toCanonicalPath } from '@/lib/pageMetadata';
 
 const FALLBACK_NAVBAR = {
   logo_url: '/assets/logo.png',
   logo_alt: 'AMP Logo',
-  logo_link: '/home',
+  logo_link: '/',
 };
 
 const FALLBACK_ITEMS = [
-  { id: 1, label: 'HOME', href: '/home', itemType: 'link', itemKey: null, parentKey: null, order: 1 },
+  { id: 1, label: 'HOME', href: '/', itemType: 'link', itemKey: null, parentKey: null, order: 1 },
   { id: 2, label: 'ABOUT US', href: '/about', itemType: 'link', itemKey: null, parentKey: null, order: 2 },
   { id: 3, label: 'PROJECTS', href: '/projects', itemType: 'dropdown', itemKey: 'projects', parentKey: null, order: 3 },
   { id: 4, label: 'Education', href: '/projects/education', itemType: 'link', itemKey: null, parentKey: 'projects', order: 4 },
@@ -56,7 +57,7 @@ const Navbar = ({ settings, items }) => {
 
   const logoSrc = resolveSiteAssetUrl(brand.logo_url || FALLBACK_NAVBAR.logo_url);
   const logoAlt = brand.logo_alt || FALLBACK_NAVBAR.logo_alt;
-  const logoLink = brand.logo_link || FALLBACK_NAVBAR.logo_link;
+  const logoLink = toCanonicalPath(brand.logo_link || FALLBACK_NAVBAR.logo_link);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((open) => {
@@ -124,7 +125,7 @@ const Navbar = ({ settings, items }) => {
                     */}
                     <div className="dropdown-toggle-row">
                       <Link
-                        href={item.href || '#'}
+                        href={toCanonicalPath(item.href || '#')}
                         className="dropdown-toggle"
                         onClick={handleLinkClick}
                       >
@@ -156,7 +157,7 @@ const Navbar = ({ settings, items }) => {
                     >
                       {item.children.map((child) => (
                         <li key={child.id}>
-                          <Link href={child.href || '#'} onClick={handleLinkClick}>
+                          <Link href={toCanonicalPath(child.href || '#')} onClick={handleLinkClick}>
                             {child.label}
                           </Link>
                         </li>
@@ -168,7 +169,7 @@ const Navbar = ({ settings, items }) => {
 
               return (
                 <li key={item.id}>
-                  <Link href={item.href || '#'} onClick={handleLinkClick}>
+                  <Link href={toCanonicalPath(item.href || '#')} onClick={handleLinkClick}>
                     {item.label}
                   </Link>
                 </li>

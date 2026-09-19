@@ -361,7 +361,7 @@ const Terms = () => {
           transition={{ duration: 0.55, ease: 'easeOut' }}
         >
           <nav className="terms-breadcrumb" aria-label="Breadcrumb">
-            <Link href="/home">Home</Link>
+            <Link href="/">Home</Link>
             <span aria-hidden="true">/</span>
             <span>Terms &amp; Conditions</span>
           </nav>

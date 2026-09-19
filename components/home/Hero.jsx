@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+import { toCanonicalPath } from '@/lib/pageMetadata';
 
 import communityImpactBanner from '@/src/assets/hero-community-impact.png';
 import educationBanner from '@/src/assets/hero-education.png';
@@ -50,7 +51,7 @@ const FALLBACK_SLIDES = [
     primaryBtnText: 'Support Us',
     secondaryBtnText: 'Our Mission',
     primaryLink: '/support-us',
-    secondaryLink: '/what-we-do',
+    secondaryLink: '/about',
   },
 ];
 
@@ -92,8 +93,8 @@ const HeroSlide = ({ slide, isActive }) => {
           <p className="carousel-subtitle">{slide.subtitle}</p>
 
           <div className="carousel-btn-group">
-            <Link href={slide.primaryLink} className="btn-primary-blue">{slide.primaryBtnText}</Link>
-            <Link href={slide.secondaryLink} className="btn-outline-white">{slide.secondaryBtnText}</Link>
+            <Link href={toCanonicalPath(slide.primaryLink)} className="btn-primary-blue">{slide.primaryBtnText}</Link>
+            <Link href={toCanonicalPath(slide.secondaryLink)} className="btn-outline-white">{slide.secondaryBtnText}</Link>
           </div>
         </div>
       </div>

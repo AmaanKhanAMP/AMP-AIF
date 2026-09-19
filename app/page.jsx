@@ -1,5 +1,10 @@
 import Home from '@/components/pages/Home';
 import { loadHomeCms } from '@/lib/loadCms';
+import { homeMetadata } from '@/lib/pageMetadata';
+import { pageGraphJsonLd } from '@/lib/jsonLd';
+import JsonLd from '@/components/seo/JsonLd';
+
+export const metadata = homeMetadata;
 
 export const revalidate = 60;
 
@@ -10,5 +15,16 @@ export const revalidate = 60;
  */
 export default async function HomePage() {
   const initialCms = await loadHomeCms();
-  return <Home initialCms={initialCms} />;
+  return (
+    <>
+      <JsonLd
+        data={pageGraphJsonLd({
+          absoluteTitle: 'AMP India Foundation',
+          description: homeMetadata.description,
+          canonical: '/',
+        })}
+      />
+      <Home initialCms={initialCms} />
+    </>
+  );
 }

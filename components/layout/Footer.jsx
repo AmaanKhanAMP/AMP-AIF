@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { FaEnvelope, FaFacebookF, FaInstagram, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { toCanonicalPath } from '@/lib/pageMetadata';
 
 const FALLBACK_FOOTER = {
   cta_heading: 'Join Our Mission to Empower Lives Through Education & Employment.',
@@ -31,7 +32,7 @@ const FALLBACK_FOOTER = {
 const FALLBACK_LINKS = [
   { id: 1, label: 'Home', href: '/', order: 1 },
   { id: 2, label: 'About Us', href: '/about', order: 2 },
-  { id: 3, label: 'What We Do', href: '/what-we-do', order: 3 },
+  { id: 3, label: 'What We Do', href: '/about', order: 3 },
   { id: 4, label: 'Projects', href: '/projects', order: 4 },
   { id: 5, label: 'Events', href: '/events', order: 5 },
   { id: 6, label: 'Join Us / Volunteer', href: '/volunteer', order: 6 },
@@ -103,7 +104,7 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
             >
               DONATE NOW
             </Link>
-            <Link href={settings.cta_button_link || '/volunteer'} className="cta-button">
+            <Link href={toCanonicalPath(settings.cta_button_link || '/volunteer')} className="cta-button">
               {settings.cta_button_text}
             </Link>
           </div>
@@ -118,7 +119,7 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
           <div className="footer-column about-col">
             <h3>{settings.about_heading}</h3>
             <p>{settings.about_text}</p>
-            <Link href={settings.about_link_href || '/about'} className="read-more-link">
+            <Link href={toCanonicalPath(settings.about_link_href || '/about')} className="read-more-link">
               {settings.about_link_text}
             </Link>
           </div>
@@ -129,7 +130,7 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
             <ul>
               {links.map((link) => (
                 <li key={link.id}>
-                  <Link href={link.href || '/'}>
+                  <Link href={toCanonicalPath(link.href || '/')}>
                     <span>▶</span> {link.label}
                   </Link>
                 </li>
@@ -142,7 +143,7 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
             <h3>{settings.recent_focus_heading}</h3>
             {focusItems.map((item) => (
               <div className="post-item" key={item.id}>
-                <Link href={item.href || '/'}>{item.title}</Link>
+                <Link href={toCanonicalPath(item.href || '/')}>{item.title}</Link>
                 <span className="post-date">{item.dateLabel}</span>
               </div>
             ))}
