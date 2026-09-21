@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import CmsMediaImage from '@/components/media/CmsMediaImage';
 
 const AUTO_SCROLL_MS = 5000;
 const SWIPE_THRESHOLD_PX = 48;
@@ -245,13 +246,6 @@ const Testimonial = ({ testimonials }) => {
     resumeAutoplay(600);
   };
 
-  const handleAvatarError = (event, item) => {
-    const img = event.currentTarget;
-    if (img.dataset.fallbackApplied === '1') return;
-    img.dataset.fallbackApplied = '1';
-    img.src = localAvatarForName(item?.name) || DEFAULT_AVATAR;
-  };
-
   const active = testimonialsData[activeIndex];
   if (!active) return null;
 
@@ -296,11 +290,14 @@ const Testimonial = ({ testimonials }) => {
             </button>
 
             <div className="avatar-stage-row">
-              {testimonialsData.map((item, index) => (
+              {testimonialsData.map((item, index) => {
+                const positionClass = getCardPositionClass(index);
+                const loadAvatar = positionClass !== 'position-hidden';
+                return (
                 <button
                   type="button"
                   key={item.id}
-                  className={`avatar-card-node ${getCardPositionClass(index)}`}
+                  className={`avatar-card-node ${positionClass}`}
                   onClick={() => {
                     pauseAutoplay();
                     const raw = ((index - activeIndex) % total + total) % total;
@@ -311,14 +308,21 @@ const Testimonial = ({ testimonials }) => {
                   aria-label={`Show testimonial from ${item.name}`}
                   aria-current={index === activeIndex ? 'true' : undefined}
                 >
-                  <img
-                    src={item.avatar}
-                    alt=""
-                    className="testimonial-avatar"
-                    onError={(event) => handleAvatarError(event, item)}
-                  />
+                  {loadAvatar ? (
+                    <CmsMediaImage
+                      cmsSrc={item.avatar}
+                      fallbackSrc={localAvatarForName(item.name) || DEFAULT_AVATAR}
+                      alt=""
+                      width={180}
+                      height={180}
+                      sizes="180px"
+                      loading="lazy"
+                      className="testimonial-avatar"
+                    />
+                  ) : null}
                 </button>
-              ))}
+                );
+              })}
             </div>
 
             <button

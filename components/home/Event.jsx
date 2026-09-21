@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+import { fallbackByTitle } from '@/lib/cmsImage';
+import CmsMediaImage from '@/components/media/CmsMediaImage';
 import etpWorkshop from '@/src/assets/employment-training-workshop.png';
 
 const etpImage = typeof etpWorkshop === 'string' ? etpWorkshop : etpWorkshop?.src;
@@ -37,9 +38,17 @@ const FALLBACK_EVENTS = [
 
 const HomeEventImage = ({ event }) => {
   const fallbackSrc = fallbackByTitle(FALLBACK_EVENTS, event.title);
-  const { src, onError } = useCmsImageSrc(event.image, fallbackSrc);
   return (
-    <img src={src} alt={event.title} className="event-row-img" onError={onError} />
+    <CmsMediaImage
+      cmsSrc={event.image}
+      fallbackSrc={fallbackSrc}
+      alt={event.title}
+      fill
+      sizes="140px"
+      loading="lazy"
+      className="event-row-img"
+      style={{ objectFit: 'cover' }}
+    />
   );
 };
 

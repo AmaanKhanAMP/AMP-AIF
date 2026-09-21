@@ -3,10 +3,8 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import eventsHeroBanner from '@/src/assets/events-hero.png';
-
-const eventsHeroSrc =
-  typeof eventsHeroBanner === 'string' ? eventsHeroBanner : eventsHeroBanner?.src;
 
 const EventsHero = () => {
   const scrollToEvents = () => {
@@ -15,9 +13,13 @@ const EventsHero = () => {
 
   return (
     <section className="events-hero" aria-label="Events hero">
-      <img
-        src={eventsHeroSrc}
+      <Image
+        src={eventsHeroBanner}
         alt=""
+        fill
+        priority
+        sizes="100vw"
+        quality={80}
         className="events-hero-bg"
         aria-hidden="true"
       />

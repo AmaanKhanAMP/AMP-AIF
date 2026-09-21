@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+import { fallbackByTitle } from '@/lib/cmsImage';
 import { toCanonicalPath } from '@/lib/pageMetadata';
+import CmsMediaImage from '@/components/media/CmsMediaImage';
 
 import communityImpactBanner from '@/src/assets/hero-community-impact.png';
 import educationBanner from '@/src/assets/hero-education.png';
@@ -55,24 +56,36 @@ const FALLBACK_SLIDES = [
   },
 ];
 
-const HeroSlide = ({ slide, isActive }) => {
+const HeroSlide = ({ slide, isActive, shouldLoadImage, priority, onImageLoad }) => {
   const fallbackSrc = fallbackByTitle(FALLBACK_SLIDES, slide.titleStart);
-  const { src, onError } = useCmsImageSrc(slide.image, fallbackSrc);
+  const photoSrc = slide.image || fallbackSrc;
   const isEducationSlide =
-    src === educationBannerImage ||
-    (typeof src === 'string' && src.includes('hero-education'));
+    (typeof photoSrc === 'string' && photoSrc.includes('hero-education')) ||
+    photoSrc === educationBannerImage;
   const isEmploymentSlide =
-    src === employmentBannerImage ||
-    (typeof src === 'string' && src.includes('hero-employment'));
+    (typeof photoSrc === 'string' && photoSrc.includes('hero-employment')) ||
+    photoSrc === employmentBannerImage;
 
   return (
     <div
       className={`carousel-slide ${isActive ? 'active' : ''} ${isEducationSlide ? 'carousel-slide-education' : ''} ${isEmploymentSlide ? 'carousel-slide-employment' : ''}`}
-      style={{ backgroundImage: `linear-gradient(rgba(11, 44, 72, 0.65), rgba(6, 24, 40, 0.75)), url(${src})` }}
     >
-      {slide.image ? (
-        <img src={slide.image} alt="" onError={onError} hidden />
+      {shouldLoadImage ? (
+        <div className="carousel-slide-media" aria-hidden="true">
+          <CmsMediaImage
+            cmsSrc={slide.image}
+            fallbackSrc={fallbackSrc}
+            alt=""
+            fill
+            sizes="100vw"
+            quality={80}
+            priority={priority}
+            onLoad={priority ? onImageLoad : undefined}
+            className="carousel-slide-photo"
+          />
+        </div>
       ) : null}
+      <div className="carousel-slide-overlay" aria-hidden="true" />
       <div className="carousel-content-container">
         <div className="carousel-text-block">
           <h1 className="carousel-title">
@@ -108,12 +121,18 @@ const HeroCarousel = ({ slides }) => {
   const slidesData = Array.isArray(slides) ? slides : FALLBACK_SLIDES;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [nextSlideUnlocked, setNextSlideUnlocked] = useState(false);
   // Preserve slide index across CMS refresh when length is unchanged.
   const slideCount = slidesData.length;
 
   useEffect(() => {
     if (currentSlide >= slideCount) setCurrentSlide(0);
   }, [slideCount, currentSlide]);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setNextSlideUnlocked(true), 2500);
+    return () => window.clearTimeout(id);
+  }, []);
 
   const triggerAnimation = (callback) => {
     if (animating) return;
@@ -146,13 +165,20 @@ const HeroCarousel = ({ slides }) => {
 
   return (
     <div className="hero-carousel-wrapper">
-      {slidesData.map((slide, index) => (
-        <HeroSlide
-          key={slide.id}
-          slide={slide}
-          isActive={index === currentSlide}
-        />
-      ))}
+      {slidesData.map((slide, index) => {
+        const isActive = index === currentSlide;
+        const isNext = index === (currentSlide + 1) % slideCount;
+        return (
+          <HeroSlide
+            key={slide.id}
+            slide={slide}
+            isActive={isActive}
+            shouldLoadImage={isActive || (isNext && nextSlideUnlocked)}
+            priority={index === 0 && isActive}
+            onImageLoad={() => setNextSlideUnlocked(true)}
+          />
+        );
+      })}
 
       <button className="nav-arrow arrow-left" onClick={handlePrev} aria-label="Previous slide">
         <span>‹</span>

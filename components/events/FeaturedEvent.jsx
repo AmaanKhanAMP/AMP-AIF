@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
-import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+import { fallbackByTitle } from '@/lib/cmsImage';
+import CmsMediaImage from '@/components/media/CmsMediaImage';
 
 const FALLBACK_FEATURED = {
   title: 'Kupwara Mega Job Fair',
@@ -16,10 +17,6 @@ const FALLBACK_FEATURED = {
 
 const FeaturedEventCard = ({ featuredEvent }) => {
   const fallbackSrc = fallbackByTitle([FALLBACK_FEATURED], featuredEvent.title);
-  const { src: imageSrc, onError: onImageError } = useCmsImageSrc(
-    featuredEvent.image,
-    fallbackSrc
-  );
   const imageContain = featuredEvent.imageFit === 'contain';
 
   return (
@@ -33,15 +30,18 @@ const FeaturedEventCard = ({ featuredEvent }) => {
         <div
           className={`featured-event-image-wrap${imageContain ? ' featured-event-image-wrap--contain' : ''}`}
         >
-          <img
-            src={imageSrc}
+          <CmsMediaImage
+            cmsSrc={featuredEvent.image}
+            fallbackSrc={fallbackSrc}
             alt={featuredEvent.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             loading="lazy"
-            onError={onImageError}
+            className="featured-event-photo"
             style={
               imageContain
                 ? { objectFit: 'contain', objectPosition: 'center' }
-                : undefined
+                : { objectFit: 'cover', objectPosition: 'center' }
             }
           />
         </div>

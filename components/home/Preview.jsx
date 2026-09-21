@@ -1,20 +1,15 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import employmentSupportImage from '@/src/assets/employment-support-job-fair.jpg';
 import careerGuidanceSeminar from '@/src/assets/career-guidance-seminar.png';
 import educationSupportStudents from '@/src/assets/education-support-students.png';
 
-const assetSrc = (image) => (typeof image === 'string' ? image : image?.src);
-
-const employmentSupportSrc = assetSrc(employmentSupportImage);
-const careerGuidanceSeminarSrc = assetSrc(careerGuidanceSeminar);
-const educationSupportSrc = assetSrc(educationSupportStudents);
-
 const cardData = [
   {
     id: 1,
     href: '/projects/education',
-    image: educationSupportSrc,
+    image: educationSupportStudents,
     title: 'Education Support',
     subtitle: 'Building Brighter Futures',
     description:
@@ -23,7 +18,7 @@ const cardData = [
   {
     id: 2,
     href: '/projects/employment',
-    image: employmentSupportSrc,
+    image: employmentSupportImage,
     title: 'Employment Support',
     subtitle: 'Creating Better Career Opportunities',
     description:
@@ -32,7 +27,7 @@ const cardData = [
   {
     id: 3,
     href: '/projects/mentorship',
-    image: careerGuidanceSeminarSrc,
+    image: careerGuidanceSeminar,
     title: 'Mentorship & Guidance',
     subtitle: 'Inspiring the Next Generation',
     description:
@@ -78,7 +73,14 @@ const Preview = () => {
               scroll
             >
               <div className="card-image-box">
-                <img src={card.image} alt={card.title} className="feature-card-img" />
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
+                  className="feature-card-img"
+                />
               </div>
               <div className="card-content-box">
                 <h3 className="card-main-title">{card.title}</h3>

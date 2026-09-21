@@ -2,7 +2,8 @@
 
 import { useState, useRef } from 'react';
 
-import { fallbackByTitle, useCmsImageSrc } from '@/lib/cmsImage';
+import { fallbackByTitle } from '@/lib/cmsImage';
+import CmsMediaImage from '@/components/media/CmsMediaImage';
 
 import etpImage from '@/src/assets/home-project-etp.png';
 import megaJobFairImage from '@/src/assets/home-project-mega-job-fair.png';
@@ -36,9 +37,16 @@ const FALLBACK_PROJECTS = [
 
 const ProjectCardImage = ({ project }) => {
   const fallbackSrc = fallbackByTitle(FALLBACK_PROJECTS, project.title);
-  const { src, onError } = useCmsImageSrc(project.image, fallbackSrc);
   return (
-    <img src={src} alt={project.title} className="project-img" onError={onError} />
+    <CmsMediaImage
+      cmsSrc={project.image}
+      fallbackSrc={fallbackSrc}
+      alt={project.title}
+      fill
+      sizes="(max-width: 768px) 290px, 360px"
+      loading="lazy"
+      className="project-img"
+    />
   );
 };
 
