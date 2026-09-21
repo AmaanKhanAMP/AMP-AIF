@@ -254,11 +254,11 @@ const Support = () => {
                   <h3>Cheque / DD</h3>
                   <p className="donation-cheque-line">
                     <span className="donation-cheque-label">Cheque/DD in favour of:</span>{" "}
-                    <strong>Association of Muslim Professionals</strong>
+                    <strong>AMP India Foundation</strong>
                   </p>
                   <p className="donation-cheque-label">Mail to:</p>
                   <p className="donation-cheque-address">
-                    Association of Muslim Professionals<br />
+                    AMP India Foundation<br />
                     Room 8, 1st Floor, Halima Manzil<br />
                     Mirza Ghalib Marg<br />
                     Clare Road<br />
