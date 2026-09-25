@@ -15,16 +15,16 @@ function secretsEqual(provided, expected) {
   return timingSafeEqual(left, right);
 }
 
-function readSecret(request, body) {
+function readSecret(request) {
   return (
     request.headers.get("x-revalidate-secret") ||
     request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ||
-    (typeof body?.secret === "string" ? body.secret : "")
-  );
+    ""
+  ).trim();
 }
 
 export async function POST(request) {
-  const expected = process.env.REVALIDATION_SECRET;
+  const expected = (process.env.REVALIDATION_SECRET || "").trim();
   if (!expected) {
     console.error("[revalidate] REVALIDATION_SECRET is not set");
     return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
@@ -37,7 +37,7 @@ export async function POST(request) {
     body = {};
   }
 
-  if (!secretsEqual(readSecret(request, body), expected)) {
+  if (!secretsEqual(readSecret(request), expected)) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   }
 

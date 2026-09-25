@@ -426,11 +426,11 @@ const Terms = () => {
           <div className="terms-help-details">
             <p>
               <span>Email</span>
-              <a href="mailto:info@ampindiafoundation.org">info@ampindiafoundation.org</a>
+              <a href="mailto:contact@ampindiafoundation.org">contact@ampindiafoundation.org</a>
             </p>
             <p>
               <span>Phone</span>
-              <a href="tel:+912240123131">+91-22-40123131</a>
+              <a href="tel:+918291101312">+91 8291101312</a>
             </p>
             <p>
               <span>Address</span>

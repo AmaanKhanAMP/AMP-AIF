@@ -279,7 +279,7 @@ const Support = () => {
                 <h4>After Your Donation</h4>
                 <p>
                   Once you make a donation, please send a confirmation email to:{" "}
-                  <a href="mailto:info@ampindia.org" className="su-email-link">info@ampindia.org</a>
+                  <a href="mailto:contact@ampindiafoundation.org" className="su-email-link">contact@ampindiafoundation.org</a>
                 </p>
               </div>
             </Reveal>
@@ -376,7 +376,7 @@ const Support = () => {
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                         <path d="M22 6l-10 7L2 6" />
                       </svg>
-                      <a href="mailto:info@ampindia.org">info@ampindia.org</a>
+                      <a href="mailto:contact@ampindiafoundation.org">contact@ampindiafoundation.org</a>
                     </li>
                     <li>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

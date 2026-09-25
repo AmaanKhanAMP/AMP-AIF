@@ -39,7 +39,42 @@ const FALLBACK_LINKS = [
   { id: 7, label: 'Support Us', href: '/support-us', order: 7 },
   { id: 8, label: 'Contact', href: '/contact', order: 8 },
   { id: 9, label: 'Terms & Conditions', href: '/terms-and-conditions', order: 9 },
+  { id: 10, label: 'Privacy Policy', href: '/privacy-policy', order: 10 },
+  { id: 11, label: 'Refund Policy', href: '/refund-policy', order: 11 },
 ];
+
+const POLICY_LINKS = [
+  { id: 'privacy-policy', label: 'Privacy Policy', href: '/privacy-policy', order: 10 },
+  { id: 'refund-policy', label: 'Refund Policy', href: '/refund-policy', order: 11 },
+];
+
+function normalizeFooterHref(href) {
+  return String(href || '')
+    .split('?')[0]
+    .split('#')[0]
+    .replace(/\/+$/, '') || '/';
+}
+
+/** Keep Privacy Policy and Refund Policy immediately after Terms & Conditions. */
+function withPolicyLinks(links) {
+  const list = Array.isArray(links) ? [...links] : [];
+  const existing = new Set(list.map((link) => normalizeFooterHref(link.href)));
+  const missing = POLICY_LINKS.filter((link) => !existing.has(normalizeFooterHref(link.href)));
+  if (!missing.length) return list;
+
+  const termsIndex = list.findIndex((link) => {
+    const href = normalizeFooterHref(link.href);
+    const label = String(link.label || '').toLowerCase();
+    return href === '/terms-and-conditions' || label.includes('terms');
+  });
+
+  if (termsIndex >= 0) {
+    list.splice(termsIndex + 1, 0, ...missing);
+    return list;
+  }
+
+  return [...list, ...missing];
+}
 
 const FALLBACK_FOCUS = [
   {
@@ -76,7 +111,7 @@ const Footer = ({ settings: settingsProp, links: linksProp, focusItems: focusPro
   const settings = settingsProp
     ? { ...FALLBACK_FOOTER, ...settingsProp }
     : FALLBACK_FOOTER;
-  const links = Array.isArray(linksProp) ? linksProp : FALLBACK_LINKS;
+  const links = withPolicyLinks(Array.isArray(linksProp) ? linksProp : FALLBACK_LINKS);
   const focusItems = Array.isArray(focusProp) ? focusProp : FALLBACK_FOCUS;
 
   return (

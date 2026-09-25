@@ -7321,6 +7321,30 @@ html {
   margin-bottom: 0;
 }
 
+.terms-list-numbered {
+  list-style: decimal;
+  padding-left: 22px;
+}
+
+.terms-list-numbered li {
+  padding-left: 8px;
+}
+
+.terms-list-numbered li::before {
+  content: none;
+  display: none;
+}
+
+.terms-section a {
+  color: #1E4FD8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.terms-section a:hover {
+  text-decoration: underline;
+}
+
 .terms-subsection {
   margin-top: 24px;
   padding-top: 4px;

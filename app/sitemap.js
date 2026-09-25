@@ -17,6 +17,8 @@ const CANONICAL_PATHS = [
   '/support-us',
   '/contact',
   '/terms-and-conditions',
+  '/privacy-policy',
+  '/refund-policy',
 ];
 
 /** @returns {import('next').MetadataRoute.Sitemap} */
