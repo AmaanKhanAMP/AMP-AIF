@@ -389,7 +389,7 @@ const Support = () => {
                         <circle cx="12" cy="12" r="9" />
                         <path d="M12 7v5l3 2" />
                       </svg>
-                      <span>Mon – Sat: 10:00 AM – 6:00 PM</span>
+                      <span>11:00 am to 7:00 pm IST</span>
                     </li>
                   </ul>
 

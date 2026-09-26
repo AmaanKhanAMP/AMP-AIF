@@ -147,7 +147,7 @@ const Contact = () => {
             <p style={{ margin: 0 }}>
               <a href={`tel:${phone.replace(/\s/g, '')}`} className="card-anchor-link">{phone}</a>
             </p>
-            <span className="card-sub-meta">Mon - Sat, 9AM to 6PM</span>
+            <span className="card-sub-meta">11:00 am to 7:00 pm IST</span>
           </div>
 
           {/* Card: Email */}
@@ -159,7 +159,6 @@ const Contact = () => {
             <p style={{ margin: 0 }}>
               <a href={`mailto:${email}`} className="card-anchor-link">{email}</a>
             </p>
-            <span className="card-sub-meta">We reply within 24 hours</span>
           </div>
 
         </div>
