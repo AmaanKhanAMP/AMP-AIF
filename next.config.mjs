@@ -21,9 +21,6 @@ const fromEnv = apiRemotePattern(apiUrl);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   // Next 15 defaults staleTimes.dynamic to 0, so every Home/Events click
   // refetches RSC from the origin. Keep a short client router cache so
   // internal navigation does not wait on Render again.

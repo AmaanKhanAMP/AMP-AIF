@@ -6,6 +6,7 @@ import { loadSiteShellCms } from '@/lib/loadCms';
 import { siteGraphJsonLd } from '@/lib/jsonLd';
 import JsonLd from '@/components/seo/JsonLd';
 import './globals.css';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');
 const SITE_NAME = 'AMP India Foundation';
@@ -68,6 +69,7 @@ export default async function RootLayout({ children }) {
         />
         {CHATBOT_ENABLED ? <ChatWidget /> : null}
         <BackToTop />
+        <GoogleAnalytics gaId="G-ZP1NZH34Y5" />
       </body>
     </html>
   );
